@@ -12,7 +12,7 @@ class Personaje {
 
     RecibirDaño()
     {
-
+       
     }
 }
 
@@ -20,7 +20,8 @@ class Arquero extends Personaje{
 
     constructor ()
     {
-        super('Arquero');
+        super('Arquero', 10, 5, 5);
+
     }
 }
 
@@ -71,3 +72,5 @@ class Guardian extends Personaje{
         super('Guardian');
     }
 }
+
+export {Mago, Guardian}
