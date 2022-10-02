@@ -41,11 +41,11 @@ class Piromano extends Personaje{
     }
 }
 
-class Esqueleto extends Personaje{
+class Esqueletos extends Personaje{
 
     constructor ()
     {
-        super('Esqueleto');
+        super('Esqueletos');
     }
 }
 
@@ -73,4 +73,4 @@ class Guardian extends Personaje{
     }
 }
 
-export {Mago, Guardian}
+export {Mago, Guardian, Polilla, Piromano, Arquero, Caballero, Esqueletos}
