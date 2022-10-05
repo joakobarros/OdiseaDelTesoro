@@ -233,12 +233,12 @@ export default class Combate extends Phaser.Scene
     if (hum1.vida <= 0 && hum3.vida <= 0 && hum2.vida <= 0) {
       setTimeout(()=>{ this.scene.start("winGuardian")},1000)
     }
+
     if (criat1.vida <= 0 && criat2.vida <= 0 && criat3.vida <= 0) {
       setTimeout(()=>{ 
         turno = 1;
         this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas })}
-        ,1000)
-     
+        ,1000) 
     }
   
   
@@ -282,45 +282,45 @@ export default class Combate extends Phaser.Scene
       break;
           
     case 2:
-      if (hum2.vida <= 0 && turno == 2) {
+      if (criat1.vida <= 0 && turno == 2) {
         turno++;
         Tturno.text = "turno: " +turno;
       } else {
-        humImg2.setScale(4.5);
+        criatImg1.setScale(4.5);
         humImg1.setScale(4);
       }
       
       break;
   
     case 3:
-      if (hum3.vida <= 0 && turno == 3) {
+      if (hum2.vida <= 0 && turno == 3) {
         turno++;
         Tturno.text = "turno: " +turno;
       } else {
-        humImg3.setScale(4.5);
-        humImg2.setScale(4);
+        humImg2.setScale(4.5);
+        criatImg1.setScale(4);
       }
      
       break;
   
     case 4:
-      if (criat1.vida <= 0 && turno == 4) {
+      if (criat2.vida <= 0 && turno == 4) {
         turno++;
         Tturno.text = "turno: " +turno;
       } else {
-       criatImg1.setScale(4.5);
-       humImg3.setScale(4);
+       criatImg2.setScale(4.5);
+       humImg2.setScale(4);
       }
       
       break;
   
     case 5:
-      if (criat2.vida <= 0 && turno == 5) {
+      if (hum3.vida <= 0 && turno == 5) {
         turno++;
         Tturno.text = "turno: " +turno;
       } else {
-       criatImg2.setScale(4.5);
-       criatImg1.setScale(4);
+       humImg3.setScale(4.5);
+       criatImg2.setScale(4);
       }
       
       break;
@@ -330,8 +330,8 @@ export default class Combate extends Phaser.Scene
         turno = 1;
         Tturno.text = "turno: " +turno;
       } else {
-        criatImg3.setScale(4.5);
-      criatImg2.setScale(4);
+       criatImg3.setScale(4.5);
+       humImg3.setScale(4);
       }
       break;
   
@@ -345,7 +345,7 @@ export default class Combate extends Phaser.Scene
     humImg1.on('pointerdown',()=> {
       if (ataque == "si") {
         switch (turno) {
-            case 4:
+            case 2:
             hum1.vida -= criat1.ataque;
             turno++;
             if (hum1.vida <= 0) {
@@ -358,7 +358,7 @@ export default class Combate extends Phaser.Scene
             }
             break;
   
-            case 5:
+            case 4:
             hum1.vida -= criat2.ataque;
             turno++;
             if (hum1.vida <= 0) {
@@ -388,7 +388,7 @@ export default class Combate extends Phaser.Scene
             break;
         }}})
     humImg1.on('pointerover',()=> {
-      if (turno >= 4) {
+      if (turno == 2 || turno == 4 || turno == 6) {
       humImg1.setScale(4.1); 
     }
     })
@@ -399,7 +399,7 @@ export default class Combate extends Phaser.Scene
     humImg2.on('pointerdown',()=> {
       if (ataque == "si") {
         switch (turno) {
-            case 4:
+            case 2:
             hum2.vida -= criat1.ataque;
             turno++;
             if (hum2.vida <= 0) {
@@ -412,7 +412,7 @@ export default class Combate extends Phaser.Scene
             }
             break;
   
-            case 5:
+            case 4:
             hum2.vida -= criat2.ataque;
             turno++;
             if (hum2.vida <= 0) {
@@ -442,7 +442,7 @@ export default class Combate extends Phaser.Scene
             break;
         }}})
     humImg2.on('pointerover',()=> {
-      if (turno >= 4) {
+      if (turno == 2 || turno == 4 || turno == 6) {
         humImg2.setScale(4.1); 
       }
     })
@@ -453,7 +453,7 @@ export default class Combate extends Phaser.Scene
     humImg3.on('pointerdown',()=> {
       if (ataque == "si") {
         switch (turno) {
-          case 4:
+          case 2:
             hum3.vida -= criat1.ataque;
             turno++;
             if (hum3.vida <= 0) {
@@ -466,7 +466,7 @@ export default class Combate extends Phaser.Scene
             }
             break;
   
-            case 5:
+            case 4:
             hum3.vida -= criat2.ataque;
             turno++;
             if (hum3.vida <= 0) {
@@ -496,7 +496,7 @@ export default class Combate extends Phaser.Scene
             break;
         }}})
     humImg3.on('pointerover',()=> {
-      if (turno >= 4) {
+      if (turno == 2 || turno == 4 || turno == 6) {
         humImg3.setScale(4.1); 
       }
     })
@@ -530,7 +530,7 @@ export default class Combate extends Phaser.Scene
             ataque = "no";
             break;
   
-            case 2:
+            case 3:
               if (hum2.nombre == "arquero" && criat1.nombre == "polilla") {
                 muerte.play();
                 criat1.vida = 0;
@@ -552,7 +552,7 @@ export default class Combate extends Phaser.Scene
             ataque = "no";
             break;
   
-            case 3:
+            case 5:
               if (hum3.nombre == "arquero" && criat1.nombre == "polilla") {
                 muerte.play();
                 criat1.vida = 0;
@@ -578,7 +578,7 @@ export default class Combate extends Phaser.Scene
             break;
         }}})
     criatImg1.on('pointerover',()=> {
-      if (turno < 4) {
+      if (turno == 1 || turno == 3 || turno == 5) {
         criatImg1.setScale(4.1); 
       }
     })
@@ -611,7 +611,7 @@ export default class Combate extends Phaser.Scene
             ataque = "no";
             break;
   
-            case 2:
+            case 3:
               if (hum2.nombre == "arquero" && criat2.nombre == "polilla") {
                 criat2.vida = 0;
               } else {
@@ -630,7 +630,7 @@ export default class Combate extends Phaser.Scene
             ataque = "no";
             break;
   
-            case 3:
+            case 5:
               if (hum3.nombre == "arquero" && criat2.nombre == "polilla") {
                 criat2.vida = 0;
               } else {
@@ -653,7 +653,7 @@ export default class Combate extends Phaser.Scene
             break;
         }}})
     criatImg2.on('pointerover',()=> {
-      if (turno < 4) {
+      if (turno == 1 || turno == 3 || turno == 5) {
         criatImg2.setScale(4.1); 
       }
     })
@@ -683,7 +683,7 @@ export default class Combate extends Phaser.Scene
             ataque = "no";
             break;
   
-            case 2:
+            case 3:
               if (hum2.nombre == "arquero" && criat3.nombre == "polilla") {
                 criat3.vida = 0;
               } else {
@@ -702,7 +702,7 @@ export default class Combate extends Phaser.Scene
             ataque = "no";
             break;
   
-            case 3:
+            case 5:
               if (hum3.nombre == "arquero" && criat3.nombre == "polilla") {
                 criat3.vida = 0;
               } else {
@@ -725,7 +725,7 @@ export default class Combate extends Phaser.Scene
             break;
         }}})
     criatImg3.on('pointerover',()=> {
-      if (turno < 4) {
+      if (turno == 1 || turno == 3 || turno == 5) {
         criatImg3.setScale(4.1); 
       }
     })
