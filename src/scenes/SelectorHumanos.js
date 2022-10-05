@@ -15,9 +15,9 @@ var hum2;
 var hum3;
 
 
-export class selectorH extends Phaser.Scene {
+export class SelectorHumanos extends Phaser.Scene {
     constructor() {
-      super("selectorH");
+      super("SelectorHumanos");
     }
   
 create() {
