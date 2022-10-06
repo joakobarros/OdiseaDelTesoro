@@ -40,18 +40,18 @@ create() {
 //////////////////////////////////////////////// variante de mapa
 
 this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'mapa');
-var s1 = new sala1;
-var s2 = new sala2;
-var s3 = new sala3;
-var s4 = new sala4;
-var s5 = new sala5;
-var s6 = new sala6;
-var s7 = new sala7;
-var s8 = new sala8;
-var s9 = new sala9;
-var s10 = new sala10;
-var s11 = new sala11;
-var mapa = new Mapa;
+var s1 = new sala1();
+var s2 = new sala2();
+var s3 = new sala3();
+var s4 = new sala4();
+var s5 = new sala5();
+var s6 = new sala6();
+var s7 = new sala7();
+var s8 = new sala8();
+var s9 = new sala9();
+var s10 = new sala10();
+var s11 = new sala11();
+var mapa = new Mapa();
 
 switch (sala){
 
@@ -61,10 +61,11 @@ switch (sala){
       for (let n = 0; n < mapa.salasPasadas.length; n++) {
         const salaPasada = mapa.salasPasadas[n];
         if (salaPos != salaPasada) {
-          ActivarSala(salaPos);
+          this.ActivarSala(salaPos);
         }
       }
-  break;
+    }
+  break; 
 
   case "s2":
     for (let p = 0; p < s2.salasPosibles.length; p++) {
@@ -75,6 +76,7 @@ switch (sala){
           ActivarSala(salaPos);
         }
       }
+    }
   break;
 
   case "s3":
@@ -86,6 +88,7 @@ switch (sala){
            ActivarSala(salaPos);
         }
       }
+    }
   break;
       
   case "s4":
@@ -183,8 +186,15 @@ switch (sala){
 
 ActivarSala(salaPos){
   switch (salaPos) {
-    case "s1":
-      
+    case "s2":
+      let salaP1 = this.add.image(100, 100, 'sala').setInteractive();
+      salaP1.on('pointerover', ()=>{salaP1.setScale(4);});
+      salaP1.on('pointerout', ()=>{salaP1.setScale(4.1)})
+      salaP1.on('pointerdown', ()=>{
+       mapa.salasPasadas.push("s2");
+       sala = "s2";
+       this.scene.start("selectorC", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas });
+      });
       break;
   
     default:

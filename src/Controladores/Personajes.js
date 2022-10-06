@@ -2,12 +2,16 @@
 
 class Personaje {
 
-    constructor(nombre, ataque, vida, vidaMax)
+    constructor(nombre, ataque, vida, vidaMax, sprite, escena)
     {
         this.nombre = nombre;
         this.ataque = ataque;
         this.vida = vida;
         this.vidaMax = vidaMax;
+        this.sprite = sprite
+        this.escena = escena;
+
+        this.escena.addImage();
     }
 
     RecibirDaño()
@@ -18,10 +22,9 @@ class Personaje {
 
 class Arquero extends Personaje{
 
-    constructor ()
+    constructor (escena)
     {
-        super('Arquero', 3, 2, 2);
-
+        super('Arquero', 3, 2, 2,"arquero", escena);
     }
 }
 
