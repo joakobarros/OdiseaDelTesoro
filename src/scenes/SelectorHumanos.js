@@ -3,7 +3,7 @@ import {Arquero} from "../Controladores/Personajes.js"
 import {Caballero} from "../Controladores/Personajes.js"
 import {Piromano} from "../Controladores/Personajes.js"
 
-var sala = 1;
+var sala = "s1";
 var criaturas = 15;
 var text1;
 var text2;
@@ -16,8 +16,10 @@ var hum3;
 
 
 export class SelectorHumanos extends Phaser.Scene {
-    constructor() {
-      super("SelectorHumanos");
+    
+  constructor() {
+
+      super('SelectorHumanos');
     }
   
 create() {
