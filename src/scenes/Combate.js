@@ -25,6 +25,7 @@ var vidaC2;
 var vidaC3;
 var daño;
 var muerte;
+var mapa;
 
 export default class Combate extends Phaser.Scene
 {
@@ -38,6 +39,7 @@ export default class Combate extends Phaser.Scene
         hum1 = data.hum1;
         hum2 = data.hum2;
         hum3 = data.hum3;
+        mapa = mapa;
         criaturas = data.criaturas;
         criat1 = data.criat1;
         criat2 = data.criat2;
@@ -55,10 +57,10 @@ export default class Combate extends Phaser.Scene
       
   
   ////////////////////////////////////////////// carteles de salud
-    vidaH1 = this.add.text(160,753,hum1.vida + "/" + hum1.vidaMax, {
-      fontSize: "50px",
-      fill: "#FFFFFF",
-      fontFamily: "georgia"
+  vidaH1 = this.add.text(160,753,hum1.vida + "/" + hum1.vidaMax, {
+    fontSize: "50px",
+    fill: "#FFFFFF",
+    fontFamily: "georgia"
   })
   
   vidaH2 = this.add.text(420, 753, hum2.vida + "/" + hum2.vidaMax, {
@@ -160,63 +162,63 @@ export default class Combate extends Phaser.Scene
   
   ////////////////////////////////////////////// selector de sprites criaturas
   switch (criat1.nombre) {
-      case "esqueletos":
-        criatImg1 = this.add.image(1200, 535, 'esqueletos').setInteractive();
-        criatImg1.setScale(4);
-        break;
+    case "esqueletos":
+      criatImg1 = this.add.image(1200, 535, 'esqueletos').setInteractive();
+      criatImg1.setScale(4);
+      break;
     
-      case "mago":
-        criatImg1 = this.add.image(1200, 535, 'mago').setInteractive();
-        criatImg1.setScale(4);
-        break;
+    case "mago":
+      criatImg1 = this.add.image(1200, 535, 'mago').setInteractive();
+      criatImg1.setScale(4);
+      break;
     
-      case "polilla":
-        criatImg1 = this.add.image(1200, 535, 'polilla').setInteractive();
-        criatImg1.setScale(4);
-        break;
+    case "polilla":
+      criatImg1 = this.add.image(1200, 535, 'polilla').setInteractive();
+      criatImg1.setScale(4);
+      break;
     
-      default:
-        break;
+    default:
+      break;
   }
   
   switch (criat2.nombre) {
-      case "esqueletos":
-        criatImg2 = this.add.image(1450, 535, 'esqueletos').setInteractive();
-        criatImg2.setScale(4);
-        break;
+    case "esqueletos":
+      criatImg2 = this.add.image(1450, 535, 'esqueletos').setInteractive();
+      criatImg2.setScale(4);
+      break;
     
-      case "mago":
-        criatImg2 = this.add.image(1450, 535, 'mago').setInteractive();
-        criatImg2.setScale(4);
-        break;
+    case "mago":
+      criatImg2 = this.add.image(1450, 535, 'mago').setInteractive();
+      criatImg2.setScale(4);
+      break;
     
-      case "polilla":
-        criatImg2 = this.add.image(1450, 535, 'polilla').setInteractive();
-        criatImg2.setScale(4);
-        break;
+    case "polilla":
+      criatImg2 = this.add.image(1450, 535, 'polilla').setInteractive();
+      criatImg2.setScale(4);
+      break;
     
-      default:
-        break;
+    default:
+      break;
   }
   
   switch (criat3.nombre) {
-      case "esqueletos":
-        criatImg3 = this.add.image(1700, 535, 'esqueletos').setInteractive();
-        criatImg3.setScale(4);
-        break;
+    case "esqueletos":
+      criatImg3 = this.add.image(1700, 535, 'esqueletos').setInteractive();
+      criatImg3.setScale(4);
+      break;
       
-        case "mago":
-          criatImg3 = this.add.image(1700, 535, 'mago').setInteractive();
-          criatImg3.setScale(4);
-          break;
+    case "mago":
+      criatImg3 = this.add.image(1700, 535, 'mago').setInteractive();
+      criatImg3.setScale(4);
+      break;
       
-        case "polilla":
-          criatImg3 = this.add.image(1700, 535, 'polilla').setInteractive();
-          criatImg3.setScale(4);
-          break;
+    case "polilla":
+      criatImg3 = this.add.image(1700, 535, 'polilla').setInteractive();
+      criatImg3.setScale(4);
+      break;
       
-        default:
-          break;
+    default:
+      break;
   }
   
   var atacar = this.add.image(950,950,'atacar').setInteractive()
@@ -237,7 +239,7 @@ export default class Combate extends Phaser.Scene
     if (criat1.vida <= 0 && criat2.vida <= 0 && criat3.vida <= 0) {
       setTimeout(()=>{ 
         turno = 1;
-        this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas })}
+        this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, mapa: mapa, criaturas: criaturas })}
         ,1000) 
     }
   

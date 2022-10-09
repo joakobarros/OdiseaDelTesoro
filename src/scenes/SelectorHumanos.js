@@ -2,9 +2,11 @@ import Phaser from 'phaser'
 import {Arquero} from "../Controladores/Personajes.js"
 import {Caballero} from "../Controladores/Personajes.js"
 import {Piromano} from "../Controladores/Personajes.js"
+import { Mapa } from '../Controladores/mapa';
 
-var sala = "s1";
-var criaturas = 15;
+const sala = "s1";
+const mapa = new Mapa();
+const criaturas = 15;
 var text1;
 var text2;
 var text3;
@@ -209,7 +211,7 @@ var continuar = this.add.image(970,950,'continuar').setInteractive()
     for (let i = 0; i < num3; i++) {
       hums.push(new Piromano)
     }
-    this.scene.start("mapa", { hum1: hums[0], hum2: hums[1], hum3: hums[2], sala: sala, criaturas: criaturas });
+    this.scene.start("mapa", { hum1: hums[0], hum2: hums[1], hum3: hums[2], sala: sala, mapa: mapa, criaturas: criaturas });
   }})  
 .on('pointerover', ()=> {continuar.setScale(5.1)})
 .on('pointerout', ()=> {continuar.setScale(5)});

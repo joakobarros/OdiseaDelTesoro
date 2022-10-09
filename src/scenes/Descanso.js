@@ -8,6 +8,7 @@ var criaturas;
 var humImg1;
 var humImg2;
 var humImg3;
+var mapa;
 
 export default class Descanso extends Phaser.Scene
 {
@@ -21,6 +22,7 @@ export default class Descanso extends Phaser.Scene
         hum1 = data.hum1;
         hum2 = data.hum2;
         hum3 = data.hum3;
+        mapa = data.mapa;
         criaturas = data.criaturas;
     }
     
@@ -113,7 +115,7 @@ export default class Descanso extends Phaser.Scene
             hum2.ataque += 1;
             hum3.ataque += 1;
             sala++;
-            this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas });})
+            this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, mapa: mapa, criaturas: criaturas });})
         .on('pointerover', ()=> {ataque.setScale(0.7)})
         .on('pointerout', ()=> {ataque.setScale(0.6)});
         ataque.setScale(0.6); 
@@ -124,7 +126,7 @@ export default class Descanso extends Phaser.Scene
             hum2.vidaMax += 1;
             hum3.vidaMax += 1;
             sala++;
-            this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas })})
+            this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, mapa: mapa, criaturas: criaturas })})
         .on('pointerover', ()=> {vidaMax.setScale(0.7)})
         .on('pointerout', ()=> {vidaMax.setScale(0.6)});
         vidaMax.setScale(0.6);
@@ -141,7 +143,7 @@ export default class Descanso extends Phaser.Scene
               hum3.vida += 1;
             }
             sala++;
-            this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas });})
+            this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, mapa: mapa, criaturas: criaturas });})
         .on('pointerover', ()=> {vida.setScale(0.7)})
         .on('pointerout', ()=> {vida.setScale(0.6)});
         vida.setScale(0.6);

@@ -8,41 +8,41 @@ export default class Preloads extends Phaser.Scene
 	}
 
 	preload() {
-        this.load.image("fondomenu", "public/assets/images/mainmenu.png");
-        this.load.image("arquero", "public/assets/images/arqueroIdle.png");
-        this.load.image("caballero", "public/assets/images/caballeroIdle.png");
-        this.load.image("piromano","public/assets/images/piromanoIdle.png");
-        this.load.image("mago","public/assets/images/mago.png");
-        this.load.image("esqueletos","public/assets/images/esqueletos.png");
-        this.load.image("polilla","public/assets/images/polilla.png");
-        this.load.image("logo","public/assets/images/logo.png");
-        this.load.image("jefe", "public/assets/images/jefe.png");
-        this.load.image("mapa1","public/assets/images/mapa1.png");
-        this.load.image("mapa2", "public/assets/images/mapa2.png");
-        this.load.image("mapa3", "public/assets/images/mapa3.png");
-        this.load.image("mapa4", "public/assets/images/mapa4.png");
-        this.load.image("mapa5", "public/assets/images/mapa5.png");
-        this.load.image("mas", "public/assets/images/mas.png");
-        this.load.image("menos", "public/assets/images/menos.png");
-        this.load.image("creditos", "public/assets/images/creditos.png");
-        this.load.image("jugar", "public/assets/images/jugar.png");
-        this.load.image("opciones", "public/assets/images/opciones.png");
-        this.load.image("pausa", "public/assets/images/pausa.png");
-        this.load.image("salir", "public/assets/images/salir.png");
-        this.load.image("volver", "public/assets/images/volver.png");
-        this.load.image("continuar", "public/assets/images/continuar.png");
-        this.load.image("atacar", "public/assets/images/atacar.png");
-        this.load.image("winGuardian", "public/assets/images/winguardian.png")
-        this.load.image("winHumanos", "public/assets/images/winhumanos.png")
-        this.load.image("selector", "public/assets/images/selector.png")
-        this.load.image("fondocombate", "public/assets/images/combatefondo.png")
-        this.load.image("masAtaque", "public/assets/images/buffo2.png")
-        this.load.image("vidaMax", "public/assets/images/buffo1.png")
-        this.load.image("curarVida", "public/assets/images/buffo3.png")
-        this.load.audio("musica", "public/assets/sounds/theSoundOfTheDungeon.wav")
-        this.load.audio("daño", "public/assets/sounds/danio.wav")
-        this.load.audio("golpe", "public/assets/sounds/golpejefe.wav")
-        this.load.audio("muerte", "public/assets/sounds/muerte.wav")
+        this.load.image("fondomenu", "assets/images/mainmenu.png");
+        this.load.image("arquero", "assets/images/arqueroIdle.png");
+        this.load.image("caballero", "assets/images/caballeroIdle.png");
+        this.load.image("piromano","assets/images/piromanoIdle.png");
+        this.load.image("mago","assets/images/mago.png");
+        this.load.image("esqueletos","assets/images/esqueletos.png");
+        this.load.image("polilla","assets/images/polilla.png");
+        this.load.image("logo","assets/images/logo.png");
+        this.load.image("jefe", "assets/images/jefe.png");
+        this.load.image("mapa1","assets/images/mapa1.png");
+        this.load.image("mapa2", "assets/images/mapa2.png");
+        this.load.image("mapa3", "assets/images/mapa3.png");
+        this.load.image("mapa4", "assets/images/mapa4.png");
+        this.load.image("mapa5", "assets/images/mapa5.png");
+        this.load.image("mas", "assets/images/mas.png");
+        this.load.image("menos", "assets/images/menos.png");
+        this.load.image("creditos", "assets/images/creditos.png");
+        this.load.image("jugar", "assets/images/jugar.png");
+        this.load.image("opciones", "assets/images/opciones.png");
+        this.load.image("pausa", "assets/images/pausa.png");
+        this.load.image("salir", "assets/images/salir.png");
+        this.load.image("volver", "assets/images/volver.png");
+        this.load.image("continuar", "assets/images/continuar.png");
+        this.load.image("atacar", "assets/images/atacar.png");
+        this.load.image("winGuardian", "assets/images/winguardian.png")
+        this.load.image("winHumanos", "assets/images/winhumanos.png")
+        this.load.image("selector", "assets/images/selector.png")
+        this.load.image("fondocombate", "assets/images/combatefondo.png")
+        this.load.image("masAtaque", "assets/images/buffo2.png")
+        this.load.image("vidaMax", "assets/images/buffo1.png")
+        this.load.image("curarVida", "assets/images/buffo3.png")
+        this.load.audio("musica", "assets/sounds/theSoundOfTheDungeon.wav")
+        this.load.audio("daño", "assets/sounds/danio.wav")
+        this.load.audio("golpe", "assets/sounds/golpejefe.wav")
+        this.load.audio("muerte", "assets/sounds/muerte.wav")
       }
     
       create() {

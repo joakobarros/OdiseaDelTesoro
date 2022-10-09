@@ -19,6 +19,7 @@ var imag2;
 var imag3;
 var tcant;
 var tmax;
+var mapa;
 
 export default class SelectorCriaturas extends Phaser.Scene
 {
@@ -32,6 +33,7 @@ export default class SelectorCriaturas extends Phaser.Scene
         hum1 = data.hum1;
         hum2 = data.hum2;
         hum3 = data.hum3;
+        mapa = data.mapa;
         criaturas = data.criaturas;
     }
   
@@ -209,7 +211,7 @@ var continuar = this.add.image(970,950,'continuar').setInteractive()
   sala++
   criaturas -= 3;
   this.scene.start("combate", { criat1: criats[0], criat2: criats[1], criat3: criats[2],
-  sala: sala, criaturas: criaturas, hum1: hum1, hum2: hum2, hum3: hum3 })}})
+  sala: sala, mapa: mapa, criaturas: criaturas, hum1: hum1, hum2: hum2, hum3: hum3 })}})
       
   .on('pointerover', ()=> {continuar.setScale(5.1)})
   .on('pointerout', ()=> {continuar.setScale(5)});

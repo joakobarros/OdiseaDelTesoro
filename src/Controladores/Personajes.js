@@ -30,49 +30,49 @@ class Arquero extends Personaje{
 
 class Caballero extends Personaje{
 
-    constructor ()
+    constructor (escena)
     {
-        super('Caballero', 1, 4, 4);
+        super('Caballero', 1, 4, 4, "caballero", escena);
     }
 }
 
 class Piromano extends Personaje{
 
-    constructor ()
+    constructor (escena)
     {
-        super('Piromano', 2, 3, 3);
+        super('Piromano', 2, 3, 3, "piromano", escena);
     }
 }
 
 class Esqueletos extends Personaje{
 
-    constructor ()
+    constructor (escena)
     {
-        super('Esqueletos', 1, 4, 4);
+        super('Esqueletos', 1, 4, 4, "esqueletos", escena);
     }
 }
 
 class Polilla extends Personaje{
 
-    constructor ()
+    constructor (escena)
     {
-        super('Polilla', 2, 3, 3);
+        super('Polilla', 2, 3, 3, "polilla", escena);
     }
 }
 
 class Mago extends Personaje{
 
-    constructor ()
+    constructor (escena)
     {
-        super('Mago', 3, 5, 5);
+        super('Mago', 3, 5, 5, "mago", escena);
     }
 }
 
 class Guardian extends Personaje{
 
-    constructor ()
+    constructor (escena)
     {
-        super('Guardian', 3, 20, 20);
+        super('Guardian', 3, 20, 20, "guardian", escena);
     }
 }
 
