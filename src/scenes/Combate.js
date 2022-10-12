@@ -1,31 +1,32 @@
 import Phaser from 'phaser'
 
-var sala;
-var hum1;
-var hum2;
-var hum3;
-var criaturas;
-var criat1;
-var criat2;
-var criat3;
-var humImg1;
-var humImg2;
-var humImg3;
-var turno = 1;
-var Tturno;
-var ataque = "";
-var criatImg1;
-var criatImg2;
-var criatImg3;
-var vidaH1;
-var vidaH2;
-var vidaH3;
-var vidaC1;
-var vidaC2;
-var vidaC3;
-var daño;
-var muerte;
-var mapa;
+let hum1;
+let hum2;
+let hum3;
+let criaturas;
+let criat1;
+let criat2;
+let criat3;
+let turno = 1;
+let Tturno;
+let ataque = "";
+let criatImg1;
+let criatImg2;
+let criatImg3;
+let humImg1;
+let humImg2;
+let humImg3;
+let vidaH1;
+let vidaH2;
+let vidaH3;
+let vidaC1;
+let vidaC2;
+let vidaC3;
+let daño;
+let muerte;
+let sala;
+let mapa;
+
 
 export default class Combate extends Phaser.Scene
 {
@@ -39,7 +40,7 @@ export default class Combate extends Phaser.Scene
         hum1 = data.hum1;
         hum2 = data.hum2;
         hum3 = data.hum3;
-        mapa = mapa;
+        mapa = data.mapa;
         criaturas = data.criaturas;
         criat1 = data.criat1;
         criat2 = data.criat2;

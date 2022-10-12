@@ -17,11 +17,7 @@ export default class Preloads extends Phaser.Scene
         this.load.image("polilla","assets/images/polilla.png");
         this.load.image("logo","assets/images/logo.png");
         this.load.image("jefe", "assets/images/jefe.png");
-        this.load.image("mapa1","assets/images/mapa1.png");
-        this.load.image("mapa2", "assets/images/mapa2.png");
-        this.load.image("mapa3", "assets/images/mapa3.png");
-        this.load.image("mapa4", "assets/images/mapa4.png");
-        this.load.image("mapa5", "assets/images/mapa5.png");
+        this.load.image("mapa","assets/images/mapa.png");
         this.load.image("mas", "assets/images/mas.png");
         this.load.image("menos", "assets/images/menos.png");
         this.load.image("creditos", "assets/images/creditos.png");
