@@ -1,22 +1,22 @@
 import Phaser from 'phaser'
 import { sala1, sala10, sala11, sala2, sala3, sala4, sala5, sala6, sala7, sala8, sala9 } from '../Controladores/Salas';
 
-var sala;
-var hum1;
-var hum2;
-var hum3;
-var criaturas;
-var atk1;
-var atk2;
-var atk3;
-var vida1;
-var vida2;
-var vida3;
-var cantCriaturas;
-var humImg1;
-var humImg2;
-var humImg3;
-var mapa;
+let sala;
+let hum1;
+let hum2;
+let hum3;
+let criaturas;
+let atk1;
+let atk2;
+let atk3;
+let vida1;
+let vida2;
+let vida3;
+let cantCriaturas;
+let humImg1;
+let humImg2;
+let humImg3;
+let mapa;
 
 
 export default class Menu extends Phaser.Scene
@@ -324,17 +324,17 @@ ActivarSala(salaPos){
 //////////////////////////////////////////////// selector de sprites
   switch (hum1.nombre) {
     case "Arquero":
-      humImg1 = this.add.image(133, 185, 'arquero')
+      humImg1 = this.add.image(133, 185, 'arquero');
       humImg1.setScale(2);
       break;
           
     case "Caballero":
-      humImg1 = this.add.image(133, 185, 'caballero')
+      humImg1 = this.add.image(133, 185, 'caballero');
       humImg1.setScale(2);
       break;
           
     case "Piromano":
-      humImg1 = this.add.image(133, 185, 'piromano')
+      humImg1 = this.add.image(133, 185, 'piromano');
       humImg1.setScale(2);
       break;
           
