@@ -5,7 +5,6 @@ import Phaser from 'phaser'
 export default class Descanso extends Phaser.Scene
 {
 
-sala;
 hum1;
 hum2;
 hum3;
@@ -21,7 +20,6 @@ mapa;
 	}
 
     init(data) {
-        this.sala = data.sala;
         this.hum1 = data.hum1;
         this.hum2 = data.hum2;
         this.hum3 = data.hum3;
@@ -52,17 +50,17 @@ mapa;
   
   /////////////////////////////////////////////////////////// sprites humanos
     switch (this.hum1.nombre) {
-      case "arquero":
+      case "Arquero":
         this.humImg1 = this.add.image(500, 535, 'arquero').setInteractive();
         this.humImg1.setScale(4);
         break;
     
-      case "caballero":
+      case "Caballero":
         this.humImg1 = this.add.image(500, 535, 'caballero').setInteractive();
         this.humImg1.setScale(4);
         break;
     
-      case "piromano":
+      case "Piromano":
         this.humImg1 = this.add.image(500, 535, 'piromano').setInteractive()
         this.humImg1.setScale(4);
         break;
@@ -72,17 +70,17 @@ mapa;
     }
     
     switch (this.hum2.nombre) {
-      case "arquero":
+      case "Arquero":
         this.humImg2 = this.add.image(900, 535, 'arquero').setInteractive();
         this.humImg2.setScale(4);
         break;
     
-      case "caballero":
+      case "Caballero":
         this.humImg2 = this.add.image(900, 535, 'caballero').setInteractive();
         this.humImg2.setScale(4);
         break;
     
-      case "piromano":
+      case "Piromano":
         this.humImg2 = this.add.image(900, 535, 'piromano').setInteractive();
         this.humImg2.setScale(4);
         break;
@@ -92,17 +90,17 @@ mapa;
     }
     
     switch (this.hum3.nombre) {
-      case "arquero":
+      case "Arquero":
         this.humImg3 = this.add.image(1300, 535, 'arquero').setInteractive()
         this.humImg3.setScale(4);
         break;
     
-      case "caballero":
+      case "Caballero":
         this.humImg3 = this.add.image(1300, 535, 'caballero').setInteractive()
         this.humImg3.setScale(4);
         break;
     
-      case "piromano":
+      case "Piromano":
         this.humImg3 = this.add.image(1300, 535, 'piromano').setInteractive();
         this.humImg3.setScale(4);
         break;
@@ -117,8 +115,7 @@ mapa;
           this.hum1.ataque += 1;
           this.hum2.ataque += 1;
           this.hum3.ataque += 1;
-          this.sala++;
-            this.scene.start("mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, mapa: this.mapa, criaturas: this.criaturas });})
+            this.scene.start("Mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, mapa: this.mapa, criaturas: this.criaturas });})
         .on('pointerover', ()=> {ataque.setScale(0.7)})
         .on('pointerout', ()=> {ataque.setScale(0.6)});
         ataque.setScale(0.6); 
@@ -128,8 +125,7 @@ mapa;
           this.hum1.vidaMax += 1; 
           this.hum2.vidaMax += 1;
           this.hum3.vidaMax += 1;
-          this.sala++;
-            this.scene.start("mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, mapa: this.mapa, criaturas: this.criaturas })})
+            this.scene.start("Mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, mapa: this.mapa, criaturas: this.criaturas })})
         .on('pointerover', ()=> {vidaMax.setScale(0.7)})
         .on('pointerout', ()=> {vidaMax.setScale(0.6)});
         vidaMax.setScale(0.6);
@@ -145,8 +141,7 @@ mapa;
             if (this.hum3.vida < this.hum3.vidaMax) {
               this.hum3.vida += 1;
             }
-            this.sala++;
-            this.scene.start("mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, mapa: this.mapa, criaturas: this.criaturas });})
+            this.scene.start("Mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, mapa: this.mapa, criaturas: this.criaturas });})
         .on('pointerover', ()=> {vida.setScale(0.7)})
         .on('pointerout', ()=> {vida.setScale(0.6)});
         vida.setScale(0.6);

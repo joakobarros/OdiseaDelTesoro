@@ -30,7 +30,6 @@ hum1;
  vidaC3;
  daño;
  muerte;
- sala;
  mapa
 	constructor()
 	{
@@ -38,7 +37,6 @@ hum1;
 	}
 
 	init(data) {
-        this.sala = data.sala;
         this.hum1 = data.hum1;
         this.hum2 = data.hum2;
         this.hum3 = data.hum3;
@@ -104,17 +102,17 @@ hum1;
   
   ////////////////////////////////////////////// selector de sprites humanos
   switch (this.hum1.nombre) {
-    case "arquero":
+    case "Arquero":
       this.humImg1 = this.add.image(200, 535, 'arquero').setInteractive();
       this.humImg1.setScale(4);
       break;
   
-    case "caballero":
+    case "Caballero":
       this.humImg1 = this.add.image(200, 535, 'caballero').setInteractive();
       this.humImg1.setScale(4);
       break;
   
-    case "piromano":
+    case "Piromano":
       this.humImg1 = this.add.image(200, 535, 'piromano').setInteractive()
       this.humImg1.setScale(4);
       break;
@@ -124,17 +122,17 @@ hum1;
   }
   
   switch (this.hum2.nombre) {
-    case "arquero":
+    case "Arquero":
       this.humImg2 = this.add.image(450, 535, 'arquero').setInteractive();
       this.humImg2.setScale(4);
       break;
   
-    case "caballero":
+    case "Caballero":
       this.humImg2 = this.add.image(450, 535, 'caballero').setInteractive();
       this.humImg2.setScale(4);
       break;
   
-    case "piromano":
+    case "Piromano":
       this.humImg2 = this.add.image(450, 535, 'piromano').setInteractive();
       this.humImg2.setScale(4);
       break;
@@ -144,17 +142,17 @@ hum1;
   }
   
   switch (this.hum3.nombre) {
-    case "arquero":
+    case "Arquero":
       this.humImg3 = this.add.image(700, 535, 'arquero').setInteractive()
       this.humImg3.setScale(4);
       break;
   
-    case "caballero":
+    case "Caballero":
       this.humImg3 = this.add.image(700, 535, 'caballero').setInteractive()
       this.humImg3.setScale(4);
       break;
   
-    case "piromano":
+    case "Piromano":
       this.humImg3 = this.add.image(700, 535, 'piromano').setInteractive();
       this.humImg3.setScale(4);
       break;
@@ -165,17 +163,17 @@ hum1;
   
   ////////////////////////////////////////////// selector de sprites criaturas
   switch (this.criat1.nombre) {
-    case "esqueletos":
+    case "Esqueletos":
       this.criatImg1 = this.add.image(1200, 535, 'esqueletos').setInteractive();
       this.criatImg1.setScale(4);
       break;
     
-    case "mago":
+    case "Mago":
       this.criatImg1 = this.add.image(1200, 535, 'mago').setInteractive();
       this.criatImg1.setScale(4);
       break;
     
-    case "polilla":
+    case "Polilla":
       this.criatImg1 = this.add.image(1200, 535, 'polilla').setInteractive();
       this.criatImg1.setScale(4);
       break;
@@ -185,17 +183,17 @@ hum1;
   }
   
   switch (this.criat2.nombre) {
-    case "esqueletos":
+    case "Esqueletos":
       this.criatImg2 = this.add.image(1450, 535, 'esqueletos').setInteractive();
       this.criatImg2.setScale(4);
       break;
     
-    case "mago":
+    case "Mago":
       this.criatImg2 = this.add.image(1450, 535, 'mago').setInteractive();
       this.criatImg2.setScale(4);
       break;
     
-    case "polilla":
+    case "Polilla":
       this.criatImg2 = this.add.image(1450, 535, 'polilla').setInteractive();
       this.criatImg2.setScale(4);
       break;
@@ -205,17 +203,17 @@ hum1;
   }
   
   switch (this.criat3.nombre) {
-    case "esqueletos":
+    case "Esqueletos":
       this.criatImg3 = this.add.image(1700, 535, 'esqueletos').setInteractive();
       this.criatImg3.setScale(4);
       break;
       
-    case "mago":
+    case "Mago":
       this.criatImg3 = this.add.image(1700, 535, 'mago').setInteractive();
       this.criatImg3.setScale(4);
       break;
       
-    case "polilla":
+    case "Polilla":
       this.criatImg3 = this.add.image(1700, 535, 'polilla').setInteractive();
       this.criatImg3.setScale(4);
       break;
@@ -236,13 +234,13 @@ hum1;
   
   ///////////////////////////////////////////////// win condition
     if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {
-      setTimeout(()=>{ this.scene.start("winGuardian")},1000)
+      setTimeout(()=>{ this.scene.start("WinGuardian")},1000)
     }
 
     if (this.criat1.vida <= 0 && this.criat2.vida <= 0 && this.criat3.vida <= 0) {
       setTimeout(()=>{ 
         this.turno = 1;
-        this.scene.start("mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, mapa: this.mapa, criaturas: this.criaturas })}
+        this.scene.start("Mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, mapa: this.mapa, criaturas: this.criaturas })}
         ,1000) 
     }
   
@@ -514,15 +512,15 @@ hum1;
       if (this.ataque == "si") {
         switch (this.turno) {
           case 1:
-            if (this.hum1.nombre == "arquero" && this.criat1.nombre == "polilla") {
+            if (this.hum1.nombre == "Arquero" && this.criat1.nombre == "Polilla") {
               this.muerte.play();
               this.criat1.vida = 0;
             } else {
-              if (this.hum1.nombre == "caballero" && this.criat1.nombre == "esqueletos") {
+              if (this.hum1.nombre == "Caballero" && this.criat1.nombre == "Esqueletos") {
                 this.muerte.play();
                 this.criat1.vida = 0;
             } else {
-              if (this.hum1.nombre == "piromano" && this.criat1.nombre == "mago") {
+              if (this.hum1.nombre == "Piromano" && this.criat1.nombre == "Mago") {
                 this.muerte.play();
                 this.criat1.vida = 0;
             } else {
@@ -536,15 +534,15 @@ hum1;
             break;
   
             case 3:
-              if (this.hum2.nombre == "arquero" && this.criat1.nombre == "polilla") {
+              if (this.hum2.nombre == "Arquero" && this.criat1.nombre == "Polilla") {
                 this.muerte.play();
                 this.criat1.vida = 0;
               } else {
-                if (this.hum2.nombre == "caballero" && this.criat1.nombre == "esqueletos") {
+                if (this.hum2.nombre == "Caballero" && this.criat1.nombre == "Esqueletos") {
                   this.muerte.play();
                   this.criat1.vida = 0;
               } else {
-                if (this.hum2.nombre == "piromano" && this.criat1.nombre == "mago") {
+                if (this.hum2.nombre == "Piromano" && this.criat1.nombre == "Mago") {
                   this.muerte.play();
                   this.criat1.vida = 0;
               } else {
@@ -558,15 +556,15 @@ hum1;
             break;
   
             case 5:
-              if (this.hum3.nombre == "arquero" && this.criat1.nombre == "polilla") {
+              if (this.hum3.nombre == "Arquero" && this.criat1.nombre == "Polilla") {
                 this.muerte.play();
                 this.criat1.vida = 0;
               } else {
-                if (this.hum3.nombre == "caballero" && this.criat1.nombre == "esqueletos") {
+                if (this.hum3.nombre == "Caballero" && this.criat1.nombre == "Esqueletos") {
                   this.muerte.play();
                   this.criat1.vida = 0;
               } else {
-                if (this.hum3.nombre == "piromano" && this.criat1.nombre == "mago") {
+                if (this.hum3.nombre == "Piromano" && this.criat1.nombre == "Mago") {
                   this.muerte.play();
                   this.criat1.vida = 0;
               } else {
@@ -595,15 +593,15 @@ hum1;
       if (this.ataque == "si") {
         switch (this.turno) {
           case 1:
-            if (this.hum1.nombre == "arquero" && this.criat2.nombre == "polilla") {
+            if (this.hum1.nombre == "Arquero" && this.criat2.nombre == "Polilla") {
               this.muerte.play();
               this.criat2.vida = 0;
             } else { 
-            if (this.hum1.nombre == "caballero" && this.criat2.nombre == "esqueletos") {
+            if (this.hum1.nombre == "Caballero" && this.criat2.nombre == "Esqueletos") {
               this.muerte.play();
               this.criat2.vida = 0;
             } else {
-              if (this.hum1.nombre == "piromano" && this.criat2.nombre == "mago") {
+              if (this.hum1.nombre == "Piromano" && this.criat2.nombre == "Mago") {
                 this.muerte.play();
                 this.criat2.vida = 0;
             } else {
@@ -617,13 +615,13 @@ hum1;
             break;
   
             case 3:
-              if (this.hum2.nombre == "arquero" && this.criat2.nombre == "polilla") {
+              if (this.hum2.nombre == "Arquero" && this.criat2.nombre == "Polilla") {
                 this.criat2.vida = 0;
               } else {
-              if (this.hum2.nombre == "caballero" && this.criat2.nombre == "esqueletos") {
+              if (this.hum2.nombre == "Caballero" && this.criat2.nombre == "Esqueletos") {
                 this.criat2.vida = 0;
               } else{ 
-              if (this.hum2.nombre == "piromano" && this.criat2.nombre == "mago") {
+              if (this.hum2.nombre == "Piromano" && this.criat2.nombre == "Mago") {
                 this.criat2.vida = 0;
               } else {
                 this.daño.play();
@@ -636,13 +634,13 @@ hum1;
             break;
   
             case 5:
-              if (this.hum3.nombre == "arquero" && this.criat2.nombre == "polilla") {
+              if (this.hum3.nombre == "Arquero" && this.criat2.nombre == "Polilla") {
                 this.criat2.vida = 0;
               } else {
-                if (this.hum3.nombre == "caballero" && this.criat2.nombre == "esqueletos") {
+                if (this.hum3.nombre == "Caballero" && this.criat2.nombre == "Esqueletos") {
                   this.criat2.vida = 0;
               } else {
-                if (this.hum3.nombre == "piromano" && this.criat2.nombre == "mago") {
+                if (this.hum3.nombre == "Piromano" && this.criat2.nombre == "Mago") {
                   this.criat2.vida = 0;
               } else {
                 this.daño.play();
@@ -670,13 +668,13 @@ hum1;
       if (this.ataque == "si") {
         switch (this.turno) {
           case 1:
-            if (this.hum1.nombre == "arquero" && this.criat3.nombre == "polilla") {
+            if (this.hum1.nombre == "Arquero" && this.criat3.nombre == "Polilla") {
               this.criat3.vida = 0;
             } else {
-              if (this.hum1.nombre == "caballero" && this.criat3.nombre == "esqueletos") {
+              if (this.hum1.nombre == "Caballero" && this.criat3.nombre == "Esqueletos") {
                 this.criat3.vida = 0;
             } else {
-              if (this.hum1.nombre == "piromano" && this.criat3.nombre == "mago") {
+              if (this.hum1.nombre == "Piromano" && this.criat3.nombre == "Mago") {
                 this.criat3.vida = 0;
             } else {
               this.daño.play();
@@ -689,13 +687,13 @@ hum1;
             break;
   
             case 3:
-              if (this.hum2.nombre == "arquero" && this.criat3.nombre == "polilla") {
+              if (this.hum2.nombre == "Arquero" && this.criat3.nombre == "Polilla") {
                 this.criat3.vida = 0;
               } else {
-                if (this.hum2.nombre == "caballero" && this.criat3.nombre == "esqueletos") {
+                if (this.hum2.nombre == "Caballero" && this.criat3.nombre == "Esqueletos") {
                   this.criat3.vida = 0;
               } else {
-                if (this.hum2.nombre == "piromano" && this.criat3.nombre == "mago") {
+                if (this.hum2.nombre == "Piromano" && this.criat3.nombre == "Mago") {
                   this.criat3.vida = 0;
               } else {
                 this.daño.play();
@@ -708,13 +706,13 @@ hum1;
             break;
   
             case 5:
-              if (this.hum3.nombre == "arquero" && this.criat3.nombre == "polilla") {
+              if (this.hum3.nombre == "Arquero" && this.criat3.nombre == "Polilla") {
                 this.criat3.vida = 0;
               } else {
-                if (this.hum3.nombre == "caballero" && this.criat3.nombre == "esqueletos") {
+                if (this.hum3.nombre == "Caballero" && this.criat3.nombre == "Esqueletos") {
                   this.criat3.vida = 0;
               } else {
-                if (this.hum3.nombre == "piromano" && this.criat3.nombre == "mago") {
+                if (this.hum3.nombre == "Piromano" && this.criat3.nombre == "Mago") {
                   this.criat3.vida = 0;
               } else {
                 this.daño.play();

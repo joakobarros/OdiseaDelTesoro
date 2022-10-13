@@ -4,7 +4,6 @@ import { sala1, sala10, sala11, sala2, sala3, sala4, sala5, sala6, sala7, sala8,
 export default class Menu extends Phaser.Scene
 {
 
-  sala;
   hum1;
   hum2;
   hum3;
@@ -28,7 +27,6 @@ export default class Menu extends Phaser.Scene
 	}
 
     init(data) {
-        this.sala = data.sala;
         this.hum1 = data.hum1;
         this.hum2 = data.hum2;
         this.hum3 = data.hum3;
@@ -54,140 +52,89 @@ let s9 = new sala9();
 let s10 = new sala10();
 let s11 = new sala11();
 
-switch (this.sala){
+switch (this.mapa.salaActual){
 
   case "s1":
     for (let p = 0; p < s1.salasPosibles.length; p++) {
       const salaPos = s1.salasPosibles[p];
-          this.ActivarSala(salaPos);
-        
-      
+      this.mapa.salasPosibles.push(salaPos);
+      this.ActivarSala(salaPos);
     }
   break; 
 
   case "s2":
     for (let p = 0; p < s2.salasPosibles.length; p++) {
-       const salaPos = s2.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s2.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   case "s3":
     for (let p = 0; p < s3.salasPosibles.length; p++) {
-       const salaPos = s3.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-           this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s3.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
       
   case "s4":
     for (let p = 0; p < s4.salasPosibles.length; p++) {
-       const salaPos = s4.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-         const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-         }
-      }
+      this.mapa.salasPosibles.push(s4.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   case "s5":
     for (let p = 0; p < s5.salasPosibles.length; p++) {
-       const salaPos = s5.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s5.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   case "s6":
     for (let p = 0; p < s6.salasPosibles.length; p++) {
-       const salaPos = s6.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-         const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s6.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   case "s7":
     for (let p = 0; p < s7.salasPosibles.length; p++) {
-       const salaPos = s7.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-         const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s7.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   case "s8":
     for (let p = 0; p < s8.salasPosibles.length; p++) {
-       const salaPos = s8.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-         const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s8.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   case "s9":
     for (let p = 0; p < s9.salasPosibles.length; p++) {
-       const salaPos = s9.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-         const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s9.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   case "s10":
     for (let p = 0; p < s10.salasPosibles.length; p++) {
-       const salaPos = s10.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-         const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s10.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   case "s11":
     for (let p = 0; p < s11.salasPosibles.length; p++) {
-       const salaPos = s11.salasPosibles[p];
-      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-         const salaPasada = this.mapa.salasPasadas[n];
-        if (salaPos != salaPasada) {
-          this.ActivarSala(salaPos);
-        }
-      }
+      this.mapa.salasPosibles.push(s11.salasPosibles[p]);
     }
+    this.ComprobacionSala();
   break;
 
   default:
   break;
-    }
+  }
 
 //////////////////////////////////////////////// selector de sprites
   switch (this.hum1.nombre) {
@@ -252,175 +199,178 @@ switch (this.sala){
 
 
 //////////////////////////////////////////////////// estadisticas
-        this.atk1 = this.add.text(220, 150, "atk: " + this.hum1.ataque, {
-            fontSize: "37px",
-            //fill: "#FFFFFF",
-            fontFamily: "georgia"
-        })
-        this.vida1 = this.add.text(220, 200, "vida: " + this.hum1.vida + "/" + this.hum1.vidaMax, {
-            fontSize: "37px",
-            //fill: "#FFFFFF",
-            fontFamily: "georgia"
-        })
+this.atk1 = this.add.text(220, 150, "atk: " + this.hum1.ataque, {
+  fontSize: "37px",
+  fontFamily: "georgia"
+  })
+this.vida1 = this.add.text(220, 200, "vida: " + this.hum1.vida + "/" + this.hum1.vidaMax, {
+  fontSize: "37px",
+  fontFamily: "georgia"
+})
 
-        this.atk2 = this.add.text(220, 500, "atk: " + this.hum2.ataque, {
-            fontSize: "37px",
-            //fill: "#FFFFFF",
-            fontFamily: "georgia"
-        })
-        this.vida2 = this.add.text(220, 550, "vida: " + this.hum2.vida + "/" + this.hum2.vidaMax, {
-            fontSize: "37px",
-            //fill: "#FFFFFF",
-            fontFamily: "georgia"
-        })
+this.atk2 = this.add.text(220, 500, "atk: " + this.hum2.ataque, {
+  fontSize: "37px",
+  fontFamily: "georgia"
+})
+this.vida2 = this.add.text(220, 550, "vida: " + this.hum2.vida + "/" + this.hum2.vidaMax, {
+  fontSize: "37px",
+  fontFamily: "georgia"
+})
 
-        this.atk3 = this.add.text(220, 860, "atk: " + this.hum3.ataque, {
-            fontSize: "37px",
-            //fill: "#FFFFFF",
-            fontFamily: "georgia"
-        })
-        this.vida3 = this.add.text(220, 910, "vida: " + this.hum3.vida + "/" + this.hum3.vidaMax, {
-            fontSize: "37px",
-            //fill: "#FFFFFF",
-            fontFamily: "georgia"
-        })
+this.atk3 = this.add.text(220, 860, "atk: " + this.hum3.ataque, {
+  fontSize: "37px",
+  fontFamily: "georgia"
+})
+this.vida3 = this.add.text(220, 910, "vida: " + this.hum3.vida + "/" + this.hum3.vidaMax, {
+  fontSize: "37px",
+  fontFamily: "georgia"
+})
 
-        this.cantCriaturas = this.add.text(1545, 590, "criaturas: " + this.criaturas, {
-            fontSize: "50px",
-            //fill: "#FFFFFF",
-            fontFamily: "georgia"
-        })
+this.cantCriaturas = this.add.text(1545, 590, "criaturas: " + this.criaturas, {
+  fontSize: "50px",
+  fontFamily: "georgia"
+})
 
 
-      let pausa = this.add.image(1800,50,'pausa').setInteractive()
-        .on('pointerdown',()=> {this.scene.start("pausa");})
-        .on('pointerover',()=> {pausa.setScale(3.1)})
-        .on('pointerout', ()=> {pausa.setScale(3)});
-        pausa.setScale(3);  
-      }
+let pausa = this.add.image(1800,50,'pausa').setInteractive()
+  .on('pointerdown',()=> {this.scene.start("Pausa");})
+  .on('pointerover',()=> {pausa.setScale(3.1)})
+  .on('pointerout', ()=> {pausa.setScale(3)});
+  pausa.setScale(3);  
+}
 
-      ///////////////////////////////// funcion activar sala
+///////////////////////////////// funcion comprobación de sala
+ComprobacionSala(){
+  for (let s = 0; s < this.mapa.salasPosibles.length; s++) {
+    const salaPos = this.mapa.salasPosibles[s];
+   for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+      const salaPasada = this.mapa.salasPasadas[n];
+     if (salaPos != salaPasada) {
+       this.ActivarSala(salaPos);
+     }
+   }
+ }
+}
+
+///////////////////////////////// funcion activar sala
 ActivarSala(salaPos){
   switch (salaPos) {
     case "s2":
-      let salaP2 = this.add.image(100, 100, 'sala').setInteractive();
-      salaP2.on('pointerover', ()=>{salaP2.setScale(4);});
-      salaP2.on('pointerout', ()=>{salaP2.setScale(4.1)})
+      let salaP2 = this.add.image(1204, 430, 'salaDisponible').setInteractive();
+      salaP2.on('pointerover', ()=>{salaP2.setScale(1.1);});
+      salaP2.on('pointerout', ()=>{salaP2.setScale(1)})
       salaP2.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s2");
-        this.sala = "s2";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s2";
+       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s3":
-      let salaP3 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP3.on('pointerover', ()=>{salaP3.setScale(4);});
-      salaP3.on('pointerout', ()=>{salaP3.setScale(4.1)})
+      let salaP3 = this.add.image(1204, 650, 'salaDisponible').setInteractive();
+      salaP3.on('pointerover', ()=>{salaP3.setScale(1.1);});
+      salaP3.on('pointerout', ()=>{salaP3.setScale(1)})
       salaP3.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s3");
-        this.sala = "s3";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s3";
+       this.scene.start("Descanso", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s4":
-      let salaP4 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP4.on('pointerover', ()=>{salaP4.setScale(4);});
-      salaP4.on('pointerout', ()=>{salaP4.setScale(4.1)})
+      let salaP4 = this.add.image(1204, 876, 'salaDisponible').setInteractive();
+      salaP4.on('pointerover', ()=>{salaP4.setScale(1.1);});
+      salaP4.on('pointerout', ()=>{salaP4.setScale(1)})
       salaP4.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s4");
-        this.sala = "s4";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s4";
+       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s5":
-      let salaP5 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP5.on('pointerover', ()=>{salaP5.setScale(4);});
-      salaP5.on('pointerout', ()=>{salaP5.setScale(4.1)})
+      let salaP5 = this.add.image(960, 200, 'salaDisponible').setInteractive();
+      salaP5.on('pointerover', ()=>{salaP5.setScale(1.1);});
+      salaP5.on('pointerout', ()=>{salaP5.setScale(1)})
       salaP5.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s5");
-        this.sala = "s5";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s5";
+       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s6":
-      let salaP6 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP6.on('pointerover', ()=>{salaP6.setScale(4);});
-      salaP6.on('pointerout', ()=>{salaP6.setScale(4.1)})
+      let salaP6 = this.add.image(960, 430, 'salaDisponible').setInteractive();
+      salaP6.on('pointerover', ()=>{salaP6.setScale(1.1);});
+      salaP6.on('pointerout', ()=>{salaP6.setScale(1)})
       salaP6.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s6");
-        this.sala = "s6";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s6";
+       this.scene.start("Descanso", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s7":
-      let salaP7 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP7.on('pointerover', ()=>{salaP7.setScale(4);});
-      salaP7.on('pointerout', ()=>{salaP7.setScale(4.1)})
+      let salaP7 = this.add.image(960, 650, 'salaDisponible').setInteractive();
+      salaP7.on('pointerover', ()=>{salaP7.setScale(1.1);});
+      salaP7.on('pointerout', ()=>{salaP7.setScale(1)})
       salaP7.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s7");
-        this.sala = "s7";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s7";
+       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s8":
-      let salaP8 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP8.on('pointerover', ()=>{salaP8.setScale(4);});
-      salaP8.on('pointerout', ()=>{salaP8.setScale(4.1)})
+      let salaP8 = this.add.image(960, 876, 'salaDisponible').setInteractive();
+      salaP8.on('pointerover', ()=>{salaP8.setScale(1.1);});
+      salaP8.on('pointerout', ()=>{salaP8.setScale(1)})
       salaP8.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s8");
-        this.sala = "s8";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s8";
+       this.scene.start("Descanso", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s9":
-      let salaP9 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP9.on('pointerover', ()=>{salaP9.setScale(4);});
-      salaP9.on('pointerout', ()=>{salaP9.setScale(4.1)})
+      let salaP9 = this.add.image(710, 200, 'salaDisponible').setInteractive();
+      salaP9.on('pointerover', ()=>{salaP9.setScale(1.1);});
+      salaP9.on('pointerout', ()=>{salaP9.setScale(1)})
       salaP9.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s9");
-        this.sala = "s9";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s9";
+       this.scene.start("Descanso", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s10":
-      let salaP10 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP10.on('pointerover', ()=>{salaP10.setScale(4);});
-      salaP10.on('pointerout', ()=>{salaP10.setScale(4.1)})
+      let salaP10 = this.add.image(710, 430, 'salaDisponible').setInteractive();
+      salaP10.on('pointerover', ()=>{salaP10.setScale(1.1);});
+      salaP10.on('pointerout', ()=>{salaP10.setScale(1)})
       salaP10.on('pointerdown', ()=>{
        this.mapa.salasPasadas.push("s10");
-       this.sala = "s10";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+       this.mapa.salaActual = "s10";
+       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s11":
-      let salaP11 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP11.on('pointerover', ()=>{salaP11.setScale(4);});
-      salaP11.on('pointerout', ()=>{salaP11.setScale(4.1)})
+      let salaP11 = this.add.image(710, 650, 'salaDisponible').setInteractive();
+      salaP11.on('pointerover', ()=>{salaP11.setScale(1.1);});
+      salaP11.on('pointerout', ()=>{salaP11.setScale(1)})
       salaP11.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s11");
-        this.sala = "s11";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, criaturas: this.criaturas, mapa: this.mapa });
+        this.mapa.salaActual = "s11";
+       this.scene.start("Descanso", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
       case "s12":
-      let salaP12 = this.add.image(100, 100, 'salaDisponible').setInteractive();
-      salaP12.on('pointerover', ()=>{salaP12.setScale(4);});
-      salaP12.on('pointerout', ()=>{salaP12.setScale(4.1)})
+      let salaP12 = this.add.image(710, 876, 'salaDisponible').setInteractive();
+      salaP12.on('pointerover', ()=>{salaP12.setScale(1.1);});
+      salaP12.on('pointerout', ()=>{salaP12.setScale(1)})
       salaP12.on('pointerdown', ()=>{
-        this.mapa.salasPasadas.push("s12");
-        this.sala = "s12";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, mapa: this.mapa, criaturas: this.criaturas });
-      });
+       this.scene.start("CombateJefe", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3})});
       break;
   
     default:
@@ -428,36 +378,3 @@ ActivarSala(salaPos){
   }
 }
 }
-
-        //var continuar = this.add.image(1680,950,'continuar').setInteractive()
-        //.on('pointerdown',()=> {  switch (sala) {
-                    
-          //case 1:{
-          // this.scene.start("SelectorCriaturas", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas });
-           //break;
-          //}
-          //case 2:{
-          // this.scene.start("descanso", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas });
-          // break;
-          //}
-          //case 3:{
-          // this.scene.start("selectorC", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas });
-          // break;
-          //}
-          //case 4:{
-          // this.scene.start("descanso", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, criaturas: criaturas });
-          // break;
-          //}
-          //case 5:{
-          // this.scene.start("combateJefe", { hum1: hum1, hum2: hum2, hum3: hum3});
-          // break;
-          //}
-
-       //}
-   //})
-        //.on('pointerover',()=> {continuar.setScale(5.1)})
-        //.on('pointerout', ()=> {continuar.setScale(5)});
-        //continuar.setScale(5);
- // }
-
-//}

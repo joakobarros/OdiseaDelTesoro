@@ -14,7 +14,7 @@ export default class WinGuardian extends Phaser.Scene
         var Salir = this.add.image(1000,945,'salir').setInteractive()
         .on('pointerdown',()=> {
           this.sound.stopAll(); 
-          this.scene.start("mainmenu")})
+          this.scene.start("MainMenu")})
         .on('pointerover',()=> {Salir.setScale(5.1)})
         .on('pointerout',()=> {Salir.setScale(5)})
         Salir.setScale(5);

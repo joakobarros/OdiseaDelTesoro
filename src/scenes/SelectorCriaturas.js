@@ -6,7 +6,6 @@ import {Esqueletos} from "../Controladores/Personajes.js"
 export default class SelectorCriaturas extends Phaser.Scene
 {
 
-sala;
 criaturas;
 hum1;
 hum2;
@@ -30,7 +29,6 @@ mapa;
 	}
 
 	init(data) {
-        this.sala = data.sala;
         this.hum1 = data.hum1;
         this.hum2 = data.hum2;
         this.hum3 = data.hum3;
@@ -212,7 +210,7 @@ var continuar = this.add.image(970,950,'continuar').setInteractive()
     this.sala++
     this.criaturas -= 3;
   this.scene.start("Combate", { criat1: criats[0], criat2: criats[1], criat3: criats[2],
-  sala: this.sala, mapa: this.mapa, criaturas: this.criaturas, hum1: this.hum1, hum2: this.hum2, hum3: this.hum3 })}})
+  mapa: this.mapa, criaturas: this.criaturas, hum1: this.hum1, hum2: this.hum2, hum3: this.hum3 })}})
       
   .on('pointerover', ()=> {continuar.setScale(5.1)})
   .on('pointerout', ()=> {continuar.setScale(5)});
