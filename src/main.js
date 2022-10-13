@@ -10,7 +10,7 @@ import  WinGuardian  from "./scenes/WinGuardian.js";
 import  WinHumanos  from "./scenes/WinHumanos.js";
 import  Pausa  from "./scenes/Pausa.js";
 import  CombateJefe  from "./scenes/CombateJefe.js";
-import SelectorHumanos  from "./scenes/SelectorHumanos.js";
+import {SelectorHumanos}  from "./scenes/SelectorHumanos.js";
 import  SelectorCriaturas  from "./scenes/SelectorCriaturas.js";
 
 const config = {

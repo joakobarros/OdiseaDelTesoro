@@ -211,7 +211,7 @@ var continuar = this.add.image(970,950,'continuar').setInteractive()
 
     this.sala++
     this.criaturas -= 3;
-  this.scene.start("combate", { criat1: criats[0], criat2: criats[1], criat3: criats[2],
+  this.scene.start("Combate", { criat1: criats[0], criat2: criats[1], criat3: criats[2],
   sala: this.sala, mapa: this.mapa, criaturas: this.criaturas, hum1: this.hum1, hum2: this.hum2, hum3: this.hum3 })}})
       
   .on('pointerover', ()=> {continuar.setScale(5.1)})

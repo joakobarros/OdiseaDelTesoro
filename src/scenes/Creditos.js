@@ -20,7 +20,7 @@ export default class Creditos extends Phaser.Scene
           var volver = this.add.image(this.cameras.main.centerX,900,'volver').setInteractive()
           .on('pointerdown',()=> {
             this.sound.stopAll(); 
-            this.scene.start("mainmenu"); })
+            this.scene.start("MainMenu"); })
           .on('pointerover', ()=> {volver.setScale(4.1)})
           .on('pointerout', ()=> {volver.setScale(4)});
           volver.setScale(4);

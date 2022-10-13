@@ -7,7 +7,7 @@ import { Mapa } from '../Controladores/mapa';
 export class SelectorHumanos extends Phaser.Scene {
     
   sala = "s1";
-  mapa = new Mapa();
+  mapa = new Mapa("",[]);
   criaturas = 15;
   text1;
   text2;
@@ -210,7 +210,7 @@ var continuar = this.add.image(970,950,'continuar').setInteractive()
     for (let i = 0; i < num3; i++) {
       hums.push(new Piromano)
     }
-    this.scene.start("mapa", { hum1: hums[0], hum2: hums[1], hum3: hums[2], sala: this.sala, mapa: this.mapa, criaturas: this.criaturas });
+    this.scene.start("Mapa", { hum1: hums[0], hum2: hums[1], hum3: hums[2], sala: this.sala, mapa: this.mapa, criaturas: this.criaturas });
   }})  
 .on('pointerover', ()=> {continuar.setScale(5.1)})
 .on('pointerout', ()=> {continuar.setScale(5)});

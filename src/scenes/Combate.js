@@ -1,50 +1,52 @@
 import Phaser from 'phaser'
 
-let hum1;
-let hum2;
-let hum3;
-let criaturas;
-let criat1;
-let criat2;
-let criat3;
-let turno = 1;
-let Tturno;
-let ataque = "";
-let criatImg1;
-let criatImg2;
-let criatImg3;
-let humImg1;
-let humImg2;
-let humImg3;
-let vidaH1;
-let vidaH2;
-let vidaH3;
-let vidaC1;
-let vidaC2;
-let vidaC3;
-let daño;
-let muerte;
-let sala;
-let mapa;
+
 
 
 export default class Combate extends Phaser.Scene
 {
+
+hum1;
+ hum2;
+ hum3;
+ criaturas;
+ criat1;
+ criat2;
+ criat3;
+ turno = 1;
+ Tturno;
+ ataque = "";
+ criatImg1;
+ criatImg2;
+ criatImg3;
+ humImg1;
+ humImg2;
+ humImg3;
+ vidaH1;
+ vidaH2;
+ vidaH3;
+ vidaC1;
+ vidaC2;
+ vidaC3;
+ daño;
+ muerte;
+ sala;
+ mapa
 	constructor()
 	{
 		super('Combate')
 	}
 
 	init(data) {
-        sala = data.sala;
-        hum1 = data.hum1;
-        hum2 = data.hum2;
-        hum3 = data.hum3;
-        mapa = data.mapa;
-        criaturas = data.criaturas;
-        criat1 = data.criat1;
-        criat2 = data.criat2;
-        criat3 = data.criat3;
+        this.sala = data.sala;
+        this.hum1 = data.hum1;
+        this.hum2 = data.hum2;
+        this.hum3 = data.hum3;
+        this.mapa = data.mapa;
+        this.criaturas = data.criaturas;
+        this.criat1 = data.criat1;
+        this.criat2 = data.criat2;
+        this.criat3 = data.criat3;
         console.log(data);
     }
   
@@ -53,108 +55,108 @@ export default class Combate extends Phaser.Scene
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondocombate');
   
   ////////////////////////////////////////////// sonidos
-  daño = this.sound.add('daño', {loop: false});
-  muerte = this.sound.add('muerte', {loop: false});
+  this.daño = this.sound.add('daño', {loop: false});
+  this.muerte = this.sound.add('muerte', {loop: false});
       
   
   ////////////////////////////////////////////// carteles de salud
-  vidaH1 = this.add.text(160,753,hum1.vida + "/" + hum1.vidaMax, {
+  this.vidaH1 = this.add.text(160,753,this.hum1.vida + "/" + this.hum1.vidaMax, {
     fontSize: "50px",
     fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
-  vidaH2 = this.add.text(420, 753, hum2.vida + "/" + hum2.vidaMax, {
+  this.vidaH2 = this.add.text(420, 753, this.hum2.vida + "/" + this.hum2.vidaMax, {
     fontSize: "50px",
     fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
-  vidaH3 = this.add.text(700, 753, hum3.vida + "/" + hum3.vidaMax, {
+  this.vidaH3 = this.add.text(700, 753, this.hum3.vida + "/" + this.hum3.vidaMax, {
     fontSize: "50px",
     fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
-  vidaC1 = this.add.text(1170, 753, criat1.vida + "/" + criat1.vidaMax, {
+  this.vidaC1 = this.add.text(1170, 753, this.criat1.vida + "/" + this.criat1.vidaMax, {
     fontSize: "50px",
     fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
-  vidaC2 = this.add.text(1430, 753, criat2.vida + "/" + criat2.vidaMax, {
+  this.vidaC2 = this.add.text(1430, 753, this.criat2.vida + "/" + this.criat2.vidaMax, {
     fontSize: "50px",
     fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
-  vidaC3 = this.add.text(1670, 753, criat3.vida + "/" + criat3.vidaMax, {
+  this.vidaC3 = this.add.text(1670, 753, this.criat3.vida + "/" + this.criat3.vidaMax, {
     fontSize: "50px",
     fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
-  Tturno = this.add.text(850, 100, "turno: " + turno, {
+  this.Tturno = this.add.text(850, 100, "turno: " + this.turno, {
     fontSize: "60px",
     fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
   ////////////////////////////////////////////// selector de sprites humanos
-  switch (hum1.nombre) {
+  switch (this.hum1.nombre) {
     case "arquero":
-      humImg1 = this.add.image(200, 535, 'arquero').setInteractive();
-      humImg1.setScale(4);
+      this.humImg1 = this.add.image(200, 535, 'arquero').setInteractive();
+      this.humImg1.setScale(4);
       break;
   
     case "caballero":
-      humImg1 = this.add.image(200, 535, 'caballero').setInteractive();
-      humImg1.setScale(4);
+      this.humImg1 = this.add.image(200, 535, 'caballero').setInteractive();
+      this.humImg1.setScale(4);
       break;
   
     case "piromano":
-      humImg1 = this.add.image(200, 535, 'piromano').setInteractive()
-      humImg1.setScale(4);
+      this.humImg1 = this.add.image(200, 535, 'piromano').setInteractive()
+      this.humImg1.setScale(4);
       break;
   
     default:
       break;
   }
   
-  switch (hum2.nombre) {
+  switch (this.hum2.nombre) {
     case "arquero":
-      humImg2 = this.add.image(450, 535, 'arquero').setInteractive();
-      humImg2.setScale(4);
+      this.humImg2 = this.add.image(450, 535, 'arquero').setInteractive();
+      this.humImg2.setScale(4);
       break;
   
     case "caballero":
-      humImg2 = this.add.image(450, 535, 'caballero').setInteractive();
-      humImg2.setScale(4);
+      this.humImg2 = this.add.image(450, 535, 'caballero').setInteractive();
+      this.humImg2.setScale(4);
       break;
   
     case "piromano":
-      humImg2 = this.add.image(450, 535, 'piromano').setInteractive();
-      humImg2.setScale(4);
+      this.humImg2 = this.add.image(450, 535, 'piromano').setInteractive();
+      this.humImg2.setScale(4);
       break;
   
     default:
       break;
   }
   
-  switch (hum3.nombre) {
+  switch (this.hum3.nombre) {
     case "arquero":
-      humImg3 = this.add.image(700, 535, 'arquero').setInteractive()
-      humImg3.setScale(4);
+      this.humImg3 = this.add.image(700, 535, 'arquero').setInteractive()
+      this.humImg3.setScale(4);
       break;
   
     case "caballero":
-      humImg3 = this.add.image(700, 535, 'caballero').setInteractive()
-      humImg3.setScale(4);
+      this.humImg3 = this.add.image(700, 535, 'caballero').setInteractive()
+      this.humImg3.setScale(4);
       break;
   
     case "piromano":
-      humImg3 = this.add.image(700, 535, 'piromano').setInteractive();
-      humImg3.setScale(4);
+      this.humImg3 = this.add.image(700, 535, 'piromano').setInteractive();
+      this.humImg3.setScale(4);
       break;
   
     default:
@@ -162,60 +164,60 @@ export default class Combate extends Phaser.Scene
   }
   
   ////////////////////////////////////////////// selector de sprites criaturas
-  switch (criat1.nombre) {
+  switch (this.criat1.nombre) {
     case "esqueletos":
-      criatImg1 = this.add.image(1200, 535, 'esqueletos').setInteractive();
-      criatImg1.setScale(4);
+      this.criatImg1 = this.add.image(1200, 535, 'esqueletos').setInteractive();
+      this.criatImg1.setScale(4);
       break;
     
     case "mago":
-      criatImg1 = this.add.image(1200, 535, 'mago').setInteractive();
-      criatImg1.setScale(4);
+      this.criatImg1 = this.add.image(1200, 535, 'mago').setInteractive();
+      this.criatImg1.setScale(4);
       break;
     
     case "polilla":
-      criatImg1 = this.add.image(1200, 535, 'polilla').setInteractive();
-      criatImg1.setScale(4);
+      this.criatImg1 = this.add.image(1200, 535, 'polilla').setInteractive();
+      this.criatImg1.setScale(4);
       break;
     
     default:
       break;
   }
   
-  switch (criat2.nombre) {
+  switch (this.criat2.nombre) {
     case "esqueletos":
-      criatImg2 = this.add.image(1450, 535, 'esqueletos').setInteractive();
-      criatImg2.setScale(4);
+      this.criatImg2 = this.add.image(1450, 535, 'esqueletos').setInteractive();
+      this.criatImg2.setScale(4);
       break;
     
     case "mago":
-      criatImg2 = this.add.image(1450, 535, 'mago').setInteractive();
-      criatImg2.setScale(4);
+      this.criatImg2 = this.add.image(1450, 535, 'mago').setInteractive();
+      this.criatImg2.setScale(4);
       break;
     
     case "polilla":
-      criatImg2 = this.add.image(1450, 535, 'polilla').setInteractive();
-      criatImg2.setScale(4);
+      this.criatImg2 = this.add.image(1450, 535, 'polilla').setInteractive();
+      this.criatImg2.setScale(4);
       break;
     
     default:
       break;
   }
   
-  switch (criat3.nombre) {
+  switch (this.criat3.nombre) {
     case "esqueletos":
-      criatImg3 = this.add.image(1700, 535, 'esqueletos').setInteractive();
-      criatImg3.setScale(4);
+      this.criatImg3 = this.add.image(1700, 535, 'esqueletos').setInteractive();
+      this.criatImg3.setScale(4);
       break;
       
     case "mago":
-      criatImg3 = this.add.image(1700, 535, 'mago').setInteractive();
-      criatImg3.setScale(4);
+      this.criatImg3 = this.add.image(1700, 535, 'mago').setInteractive();
+      this.criatImg3.setScale(4);
       break;
       
     case "polilla":
-      criatImg3 = this.add.image(1700, 535, 'polilla').setInteractive();
-      criatImg3.setScale(4);
+      this.criatImg3 = this.add.image(1700, 535, 'polilla').setInteractive();
+      this.criatImg3.setScale(4);
       break;
       
     default:
@@ -223,7 +225,7 @@ export default class Combate extends Phaser.Scene
   }
   
   var atacar = this.add.image(950,950,'atacar').setInteractive()
-  .on('pointerdown',()=> {ataque = "si" })
+  .on('pointerdown',()=> {this.ataque = "si" })
   .on('pointerover',()=> {atacar.setScale(5.1)})
   .on('pointerout',()=> {atacar.setScale(5)})
   atacar.setScale(5)
@@ -233,108 +235,108 @@ export default class Combate extends Phaser.Scene
   update(){
   
   ///////////////////////////////////////////////// win condition
-    if (hum1.vida <= 0 && hum3.vida <= 0 && hum2.vida <= 0) {
+    if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {
       setTimeout(()=>{ this.scene.start("winGuardian")},1000)
     }
 
-    if (criat1.vida <= 0 && criat2.vida <= 0 && criat3.vida <= 0) {
+    if (this.criat1.vida <= 0 && this.criat2.vida <= 0 && this.criat3.vida <= 0) {
       setTimeout(()=>{ 
-        turno = 1;
-        this.scene.start("mapa", { hum1: hum1, hum2: hum2, hum3: hum3, sala: sala, mapa: mapa, criaturas: criaturas })}
+        this.turno = 1;
+        this.scene.start("mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, sala: this.sala, mapa: this.mapa, criaturas: this.criaturas })}
         ,1000) 
     }
   
   
   ///////////////////////////////////////////////// eliminar unidades
-  if (hum1.vida <= 0) {
-    humImg1.destroy();
-    vidaH1.text  = "";
+  if (this.hum1.vida <= 0) {
+    this.humImg1.destroy();
+    this.vidaH1.text  = "";
   }
-  if (hum2.vida <= 0) {
-    humImg2.destroy();
-    vidaH2.text  = "";
+  if (this.hum2.vida <= 0) {
+    this.humImg2.destroy();
+    this.vidaH2.text  = "";
   }
-  if (hum3.vida <= 0) {
-    humImg3.destroy();
-    vidaH3.text  = "";
+  if (this.hum3.vida <= 0) {
+    this.humImg3.destroy();
+    this.vidaH3.text  = "";
   }
-  if (criat1.vida <= 0) {
-    criatImg1.destroy();
-    vidaC1.text  = "";
+  if (this.criat1.vida <= 0) {
+    this.criatImg1.destroy();
+    this.vidaC1.text  = "";
   }
-  if (criat2.vida <= 0) {
-    criatImg2.destroy();
-    vidaC2.text  = "";
+  if (this.criat2.vida <= 0) {
+    this.criatImg2.destroy();
+    this.vidaC2.text  = "";
   }
-  if (criat3.vida <= 0) {
-    criatImg3.destroy();
-    vidaC3.text  = "";
+  if (this.criat3.vida <= 0) {
+    this.criatImg3.destroy();
+    this.vidaC3.text  = "";
   }
   
   ////////////////////////////////////////////////// indicador de turno
       
-  switch (turno) {
+  switch (this.turno) {
     case 1:
-      if (hum1.vida <= 0 && turno == 1) {
-        turno++;
-        Tturno.text = "turno: " +turno;
+      if (this.hum1.vida <= 0 && this.turno == 1) {
+        this.turno++;
+        this.Tturno.text = "turno: " +this.turno;
       } else {
-        humImg1.setScale(4.5); 
+        this.humImg1.setScale(4.5); 
       }
           
       break;
           
     case 2:
-      if (criat1.vida <= 0 && turno == 2) {
-        turno++;
-        Tturno.text = "turno: " +turno;
+      if (this.criat1.vida <= 0 && this.turno == 2) {
+        this.turno++;
+        this.Tturno.text = "turno: " +this.turno;
       } else {
-        criatImg1.setScale(4.5);
-        humImg1.setScale(4);
+        this.criatImg1.setScale(4.5);
+        this.humImg1.setScale(4);
       }
       
       break;
   
     case 3:
-      if (hum2.vida <= 0 && turno == 3) {
-        turno++;
-        Tturno.text = "turno: " +turno;
+      if (this.hum2.vida <= 0 && this.turno == 3) {
+        this.turno++;
+        this.Tturno.text = "turno: " +this.turno;
       } else {
-        humImg2.setScale(4.5);
-        criatImg1.setScale(4);
+        this.humImg2.setScale(4.5);
+        this.criatImg1.setScale(4);
       }
      
       break;
   
     case 4:
-      if (criat2.vida <= 0 && turno == 4) {
-        turno++;
-        Tturno.text = "turno: " +turno;
+      if (this.criat2.vida <= 0 && this.turno == 4) {
+        this.turno++;
+        this.Tturno.text = "turno: " +this.turno;
       } else {
-       criatImg2.setScale(4.5);
-       humImg2.setScale(4);
+        this.criatImg2.setScale(4.5);
+        this.humImg2.setScale(4);
       }
       
       break;
   
     case 5:
-      if (hum3.vida <= 0 && turno == 5) {
-        turno++;
-        Tturno.text = "turno: " +turno;
+      if (this.hum3.vida <= 0 && this.turno == 5) {
+        this.turno++;
+        this.Tturno.text = "turno: " +this.turno;
       } else {
-       humImg3.setScale(4.5);
-       criatImg2.setScale(4);
+        this.humImg3.setScale(4.5);
+        this.criatImg2.setScale(4);
       }
       
       break;
   
     case 6:
-      if (criat3.vida <= 0 && turno == 6) {
-        turno = 1;
-        Tturno.text = "turno: " +turno;
+      if (this.criat3.vida <= 0 && this.turno == 6) {
+        this.turno = 1;
+        this.Tturno.text = "turno: " +this.turno;
       } else {
-       criatImg3.setScale(4.5);
-       humImg3.setScale(4);
+        this.criatImg3.setScale(4.5);
+        this.humImg3.setScale(4);
       }
       break;
   
@@ -345,395 +347,395 @@ export default class Combate extends Phaser.Scene
     
       
   //////////////////////////////////////////////// humanos
-    humImg1.on('pointerdown',()=> {
-      if (ataque == "si") {
-        switch (turno) {
+  this.humImg1.on('pointerdown',()=> {
+      if (this.ataque == "si") {
+        switch (this.turno) {
             case 2:
-            hum1.vida -= criat1.ataque;
-            turno++;
-            if (hum1.vida <= 0) {
-              muerte.play();
+              this.hum1.vida -= this.criat1.ataque;
+              this.turno++;
+            if (this.hum1.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH1.text = hum1.vida + "/" + hum1.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH1.text = this.hum1.vida + "/" + this.hum1.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
   
             case 4:
-            hum1.vida -= criat2.ataque;
-            turno++;
-            if (hum1.vida <= 0) {
-              muerte.play();
+              this.hum1.vida -= this.criat2.ataque;
+              this.turno++;
+            if (this.hum1.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH1.text = hum1.vida + "/" + hum1.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH1.text = this.hum1.vida + "/" + this.hum1.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
   
             case 6:
-            hum1.vida -= criat3.ataque;
-            turno = 1;
-            if (hum1.vida <= 0) {
-              muerte.play();
+              this.hum1.vida -= this.criat3.ataque;
+              this.turno = 1;
+            if (this.hum1.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH1.text = hum1.vida + "/" + hum1.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH1.text = this.hum1.vida + "/" + this.hum1.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
         
           default:
             break;
         }}})
-    humImg1.on('pointerover',()=> {
-      if (turno == 2 || turno == 4 || turno == 6) {
-      humImg1.setScale(4.1); 
+        this.humImg1.on('pointerover',()=> {
+      if (this.turno == 2 || this.turno == 4 || this.turno == 6) {
+        this.humImg1.setScale(4.1); 
     }
     })
-    humImg1.on('pointerout', ()=> {
-      humImg1.setScale(4);
+    this.humImg1.on('pointerout', ()=> {
+      this.humImg1.setScale(4);
     })
   
-    humImg2.on('pointerdown',()=> {
-      if (ataque == "si") {
-        switch (turno) {
+    this.humImg2.on('pointerdown',()=> {
+      if (this.ataque == "si") {
+        switch (this.turno) {
             case 2:
-            hum2.vida -= criat1.ataque;
-            turno++;
-            if (hum2.vida <= 0) {
-              muerte.play();
+              this.hum2.vida -= this.criat1.ataque;
+              this.turno++;
+            if (this.hum2.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH2.text = hum2.vida + "/" + hum2.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH2.text = this.hum2.vida + "/" + this.hum2.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
   
             case 4:
-            hum2.vida -= criat2.ataque;
-            turno++;
-            if (hum2.vida <= 0) {
-              muerte.play();
+              this.hum2.vida -= this.criat2.ataque;
+              this.turno++;
+            if (this.hum2.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH2.text = hum2.vida + "/" + hum2.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH2.text = this.hum2.vida + "/" + this.hum2.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
   
             case 6:
-            hum2.vida -= criat3.ataque;
-            turno = 1;
-            if (hum2.vida <= 0) {
-              muerte.play();
+              this.hum2.vida -= this.criat3.ataque;
+              this.turno = 1;
+            if (this.hum2.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH2.text = hum2.vida + "/" + hum2.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH2.text = this.hum2.vida + "/" + this.hum2.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
         
           default:
             break;
         }}})
-    humImg2.on('pointerover',()=> {
-      if (turno == 2 || turno == 4 || turno == 6) {
-        humImg2.setScale(4.1); 
+        this.humImg2.on('pointerover',()=> {
+      if (this.turno == 2 || this.turno == 4 || this.turno == 6) {
+        this.humImg2.setScale(4.1); 
       }
     })
-    humImg2.on('pointerout', ()=> {
-      humImg2.setScale(4);
+    this.humImg2.on('pointerout', ()=> {
+      this.humImg2.setScale(4);
     })
     
-    humImg3.on('pointerdown',()=> {
-      if (ataque == "si") {
-        switch (turno) {
+    this.humImg3.on('pointerdown',()=> {
+      if (this.ataque == "si") {
+        switch (this.turno) {
           case 2:
-            hum3.vida -= criat1.ataque;
-            turno++;
-            if (hum3.vida <= 0) {
-              muerte.play();
+            this.hum3.vida -= this.criat1.ataque;
+            this.turno++;
+            if (this.hum3.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH3.text = hum3.vida + "/" + hum3.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH3.text = this.hum3.vida + "/" + this.hum3.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
   
             case 4:
-            hum3.vida -= criat2.ataque;
-            turno++;
-            if (hum3.vida <= 0) {
-              muerte.play();
+              this.hum3.vida -= this.criat2.ataque;
+              this.turno++;
+            if (this.hum3.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH3.text = hum3.vida + "/" + hum3.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH3.text = this.hum3.vida + "/" + this.hum3.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
   
             case 6:
-            hum3.vida -= criat3.ataque;
-            turno = 1;
-            if (hum3.vida <= 0) {
-              muerte.play();
+              this.hum3.vida -= this.criat3.ataque;
+              this.turno = 1;
+            if (this.hum3.vida <= 0) {
+              this.muerte.play();
             } else {
-            daño.play();
-            vidaH3.text = hum3.vida + "/" + hum3.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.daño.play();
+              this.vidaH3.text = this.hum3.vida + "/" + this.hum3.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             }
             break;
         
           default:
             break;
         }}})
-    humImg3.on('pointerover',()=> {
-      if (turno == 2 || turno == 4 || turno == 6) {
-        humImg3.setScale(4.1); 
+        this.humImg3.on('pointerover',()=> {
+      if (this.turno == 2 || this.turno == 4 || this.turno == 6) {
+        this.humImg3.setScale(4.1); 
       }
     })
-    humImg3.on('pointerout', ()=> {
-      humImg3.setScale(4);
+    this.humImg3.on('pointerout', ()=> {
+      this.humImg3.setScale(4);
     })
   
     /////////////////////////////////////// criaturas
-    criatImg1.on('pointerdown',()=> {
-      if (ataque == "si") {
-        switch (turno) {
+    this.criatImg1.on('pointerdown',()=> {
+      if (this.ataque == "si") {
+        switch (this.turno) {
           case 1:
-            if (hum1.nombre == "arquero" && criat1.nombre == "polilla") {
-              muerte.play();
-              criat1.vida = 0;
+            if (this.hum1.nombre == "arquero" && this.criat1.nombre == "polilla") {
+              this.muerte.play();
+              this.criat1.vida = 0;
             } else {
-              if (hum1.nombre == "caballero" && criat1.nombre == "esqueletos") {
-                muerte.play();
-              criat1.vida = 0;
+              if (this.hum1.nombre == "caballero" && this.criat1.nombre == "esqueletos") {
+                this.muerte.play();
+                this.criat1.vida = 0;
             } else {
-              if (hum1.nombre == "piromano" && criat1.nombre == "mago") {
-                muerte.play();
-              criat1.vida = 0;
+              if (this.hum1.nombre == "piromano" && this.criat1.nombre == "mago") {
+                this.muerte.play();
+                this.criat1.vida = 0;
             } else {
-              daño.play();
-            criat1.vida -= hum1.ataque;
+              this.daño.play();
+              this.criat1.vida -= this.hum1.ataque;
             }}}
-            turno++;
-            vidaC1.text = criat1.vida + "/" + criat1.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+            this.turno++;
+            this.vidaC1.text = this.criat1.vida + "/" + this.criat1.vidaMax;
+            this.Tturno.text = "turno: " +this.turno;
+            this.ataque = "no";
             break;
   
             case 3:
-              if (hum2.nombre == "arquero" && criat1.nombre == "polilla") {
-                muerte.play();
-                criat1.vida = 0;
+              if (this.hum2.nombre == "arquero" && this.criat1.nombre == "polilla") {
+                this.muerte.play();
+                this.criat1.vida = 0;
               } else {
-                if (hum2.nombre == "caballero" && criat1.nombre == "esqueletos") {
-                  muerte.play();
-                criat1.vida = 0;
+                if (this.hum2.nombre == "caballero" && this.criat1.nombre == "esqueletos") {
+                  this.muerte.play();
+                  this.criat1.vida = 0;
               } else {
-                if (hum2.nombre == "piromano" && criat1.nombre == "mago") {
-                  muerte.play();
-                criat1.vida = 0;
+                if (this.hum2.nombre == "piromano" && this.criat1.nombre == "mago") {
+                  this.muerte.play();
+                  this.criat1.vida = 0;
               } else {
-                daño.play();
-              criat1.vida -= hum2.ataque;
+                this.daño.play();
+                this.criat1.vida -= this.hum2.ataque;
               }}}
-              turno++;
-            vidaC1.text = criat1.vida + "/" + criat1.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.turno++;
+              this.vidaC1.text = this.criat1.vida + "/" + this.criat1.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             break;
   
             case 5:
-              if (hum3.nombre == "arquero" && criat1.nombre == "polilla") {
-                muerte.play();
-                criat1.vida = 0;
+              if (this.hum3.nombre == "arquero" && this.criat1.nombre == "polilla") {
+                this.muerte.play();
+                this.criat1.vida = 0;
               } else {
-                if (hum3.nombre == "caballero" && criat1.nombre == "esqueletos") {
-                  muerte.play();
-                criat1.vida = 0;
+                if (this.hum3.nombre == "caballero" && this.criat1.nombre == "esqueletos") {
+                  this.muerte.play();
+                  this.criat1.vida = 0;
               } else {
-                if (hum3.nombre == "piromano" && criat1.nombre == "mago") {
-                  muerte.play();
-                criat1.vida = 0;
+                if (this.hum3.nombre == "piromano" && this.criat1.nombre == "mago") {
+                  this.muerte.play();
+                  this.criat1.vida = 0;
               } else {
-                daño.play();
-              criat1.vida -= hum3.ataque;
+                this.daño.play();
+                this.criat1.vida -= this.hum3.ataque;
               }}}
-              turno++;
-            vidaC1.text = criat1.vida + "/" + criat1.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.turno++;
+              this.vidaC1.text = this.criat1.vida + "/" + this.criat1.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             break;
         
           default:
             break;
         }}})
-    criatImg1.on('pointerover',()=> {
-      if (turno == 1 || turno == 3 || turno == 5) {
-        criatImg1.setScale(4.1); 
+        this.criatImg1.on('pointerover',()=> {
+      if (this.turno == 1 || this.turno == 3 || this.turno == 5) {
+        this.criatImg1.setScale(4.1); 
       }
     })
-    criatImg1.on('pointerout', ()=> {
-      criatImg1.setScale(4);
+    this.criatImg1.on('pointerout', ()=> {
+      this.criatImg1.setScale(4);
     })
   
-    criatImg2.on('pointerdown',()=> {
-      if (ataque == "si") {
-        switch (turno) {
+    this.criatImg2.on('pointerdown',()=> {
+      if (this.ataque == "si") {
+        switch (this.turno) {
           case 1:
-            if (hum1.nombre == "arquero" && criat2.nombre == "polilla") {
-              muerte.play();
-              criat2.vida = 0;
+            if (this.hum1.nombre == "arquero" && this.criat2.nombre == "polilla") {
+              this.muerte.play();
+              this.criat2.vida = 0;
             } else { 
-            if (hum1.nombre == "caballero" && criat2.nombre == "esqueletos") {
-              muerte.play();
-              criat2.vida = 0;
+            if (this.hum1.nombre == "caballero" && this.criat2.nombre == "esqueletos") {
+              this.muerte.play();
+              this.criat2.vida = 0;
             } else {
-              if (hum1.nombre == "piromano" && criat2.nombre == "mago") {
-                muerte.play();
-              criat2.vida = 0;
+              if (this.hum1.nombre == "piromano" && this.criat2.nombre == "mago") {
+                this.muerte.play();
+                this.criat2.vida = 0;
             } else {
-              daño.play();
-            criat2.vida -= hum1.ataque;
+              this.daño.play();
+              this.criat2.vida -= this.hum1.ataque;
             }}}
-            turno++;
-            vidaC2.text = criat2.vida + "/" + criat2.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+            this.turno++;
+            this.vidaC2.text = this.criat2.vida + "/" + this.criat2.vidaMax;
+            this.Tturno.text = "turno: " +this.turno;
+            this.ataque = "no";
             break;
   
             case 3:
-              if (hum2.nombre == "arquero" && criat2.nombre == "polilla") {
-                criat2.vida = 0;
+              if (this.hum2.nombre == "arquero" && this.criat2.nombre == "polilla") {
+                this.criat2.vida = 0;
               } else {
-              if (hum2.nombre == "caballero" && criat2.nombre == "esqueletos") {
-                criat2.vida = 0;
+              if (this.hum2.nombre == "caballero" && this.criat2.nombre == "esqueletos") {
+                this.criat2.vida = 0;
               } else{ 
-              if (hum2.nombre == "piromano" && criat2.nombre == "mago") {
-                criat2.vida = 0;
+              if (this.hum2.nombre == "piromano" && this.criat2.nombre == "mago") {
+                this.criat2.vida = 0;
               } else {
-                daño.play();
-              criat2.vida -= hum2.ataque;
+                this.daño.play();
+                this.criat2.vida -= this.hum2.ataque;
               }}}
-              turno++;
-            vidaC2.text = criat2.vida + "/" + criat2.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.turno++;
+              this.vidaC2.text = this.criat2.vida + "/" + this.criat2.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             break;
   
             case 5:
-              if (hum3.nombre == "arquero" && criat2.nombre == "polilla") {
-                criat2.vida = 0;
+              if (this.hum3.nombre == "arquero" && this.criat2.nombre == "polilla") {
+                this.criat2.vida = 0;
               } else {
-                if (hum3.nombre == "caballero" && criat2.nombre == "esqueletos") {
-                criat2.vida = 0;
+                if (this.hum3.nombre == "caballero" && this.criat2.nombre == "esqueletos") {
+                  this.criat2.vida = 0;
               } else {
-                if (hum3.nombre == "piromano" && criat2.nombre == "mago") {
-                criat2.vida = 0;
+                if (this.hum3.nombre == "piromano" && this.criat2.nombre == "mago") {
+                  this.criat2.vida = 0;
               } else {
-                daño.play();
-              criat2.vida -= hum3.ataque;
+                this.daño.play();
+                this.criat2.vida -= this.hum3.ataque;
               }}}
-              turno++;
-            vidaC2.text = criat2.vida + "/" + criat2.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.turno++;
+              this.vidaC2.text = this.criat2.vida + "/" + this.criat2.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             break;
         
           default:
             break;
         }}})
-    criatImg2.on('pointerover',()=> {
-      if (turno == 1 || turno == 3 || turno == 5) {
-        criatImg2.setScale(4.1); 
+        this.criatImg2.on('pointerover',()=> {
+      if (this.turno == 1 || this.turno == 3 || this.turno == 5) {
+        this.criatImg2.setScale(4.1); 
       }
     })
-    criatImg2.on('pointerout', ()=> {
-      criatImg2.setScale(4);
+    this.criatImg2.on('pointerout', ()=> {
+      this.criatImg2.setScale(4);
     })
   
-    criatImg3.on('pointerdown',()=> {
-      if (ataque == "si") {
-        switch (turno) {
+    this.criatImg3.on('pointerdown',()=> {
+      if (this.ataque == "si") {
+        switch (this.turno) {
           case 1:
-            if (hum1.nombre == "arquero" && criat3.nombre == "polilla") {
-              criat3.vida = 0;
+            if (this.hum1.nombre == "arquero" && this.criat3.nombre == "polilla") {
+              this.criat3.vida = 0;
             } else {
-              if (hum1.nombre == "caballero" && criat3.nombre == "esqueletos") {
-              criat3.vida = 0;
+              if (this.hum1.nombre == "caballero" && this.criat3.nombre == "esqueletos") {
+                this.criat3.vida = 0;
             } else {
-              if (hum1.nombre == "piromano" && criat3.nombre == "mago") {
-              criat3.vida = 0;
+              if (this.hum1.nombre == "piromano" && this.criat3.nombre == "mago") {
+                this.criat3.vida = 0;
             } else {
-              daño.play();
-            criat3.vida -= hum1.ataque;
+              this.daño.play();
+              this.criat3.vida -= this.hum1.ataque;
             }}}
-            turno++;
-            vidaC3.text = criat3.vida + "/" + criat3.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+            this.turno++;
+            this.vidaC3.text = this.criat3.vida + "/" + this.criat3.vidaMax;
+            this.Tturno.text = "turno: " +this.turno;
+            this.ataque = "no";
             break;
   
             case 3:
-              if (hum2.nombre == "arquero" && criat3.nombre == "polilla") {
-                criat3.vida = 0;
+              if (this.hum2.nombre == "arquero" && this.criat3.nombre == "polilla") {
+                this.criat3.vida = 0;
               } else {
-                if (hum2.nombre == "caballero" && criat3.nombre == "esqueletos") {
-                criat3.vida = 0;
+                if (this.hum2.nombre == "caballero" && this.criat3.nombre == "esqueletos") {
+                  this.criat3.vida = 0;
               } else {
-                if (hum2.nombre == "piromano" && criat3.nombre == "mago") {
-                criat3.vida = 0;
+                if (this.hum2.nombre == "piromano" && this.criat3.nombre == "mago") {
+                  this.criat3.vida = 0;
               } else {
-                daño.play();
-              criat3.vida -= hum2.ataque;
+                this.daño.play();
+                this.criat3.vida -= this.hum2.ataque;
               }}}
-              turno++;
-            vidaC3.text = criat3.vida + "/" + criat3.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.turno++;
+              this.vidaC3.text = this.criat3.vida + "/" + this.criat3.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             break;
   
             case 5:
-              if (hum3.nombre == "arquero" && criat3.nombre == "polilla") {
-                criat3.vida = 0;
+              if (this.hum3.nombre == "arquero" && this.criat3.nombre == "polilla") {
+                this.criat3.vida = 0;
               } else {
-                if (hum3.nombre == "caballero" && criat3.nombre == "esqueletos") {
-                criat3.vida = 0;
+                if (this.hum3.nombre == "caballero" && this.criat3.nombre == "esqueletos") {
+                  this.criat3.vida = 0;
               } else {
-                if (hum3.nombre == "piromano" && criat3.nombre == "mago") {
-                criat3.vida = 0;
+                if (this.hum3.nombre == "piromano" && this.criat3.nombre == "mago") {
+                  this.criat3.vida = 0;
               } else {
-                daño.play();
-              criat3.vida -= hum3.ataque;
+                this.daño.play();
+                this.criat3.vida -= this.hum3.ataque;
               }}}
-              turno++;
-            vidaC3.text = criat3.vida + "/" + criat3.vidaMax;
-            Tturno.text = "turno: " +turno;
-            ataque = "no";
+              this.turno++;
+              this.vidaC3.text = this.criat3.vida + "/" + this.criat3.vidaMax;
+              this.Tturno.text = "turno: " +this.turno;
+              this.ataque = "no";
             break;
         
           default:
             break;
         }}})
-    criatImg3.on('pointerover',()=> {
-      if (turno == 1 || turno == 3 || turno == 5) {
-        criatImg3.setScale(4.1); 
+        this.criatImg3.on('pointerover',()=> {
+      if (this.turno == 1 || this.turno == 3 || this.turno == 5) {
+        this.criatImg3.setScale(4.1); 
       }
     })
-    criatImg3.on('pointerout', ()=> {
-      criatImg3.setScale(4);
+    this.criatImg3.on('pointerout', ()=> {
+      this.criatImg3.setScale(4);
     })
   }
 }
