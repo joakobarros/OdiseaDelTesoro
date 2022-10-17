@@ -3,8 +3,7 @@ import {Guardian} from "../Controladores/Personajes";
 
 
 
-export default class CombateJefe extends Phaser.Scene
-{
+export default class CombateJefe extends Phaser.Scene{
 
 hum1;
 hum2;
@@ -19,8 +18,8 @@ vidaJefe;
 ataque;
 jefe;
 jefeImg;
-turno = 1;
-Tturno = 1;
+turno;
+Tturno = "";
 daño;
 muerte;
 golpe;
@@ -39,6 +38,8 @@ golpe;
   create() {    
   
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondocombate');
+
+    this.turno = 1;
   
   ////////////////////////////////////////////////////// sonidos
   this.daño = this.sound.add('daño', {loop: false});
@@ -53,43 +54,38 @@ golpe;
   
   ////////////////////////////////////////////////////// indicadores de vida
   this.vidaH1 = this.add.text(160,753,this.hum1.vida + "/" + this.hum1.vidaMax, {
-    fontSize: "50px",
-    fill: "#FFFFFF",
-    fontFamily: "georgia"
+  fontSize: "50px",
+  fontFamily: "georgia"
   })
   this.vidaH2 = this.add.text(420, 753, this.hum2.vida + "/" + this.hum2.vidaMax, {
   fontSize: "50px",
-  fill: "#FFFFFF",
   fontFamily: "georgia"
   })
   this.vidaH3 = this.add.text(700, 753, this.hum3.vida + "/" + this.hum3.vidaMax, {
   fontSize: "50px",
-  fill: "#FFFFFF",
   fontFamily: "georgia"
   })
   this.vidaJefe = this.add.text(1430, 753, this.jefe.vida + "/" + this.jefe.vidaMax, {
     fontSize: "50px",
-    fill: "#FFFFFF",
   })
   this.Tturno = this.add.text(850, 100, "turno: " + this.turno, {
     fontSize: "60px",
-    fill: "#FFFFFF",
   })
   
   
   ////////////////////////////////////////////// selector de sprites humanos
   switch (this.hum1.nombre) {
-    case "arquero":
+    case "Arquero":
       this.humImg1 = this.add.image(200, 535, 'arquero').setInteractive();
       this.humImg1.setScale(4);
       break;
   
-    case "caballero":
+    case "Caballero":
       this.humImg1 = this.add.image(200, 535, 'caballero').setInteractive();
       this.humImg1.setScale(4);
       break;
   
-    case "piromano":
+    case "Piromano":
       this.humImg1 = this.add.image(200, 535, 'piromano').setInteractive()
       this.humImg1.setScale(4);
       break;
@@ -99,17 +95,17 @@ golpe;
   }
   
   switch (this.hum2.nombre) {
-    case "arquero":
+    case "Arquero":
       this.humImg2 = this.add.image(450, 535, 'arquero').setInteractive();
       this.humImg2.setScale(4);
       break;
   
-    case "caballero":
+    case "Caballero":
       this.humImg2 = this.add.image(450, 535, 'caballero').setInteractive();
       this.humImg2.setScale(4);
       break;
   
-    case "piromano":
+    case "Piromano":
       this.humImg2 = this.add.image(450, 535, 'piromano').setInteractive();
       this.humImg2.setScale(4);
       break;
@@ -119,17 +115,17 @@ golpe;
   }
   
   switch (this.hum3.nombre) {
-    case "arquero":
+    case "Arquero":
       this.humImg3 = this.add.image(700, 535, 'arquero').setInteractive()
       this.humImg3.setScale(4);
       break;
   
-    case "caballero":
+    case "Caballero":
       this.humImg3 = this.add.image(700, 535, 'caballero').setInteractive()
       this.humImg3.setScale(4);
       break;
   
-    case "piromano":
+    case "Piromano":
       this.humImg3 = this.add.image(700, 535, 'piromano').setInteractive();
       this.humImg3.setScale(4);
       break;
@@ -143,18 +139,17 @@ golpe;
   .on('pointerdown',()=> {this.ataque = "si" })
   .on('pointerover',()=> {atacar.setScale(5.1)})
   .on('pointerout',()=> {atacar.setScale(5)})
-  atacar.setScale(5)
-   
-    }
+  atacar.setScale(5) 
+  }
               
   update() {
   
   ///////////////////////////////////////////////// win condition
   if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {
-    this.scene.start("winGuardian")
+    this.scene.start("WinGuardian")
   }
   if (this.jefe.vida <= 0) {
-    setTimeout(()=>{this.scene.start("winHumanos")},1000)
+    setTimeout(()=>{this.scene.start("WinHumanos")},1000)
   }
   
   ///////////////////////////////////////////////// indicador de turno
@@ -171,7 +166,7 @@ golpe;
     case 2:
       if (this.hum2.vida <= 0 && this.turno == 2) {
         this.turno++;
-        this.Tturno.text = "turno: " +turno;
+        this.Tturno.text = "turno: " +this.turno;
       } else {
         this.humImg2.setScale(4.5);
         this.humImg1.setScale(4);

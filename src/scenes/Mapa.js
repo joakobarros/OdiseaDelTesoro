@@ -57,79 +57,139 @@ switch (this.mapa.salaActual){
   case "s1":
     for (let p = 0; p < s1.salasPosibles.length; p++) {
       const salaPos = s1.salasPosibles[p];
-      this.mapa.salasPosibles.push(salaPos);
+      //this.mapa.salasPosibles.push(salaPos);
       this.ActivarSala(salaPos);
     }
   break; 
 
   case "s2":
-    for (let p = 0; p < s2.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s2.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s2.salasPosibles.length; s++) {
+      const salaPos = s2.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   case "s3":
-    for (let p = 0; p < s3.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s3.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s3.salasPosibles.length; s++) {
+      const salaPos = s3.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
       
   case "s4":
-    for (let p = 0; p < s4.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s4.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s4.salasPosibles.length; s++) {
+      const salaPos = s4.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   case "s5":
-    for (let p = 0; p < s5.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s5.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s5.salasPosibles.length; s++) {
+      const salaPos = s5.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   case "s6":
-    for (let p = 0; p < s6.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s6.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s6.salasPosibles.length; s++) {
+      const salaPos = s6.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   case "s7":
-    for (let p = 0; p < s7.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s7.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s7.salasPosibles.length; s++) {
+      const salaPos = s7.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   case "s8":
-    for (let p = 0; p < s8.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s8.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s8.salasPosibles.length; s++) {
+      const salaPos = s8.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   case "s9":
-    for (let p = 0; p < s9.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s9.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s9.salasPosibles.length; s++) {
+      const salaPos = s9.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   case "s10":
-    for (let p = 0; p < s10.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s10.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s10.salasPosibles.length; s++) {
+      const salaPos = s10.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   case "s11":
-    for (let p = 0; p < s11.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s11.salasPosibles[p]);
-    }
-    this.ComprobacionSala();
+    for (let s = 0; s < s11.salasPosibles.length; s++) {
+      const salaPos = s11.salasPosibles[s];
+     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+        const salaPasada = this.mapa.salasPasadas[n];
+       if (salaPos != salaPasada) {
+         this.ActivarSala(salaPos);
+       }
+     }
+   }
+    //this.ComprobacionSala();
   break;
 
   default:
@@ -240,7 +300,7 @@ let pausa = this.add.image(1800,50,'pausa').setInteractive()
 }
 
 ///////////////////////////////// funcion comprobación de sala
-ComprobacionSala(){
+/*ComprobacionSala(){
   for (let s = 0; s < this.mapa.salasPosibles.length; s++) {
     const salaPos = this.mapa.salasPosibles[s];
    for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -251,6 +311,10 @@ ComprobacionSala(){
    }
  }
 }
+for (let p = 0; p < s4.salasPosibles.length; p++) {
+      this.mapa.salasPosibles.push(s4.salasPosibles[p]);
+    }
+*/
 
 ///////////////////////////////// funcion activar sala
 ActivarSala(salaPos){
@@ -262,7 +326,7 @@ ActivarSala(salaPos){
       salaP2.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s2");
         this.mapa.salaActual = "s2";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
+       this.scene.start("CombateJefe", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 

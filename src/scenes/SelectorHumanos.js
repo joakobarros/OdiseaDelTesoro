@@ -6,9 +6,8 @@ import { Mapa } from '../Controladores/mapa';
 
 export class SelectorHumanos extends Phaser.Scene {
     
-
-  mapa = new Mapa("s1",[],[]);
-  criaturas = 15;
+  mapa
+  criaturas
   text1;
   text2;
   text3;
@@ -26,6 +25,9 @@ export class SelectorHumanos extends Phaser.Scene {
 create() {
   this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'selector');
 
+ this.mapa = new Mapa("s1",[]);
+ this.criaturas = 15;
+
 //////////////////////////////////////////// indicadores de cantidad
 
   var num1 = 0;
@@ -35,27 +37,27 @@ create() {
   
   this.text1 = this.add.text(315, 175, "0", {
     fontSize: "120px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   this.text2 = this.add.text(925, 175, "0", {
     fontSize: "120px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   this.text3 = this.add.text(1525, 175, "0", {
     fontSize: "120px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   this.text9 = this.add.text(1150, 75, "max/min: 3", {
     fontSize: "40px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   this.tcant = this.add.text(530, 75, "cantidad: " + cant, {
     fontSize: "40px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
 
@@ -63,47 +65,47 @@ create() {
   //////////////////////////////////////////////// estadisticas
 const text4 = this.add.text(280, 690, "vida: 2", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 const text5 = this.add.text(280, 650, "daño: 3", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 const text12 = this.add.text(210, 725, "ventaja vs: polilla", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 const text6 = this.add.text(895, 690, "vida: 4", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 const text7 = this.add.text(895, 650, "daño: 1", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 const text11 = this.add.text(790, 725, "ventaja vs: esqueletos", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 const text8 = this.add.text(1500, 690, "vida: 3", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 const text9 = this.add.text(1500, 650, "daño: 2", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 const text10 = this.add.text(1435, 725, "ventaja vs: mago", {
   fontSize: "37px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 
