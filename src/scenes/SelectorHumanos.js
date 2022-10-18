@@ -204,13 +204,13 @@ var continuar = this.add.image(970,950,'continuar').setInteractive()
   if (cant == 3) {
   
     for (let i = 0; i < num1; i++) {
-      hums.push(new Arquero)
+      hums.push(new Arquero(this))
     }
     for (let i = 0; i < num2; i++) {
-      hums.push(new Caballero)
+      hums.push(new Caballero(this))
     }
     for (let i = 0; i < num3; i++) {
-      hums.push(new Piromano)
+      hums.push(new Piromano(this))
     }
     this.scene.start("Mapa", { hum1: hums[0], hum2: hums[1], hum3: hums[2], mapa: this.mapa, criaturas: this.criaturas });
   }})  

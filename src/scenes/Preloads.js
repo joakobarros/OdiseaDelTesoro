@@ -19,6 +19,7 @@ export default class Preloads extends Phaser.Scene
    this.load.image("jefe", "assets/images/jefe.png");
    this.load.image("mapa","assets/images/mapa.png");
    this.load.image("salaDisponible","assets/images/salaDisponible.png");
+   this.load.image("salaActual","assets/images/salaActual.png");
    this.load.image("mas", "assets/images/mas.png");
    this.load.image("menos", "assets/images/menos.png");
    this.load.image("creditos", "assets/images/creditos.png");
@@ -40,10 +41,50 @@ export default class Preloads extends Phaser.Scene
    this.load.audio("daño", "assets/sounds/danio.wav")
    this.load.audio("golpe", "assets/sounds/golpejefe.wav")
    this.load.audio("muerte", "assets/sounds/muerte.wav")
+   this.load.spritesheet("caballeroAtaque", "assets/images/caballeroAtlas.png",{frameWidth:64, frameHeight:64})
+   this.load.spritesheet("arqueroAtaque", "assets/images/arqueroAtlas.png",{frameWidth:52, frameHeight:60})
+   this.load.spritesheet("piromanoAtaque", "assets/images/piromanoAtlas.png",{frameWidth:64, frameHeight:64})
+   this.load.spritesheet("jefeAtaque", "assets/images/jefeAtlas.png",{frameWidth:98, frameHeight:75})
+   this.load.spritesheet("esqueletosIdle", "assets/images/esqueletosAtlas.png",{frameWidth:70, frameHeight:61})
   }
     
   create() {
 
+//////////////////////////////// animaciones
+  this.anims.create({
+    key: "cabAtk",
+    frames: this.anims.generateFrameNumbers("caballeroAtlas",{start:0, end:4}),
+    frameRate: 10,
+    repeat: -1,
+  })
+
+  this.anims.create({
+    key: "arqAtk",
+    frames: this.anims.generateFrameNumbers("arqueroAtlas",{start:0, end:3}),
+    frameRate: 10,
+    repeat: -1,
+  })
+
+  this.anims.create({
+    key: "piroAtk",
+    frames: this.anims.generateFrameNumbers("piromanoAtlas",{start:0, end:7}),
+    frameRate: 10,
+    repeat: -1,
+  })
+
+  this.anims.create({
+    key: "esqAtk",
+    frames: this.anims.generateFrameNumbers("esqueletosAtlas",{start:0, end:3}),
+    frameRate: 15,
+    repeat: 1,
+  })
+
+  this.anims.create({
+    key: "jefeAtk",
+    frames: this.anims.generateFrameNumbers("jefeAtlas",{start:0, end:5}),
+    frameRate: 10,
+    repeat: 1,
+  })
 
   this.scene.start("MainMenu");
   }

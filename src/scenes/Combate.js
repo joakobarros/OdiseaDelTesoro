@@ -13,7 +13,7 @@ hum1;
  criat1;
  criat2;
  criat3;
- turno = 1;
+ turno;
  Tturno;
  ataque = "";
  criatImg1;
@@ -50,6 +50,8 @@ hum1;
   
   create() {
   
+    this.turno = 1;
+
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondocombate');
   
   ////////////////////////////////////////////// sonidos
@@ -60,43 +62,43 @@ hum1;
   ////////////////////////////////////////////// carteles de salud
   this.vidaH1 = this.add.text(160,753,this.hum1.vida + "/" + this.hum1.vidaMax, {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
   this.vidaH2 = this.add.text(420, 753, this.hum2.vida + "/" + this.hum2.vidaMax, {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
   this.vidaH3 = this.add.text(700, 753, this.hum3.vida + "/" + this.hum3.vidaMax, {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
   this.vidaC1 = this.add.text(1170, 753, this.criat1.vida + "/" + this.criat1.vidaMax, {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
   this.vidaC2 = this.add.text(1430, 753, this.criat2.vida + "/" + this.criat2.vidaMax, {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
   this.vidaC3 = this.add.text(1670, 753, this.criat3.vida + "/" + this.criat3.vidaMax, {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   
   this.Tturno = this.add.text(850, 100, "turno: " + this.turno, {
     fontSize: "60px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
   

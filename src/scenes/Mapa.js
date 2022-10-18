@@ -19,6 +19,7 @@ export default class Menu extends Phaser.Scene
   humImg2;
   humImg3;
   mapa;
+  salaAc;
 
 
 	constructor()
@@ -55,6 +56,7 @@ let s11 = new sala11();
 switch (this.mapa.salaActual){
 
   case "s1":
+    this.salaAc = this.add.image(1204,200,'salaActual');
     for (let p = 0; p < s1.salasPosibles.length; p++) {
       const salaPos = s1.salasPosibles[p];
       //this.mapa.salasPosibles.push(salaPos);
@@ -63,6 +65,7 @@ switch (this.mapa.salaActual){
   break; 
 
   case "s2":
+    this.salaAc = this.add.image(1204,430,'salaActual');
     for (let s = 0; s < s2.salasPosibles.length; s++) {
       const salaPos = s2.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -76,6 +79,7 @@ switch (this.mapa.salaActual){
   break;
 
   case "s3":
+    this.salaAc = this.add.image(1204,650,'salaActual');
     for (let s = 0; s < s3.salasPosibles.length; s++) {
       const salaPos = s3.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -85,10 +89,12 @@ switch (this.mapa.salaActual){
        }
      }
    }
+   
     //this.ComprobacionSala();
   break;
       
   case "s4":
+    this.salaAc = this.add.image(1204,876,'salaActual');
     for (let s = 0; s < s4.salasPosibles.length; s++) {
       const salaPos = s4.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -102,6 +108,7 @@ switch (this.mapa.salaActual){
   break;
 
   case "s5":
+    this.salaAc = this.add.image(960,200,'salaActual');
     for (let s = 0; s < s5.salasPosibles.length; s++) {
       const salaPos = s5.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -115,6 +122,7 @@ switch (this.mapa.salaActual){
   break;
 
   case "s6":
+    this.salaAc = this.add.image(960,430,'salaActual');
     for (let s = 0; s < s6.salasPosibles.length; s++) {
       const salaPos = s6.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -128,6 +136,7 @@ switch (this.mapa.salaActual){
   break;
 
   case "s7":
+    this.salaAc = this.add.image(960,650,'salaActual');
     for (let s = 0; s < s7.salasPosibles.length; s++) {
       const salaPos = s7.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -141,6 +150,7 @@ switch (this.mapa.salaActual){
   break;
 
   case "s8":
+    this.salaAc = this.add.image(960,876,'salaActual');
     for (let s = 0; s < s8.salasPosibles.length; s++) {
       const salaPos = s8.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -154,6 +164,7 @@ switch (this.mapa.salaActual){
   break;
 
   case "s9":
+    this.salaAc = this.add.image(710,200,'salaActual');
     for (let s = 0; s < s9.salasPosibles.length; s++) {
       const salaPos = s9.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -167,6 +178,7 @@ switch (this.mapa.salaActual){
   break;
 
   case "s10":
+    this.salaAc = this.add.image(710,430,'salaActual');
     for (let s = 0; s < s10.salasPosibles.length; s++) {
       const salaPos = s10.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -180,6 +192,7 @@ switch (this.mapa.salaActual){
   break;
 
   case "s11":
+    this.salaAc = this.add.image(710,650,'salaActual');
     for (let s = 0; s < s11.salasPosibles.length; s++) {
       const salaPos = s11.salasPosibles[s];
      for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -326,7 +339,7 @@ ActivarSala(salaPos){
       salaP2.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s2");
         this.mapa.salaActual = "s2";
-       this.scene.start("CombateJefe", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
+       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 
