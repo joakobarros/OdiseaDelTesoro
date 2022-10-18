@@ -212,17 +212,17 @@ switch (this.mapa.salaActual){
 //////////////////////////////////////////////// selector de sprites
   switch (this.hum1.nombre) {
     case "Arquero":
-      this.humImg1 = this.add.image(133, 185, 'arquero');
+      this.humImg1 = this.add.image(133, 185, 'arqueroAtaque');
       this.humImg1.setScale(2);
       break;
           
     case "Caballero":
-      this.humImg1 = this.add.image(133, 185, 'caballero');
+      this.humImg1 = this.add.image(133, 185, 'caballeroAtaque');
       this.humImg1.setScale(2);
       break;
           
     case "Piromano":
-      this.humImg1 = this.add.image(133, 185, 'piromano');
+      this.humImg1 = this.add.image(133, 185, 'piromanoAtaque');
       this.humImg1.setScale(2);
       break;
           
@@ -232,17 +232,17 @@ switch (this.mapa.salaActual){
           
   switch (this.hum2.nombre) {
     case "Arquero":
-      this.humImg2 = this.add.image(133, 544, 'arquero')
+      this.humImg2 = this.add.image(133, 544, 'arqueroAtaque')
       this.humImg2.setScale(2);
       break;
           
     case "Caballero":
-      this.humImg2 = this.add.image(133, 544, 'caballero')
+      this.humImg2 = this.add.image(133, 544, 'caballeroAtaque')
       this.humImg2.setScale(2);
       break;
           
     case "Piromano":
-      this.humImg2 = this.add.image(133, 544, 'piromano')
+      this.humImg2 = this.add.image(133, 544, 'piromanoAtaque')
       this.humImg2.setScale(2);
       break;
           
@@ -252,17 +252,17 @@ switch (this.mapa.salaActual){
           
   switch (this.hum3.nombre) {
     case "Arquero":
-      this.humImg3 = this.add.image(133, 900, 'arquero').setInteractive()
+      this.humImg3 = this.add.image(133, 900, 'arqueroAtaque').setInteractive()
       this.humImg3.setScale(2);
       break;
           
     case "Caballero":
-      this.humImg3 = this.add.image(133, 900, 'caballero').setInteractive()
+      this.humImg3 = this.add.image(133, 900, 'caballeroAtaque').setInteractive()
       this.humImg3.setScale(2);
       break;
           
     case "Piromano":
-      this.humImg3 = this.add.image(133, 900, 'piromano').setInteractive();
+      this.humImg3 = this.add.image(133, 900, 'piromanoAtaque').setInteractive();
       this.humImg3.setScale(2);
       break;
           
@@ -339,7 +339,7 @@ ActivarSala(salaPos){
       salaP2.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s2");
         this.mapa.salaActual = "s2";
-       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
+       this.scene.start("CombateJefe", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 

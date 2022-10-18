@@ -34,6 +34,7 @@ export default class Preloads extends Phaser.Scene
    this.load.image("winHumanos", "assets/images/winhumanos.png")
    this.load.image("selector", "assets/images/selector.png")
    this.load.image("fondocombate", "assets/images/combatefondo.png")
+   this.load.image("fondoDescanso", "assets/images/descansoFondo.png")
    this.load.image("masAtaque", "assets/images/buffo2.png")
    this.load.image("vidaMax", "assets/images/buffo1.png")
    this.load.image("curarVida", "assets/images/buffo3.png")
@@ -46,6 +47,16 @@ export default class Preloads extends Phaser.Scene
    this.load.spritesheet("piromanoAtaque", "assets/images/piromanoAtlas.png",{frameWidth:64, frameHeight:64})
    this.load.spritesheet("jefeAtaque", "assets/images/jefeAtlas.png",{frameWidth:98, frameHeight:75})
    this.load.spritesheet("esqueletosIdle", "assets/images/esqueletosAtlas.png",{frameWidth:70, frameHeight:61})
+   this.load.spritesheet("magoAtaque", "assets/images/magoAtlas.png",{frameWidth:64, frameHeight:64})
+
+   ///////// provisional
+   this.load.image("arqueroV", "assets/images/ArqueroV.png")
+   this.load.image("caballeroV", "assets/images/CaballeroV.png")
+   this.load.image("piromanoV", "assets/images/PiromanoV.png")
+   this.load.image("jefeV", "assets/images/jefeV.png")
+   this.load.image("esqueletosV", "assets/images/EsqueletosV.png")
+   this.load.image("polillaV", "assets/images/polillaV.png")
+   this.load.image("magoV", "assets/images/MagoV.png")
   }
     
   create() {

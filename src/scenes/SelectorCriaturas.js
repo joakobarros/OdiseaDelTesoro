@@ -45,62 +45,62 @@ let num2 = 0;
 let num3 = 0;
 let cant = 0;
 
-this.text1 = this.add.text(315, 175, "0", {
+this.text1 = this.add.text(315, 870, "0", {
   fontSize: "120px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
-this.text2 = this.add.text(925, 175, "0", {
+this.text2 = this.add.text(925, 870, "0", {
   fontSize: "120px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
-this.text3 = this.add.text(1525, 175, "0", {
+this.text3 = this.add.text(1525, 870, "0", {
   fontSize: "120px",
-  fill: "#FFFFFF",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
-this.tmax = this.add.text(1150, 75, "max/min: 3", {
-    fontSize: "37px",
-    fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  this.tcant = this.add.text(530, 75, "cantidad: " + cant, {
-    fontSize: "40px",
-    fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
+/*this.tmax = this.add.text(1150, 75, "max/min: 3", {
+  fontSize: "37px",
+  //fill: "#FFFFFF",
+  fontFamily: "georgia"
+})*/
+this.tcant = this.add.text(485, 150, "Selecciona 3 unidades", {
+  fontSize: "60px",
+  //fill: "#FFFFFF",
+  fontFamily: "georgia"
+})
 
 
 //////////////////////////////////////////////// estadisticas
-let text4 = this.add.text(280, 720, "vida: 4", {
-  fontSize: "37px",
-  fill: "#FFFFFF",
+let text4 = this.add.text(280, 700, "vida: 4", {
+  fontSize: "40px",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 let text5 = this.add.text(280, 660, "daño: 1", {
-  fontSize: "37px",
-  fill: "#FFFFFF",
+  fontSize: "40px",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
-let text6 = this.add.text(895, 720, "vida: 3", {
-  fontSize: "37px",
-  fill: "#FFFFFF",
+let text6 = this.add.text(895, 700, "vida: 3", {
+  fontSize: "40px",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 let text7 = this.add.text(895, 660, "daño: 2", {
-  fontSize: "37px",
-  fill: "#FFFFFF",
+  fontSize: "40px",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
-let text8 = this.add.text(1500, 720, "vida: 5", {
-  fontSize: "37px",
-  fill: "#FFFFFF",
+let text8 = this.add.text(1500, 700, "vida: 5", {
+  fontSize: "40px",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 let text9 = this.add.text(1500, 660, "daño: 3", {
-  fontSize: "37px",
-  fill: "#FFFFFF",
+  fontSize: "40px",
+  //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
 
@@ -108,92 +108,92 @@ let text9 = this.add.text(1500, 660, "daño: 3", {
 //////////////////////////////////////////////////// sprites
   let imag1 = this.add.image(350, 515, 'esqueletos');
   let imag2 = this.add.image(960, 515, 'polilla');
-  let imag3 = this.add.image(1550, 515, 'mago');
+  let imag3 = this.add.image(1550, 515, 'magoAtaque');
   imag1.setScale(4);
   imag2.setScale(4);
   imag3.setScale(4);
 
 
 ////////////////////////////////////////////////// botones
-var menos3 = this.add.image(1420,251,'menos').setInteractive()
+var menos3 = this.add.image(1440,950, 'menos').setInteractive()
         .on('pointerdown',()=> { 
           if (num3 > 0 && cant != 0){
           num3--
           cant--
           this.text3.text = num3;
-          this.tcant.text = "cantidad: " + cant;
+          //this.tcant.text = "cantidad: " + cant;
          }})
-  .on('pointerover', ()=> {menos3.setScale(5.2)})
-  .on('pointerout', ()=> {menos3.setScale(5.1)});
-        menos3.setScale(5.1);   
+  .on('pointerover', ()=> {menos3.setScale(4.4)})
+  .on('pointerout', ()=> {menos3.setScale(4.3)});
+        menos3.setScale(4.3);   
 
-var mas3 = this.add.image(1710,251,'mas').setInteractive()
+var mas3 = this.add.image(1700,950,'mas').setInteractive()
         .on('pointerdown',()=> { 
           if (num3 < 3 && cant < 3){
             num3++
             cant++
             this.text3.text = num3;
-            this.tcant.text = "cantidad: " + cant;
+            //this.tcant.text = "cantidad: " + cant;
            }})
-  .on('pointerover', ()=> {mas3.setScale(5.2)})
-  .on('pointerout', ()=> {mas3.setScale(5.1)});
-        mas3.setScale(5.1);
+  .on('pointerover', ()=> {mas3.setScale(4.4)})
+  .on('pointerout', ()=> {mas3.setScale(4.3)});
+        mas3.setScale(4.3);
 
   
-var mas2 = this.add.image(1105,251,'mas').setInteractive()
+var mas2 = this.add.image(1090,950,'mas').setInteractive()
         .on('pointerdown',()=> { 
           if (num2 < 3 && cant < 3){
             num2++
             cant++
             this.text2.text = num2;
-            this.tcant.text = "cantidad: " + cant;
+            //this.tcant.text = "cantidad: " + cant;
            }})
-  .on('pointerover', ()=> {mas2.setScale(5.2)})
-  .on('pointerout', ()=> {mas2.setScale(5.1)});
-        mas2.setScale(5.1);
+  .on('pointerover', ()=> {mas2.setScale(4.4)})
+  .on('pointerout', ()=> {mas2.setScale(4.3)});
+        mas2.setScale(4.3);
 
-var menos2 = this.add.image(820,251,'menos').setInteractive()
+var menos2 = this.add.image(830,950,'menos').setInteractive()
         .on('pointerdown',()=> { 
           if (num2 > 0 && cant != 0){
             num2--
             cant--
             this.text2.text = num2;
-            this.tcant.text = "cantidad: " + cant;
+            //this.tcant.text = "cantidad: " + cant;
            }})
-  .on('pointerover', ()=> {menos2.setScale(5.2)})
-  .on('pointerout', ()=> {menos2.setScale(5.1)});
-        menos2.setScale(5.1); 
+  .on('pointerover', ()=> {menos2.setScale(4.4)})
+  .on('pointerout', ()=> {menos2.setScale(4.3)});
+        menos2.setScale(4.3); 
   
 
-var mas1 = this.add.image(500,251,'mas').setInteractive()
+var mas1 = this.add.image(475,950,'mas').setInteractive()
         .on('pointerdown',()=> { 
           if (num1 < 3 && cant < 3){
             num1++
             cant++
             this.text1.text = num1;
-            this.tcant.text = "cantidad: " + cant;
+            //this.tcant.text = "cantidad: " + cant;
            }})
-  .on('pointerover', ()=> {mas1.setScale(5.2)})
-  .on('pointerout', ()=> {mas1.setScale(5.1)});
-        mas1.setScale(5.1);
+  .on('pointerover', ()=> {mas1.setScale(4.4)})
+  .on('pointerout', ()=> {mas1.setScale(4.3)});
+        mas1.setScale(4.3);
 
-var menos1 = this.add.image(200,251,'menos').setInteractive()
+var menos1 = this.add.image(220,950,'menos').setInteractive()
         .on('pointerdown',()=> { 
           if (num1 > 0 && cant != 0){
             num1--
             cant--
             this.text1.text = num1;
-            this.tcant.text = "cantidad: " + cant;
+            //this.tcant.text = "cantidad: " + cant;
            }})
-  .on('pointerover', ()=> {menos1.setScale(5.2)})
-  .on('pointerout', ()=> {menos1.setScale(5.1)});
-        menos1.setScale(5.1);
+  .on('pointerover', ()=> {menos1.setScale(4.4)})
+  .on('pointerout', ()=> {menos1.setScale(4.3)});
+        menos1.setScale(4.3);
 
       
 /////////////////////////////////////////////// matriz de personajes
 var criats = []
 
-var continuar = this.add.image(970,950,'continuar').setInteractive()
+var continuar = this.add.image(1300, 190,'continuar').setInteractive()
   .on('pointerdown',()=> {
     if (cant == 3) {
       
@@ -207,7 +207,6 @@ var continuar = this.add.image(970,950,'continuar').setInteractive()
      criats.push(new Mago)
     }
 
-    this.sala++
     this.criaturas -= 3;
   this.scene.start("Combate", { criat1: criats[0], criat2: criats[1], criat3: criats[2],
   mapa: this.mapa, criaturas: this.criaturas, hum1: this.hum1, hum2: this.hum2, hum3: this.hum3 })}})

@@ -6,7 +6,7 @@ import Phaser from 'phaser'
 export default class Combate extends Phaser.Scene
 {
 
-hum1;
+ hum1;
  hum2;
  hum3;
  criaturas;
@@ -31,6 +31,15 @@ hum1;
  daño;
  muerte;
  mapa
+
+ //// provisional
+ criat1V;
+ criat2V;
+ criat3V;
+ hum1V;
+ hum2V;
+ hum3V;
+
 	constructor()
 	{
 		super('Combate')
@@ -96,8 +105,8 @@ hum1;
     fontFamily: "georgia"
   })
   
-  this.Tturno = this.add.text(850, 100, "turno: " + this.turno, {
-    fontSize: "60px",
+  this.Tturno = this.add.text(850, 150, "turno: " + this.turno, {
+    fontSize: "80px",
     //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
@@ -105,18 +114,24 @@ hum1;
   ////////////////////////////////////////////// selector de sprites humanos
   switch (this.hum1.nombre) {
     case "Arquero":
-      this.humImg1 = this.add.image(200, 535, 'arquero').setInteractive();
+      this.humImg1 = this.add.image(200, 535, 'arqueroAtaque').setInteractive();
       this.humImg1.setScale(4);
+      this.hum1V = this.add.image(200, 535, 'arqueroV');
+      this.hum1V.setScale(0);
       break;
   
     case "Caballero":
-      this.humImg1 = this.add.image(200, 535, 'caballero').setInteractive();
+      this.humImg1 = this.add.image(200, 535, 'caballeroAtaque').setInteractive();
       this.humImg1.setScale(4);
+      this.hum1V = this.add.image(200, 535, 'caballeroV');
+      this.hum1V.setScale(0);
       break;
   
     case "Piromano":
-      this.humImg1 = this.add.image(200, 535, 'piromano').setInteractive()
+      this.humImg1 = this.add.image(200, 535, 'piromanoAtaque').setInteractive()
       this.humImg1.setScale(4);
+      this.hum1V = this.add.image(200, 535, 'piromanoV');
+      this.hum1V.setScale(0);
       break;
   
     default:
@@ -125,18 +140,24 @@ hum1;
   
   switch (this.hum2.nombre) {
     case "Arquero":
-      this.humImg2 = this.add.image(450, 535, 'arquero').setInteractive();
+      this.humImg2 = this.add.image(450, 535, 'arqueroAtaque').setInteractive();
       this.humImg2.setScale(4);
+      this.hum2V = this.add.image(450, 535, 'arqueroV');
+      this.hum2V.setScale(0);
       break;
   
     case "Caballero":
-      this.humImg2 = this.add.image(450, 535, 'caballero').setInteractive();
+      this.humImg2 = this.add.image(450, 535, 'caballeroAtaque').setInteractive();
       this.humImg2.setScale(4);
+      this.hum2V = this.add.image(450, 535, 'caballeroV');
+      this.hum2V.setScale(0);
       break;
   
     case "Piromano":
-      this.humImg2 = this.add.image(450, 535, 'piromano').setInteractive();
+      this.humImg2 = this.add.image(450, 535, 'piromanoAtaque').setInteractive();
       this.humImg2.setScale(4);
+      this.hum2V = this.add.image(450, 535, 'piromanoV');
+      this.hum2V.setScale(0);
       break;
   
     default:
@@ -145,18 +166,24 @@ hum1;
   
   switch (this.hum3.nombre) {
     case "Arquero":
-      this.humImg3 = this.add.image(700, 535, 'arquero').setInteractive()
+      this.humImg3 = this.add.image(700, 535, 'arqueroAtaque').setInteractive()
       this.humImg3.setScale(4);
+      this.hum3V = this.add.image(700, 535, 'arqueroV');
+      this.hum3V.setScale(0);
       break;
   
     case "Caballero":
-      this.humImg3 = this.add.image(700, 535, 'caballero').setInteractive()
+      this.humImg3 = this.add.image(700, 535, 'caballeroAtaque').setInteractive()
       this.humImg3.setScale(4);
+      this.hum3V = this.add.image(200, 535, 'caballeroV');
+      this.hum3V.setScale(0);
       break;
   
     case "Piromano":
-      this.humImg3 = this.add.image(700, 535, 'piromano').setInteractive();
+      this.humImg3 = this.add.image(700, 535, 'piromanoAtaque').setInteractive();
       this.humImg3.setScale(4);
+      this.hum3V = this.add.image(700, 535, 'piromanoV');
+      this.hum3V.setScale(0);
       break;
   
     default:
@@ -168,16 +195,22 @@ hum1;
     case "Esqueletos":
       this.criatImg1 = this.add.image(1200, 535, 'esqueletos').setInteractive();
       this.criatImg1.setScale(4);
+      this.criat1V = this.add.image(1200, 535, 'esqueletosV').setInteractive();
+      this.criat1V.setScale(0);
       break;
     
     case "Mago":
-      this.criatImg1 = this.add.image(1200, 535, 'mago').setInteractive();
+      this.criatImg1 = this.add.image(1200, 535, 'magoAtaque').setInteractive();
       this.criatImg1.setScale(4);
+      this.criat1V = this.add.image(1200, 535, 'magoV').setInteractive();
+      this.criat1V.setScale(0);
       break;
     
     case "Polilla":
       this.criatImg1 = this.add.image(1200, 535, 'polilla').setInteractive();
       this.criatImg1.setScale(4);
+      this.criat1V = this.add.image(1200, 535, 'polillaV').setInteractive();
+      this.criat1V.setScale(0);
       break;
     
     default:
@@ -188,16 +221,22 @@ hum1;
     case "Esqueletos":
       this.criatImg2 = this.add.image(1450, 535, 'esqueletos').setInteractive();
       this.criatImg2.setScale(4);
+      this.criat2V = this.add.image(1450, 535, 'esqueletosV').setInteractive();
+      this.criat2V.setScale(0);
       break;
     
     case "Mago":
-      this.criatImg2 = this.add.image(1450, 535, 'mago').setInteractive();
+      this.criatImg2 = this.add.image(1450, 535, 'magoAtaque').setInteractive();
       this.criatImg2.setScale(4);
+      this.criat2V = this.add.image(1450, 535, 'magoV').setInteractive();
+      this.criat2V.setScale(0);
       break;
     
     case "Polilla":
       this.criatImg2 = this.add.image(1450, 535, 'polilla').setInteractive();
       this.criatImg2.setScale(4);
+      this.criat2V = this.add.image(1450, 535, 'polillaV').setInteractive();
+      this.criat2V.setScale(0);
       break;
     
     default:
@@ -208,23 +247,29 @@ hum1;
     case "Esqueletos":
       this.criatImg3 = this.add.image(1700, 535, 'esqueletos').setInteractive();
       this.criatImg3.setScale(4);
+      this.criat3V = this.add.image(1700, 535, 'esqueletosV').setInteractive();
+      this.criat3V.setScale(0);
       break;
       
     case "Mago":
-      this.criatImg3 = this.add.image(1700, 535, 'mago').setInteractive();
+      this.criatImg3 = this.add.image(1700, 535, 'magoAtaque').setInteractive();
       this.criatImg3.setScale(4);
+      this.criat3V = this.add.image(1700, 535, 'magoV').setInteractive();
+      this.criat3V.setScale(0);
       break;
       
     case "Polilla":
       this.criatImg3 = this.add.image(1700, 535, 'polilla').setInteractive();
       this.criatImg3.setScale(4);
+      this.criat3V = this.add.image(1700, 535, 'polillaV').setInteractive();
+      this.criat3V.setScale(0);
       break;
       
     default:
       break;
   }
   
-  var atacar = this.add.image(950,950,'atacar').setInteractive()
+  var atacar = this.add.image(950,910,'atacar').setInteractive()
   .on('pointerdown',()=> {this.ataque = "si" })
   .on('pointerover',()=> {atacar.setScale(5.1)})
   .on('pointerout',()=> {atacar.setScale(5)})
@@ -281,7 +326,8 @@ hum1;
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.humImg1.setScale(4.5); 
+        this.hum1V.setScale(5); 
+        this.criat3V.setScale(0);
       }
           
       break;
@@ -291,8 +337,9 @@ hum1;
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.criatImg1.setScale(4.5);
-        this.humImg1.setScale(4);
+        this.criat1V.setScale(5);
+        this.hum1V.setScale(0);
+        this.criat3V.setScale(0);
       }
       
       break;
@@ -302,8 +349,9 @@ hum1;
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.humImg2.setScale(4.5);
-        this.criatImg1.setScale(4);
+        this.hum2V.setScale(5);
+        this.criat1V.setScale(0);
+        this.criat3V.setScale(0);
       }
      
       break;
@@ -313,8 +361,8 @@ hum1;
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.criatImg2.setScale(4.5);
-        this.humImg2.setScale(4);
+        this.criat2V.setScale(5);
+        this.hum2V.setScale(0);
       }
       
       break;
@@ -324,8 +372,8 @@ hum1;
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.humImg3.setScale(4.5);
-        this.criatImg2.setScale(4);
+        this.hum3V.setScale(5);
+        this.criat2V.setScale(0);
       }
       
       break;
@@ -335,8 +383,8 @@ hum1;
         this.turno = 1;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.criatImg3.setScale(4.5);
-        this.humImg3.setScale(4);
+        this.criat3V.setScale(5);
+        this.hum3V.setScale(0);
       }
       break;
   

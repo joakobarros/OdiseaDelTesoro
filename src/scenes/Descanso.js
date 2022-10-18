@@ -13,6 +13,7 @@ humImg1;
 humImg2;
 humImg3;
 mapa;
+tcant;
 
 	constructor()
 	{
@@ -29,39 +30,44 @@ mapa;
     
   create() {
   
-    this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondocombate');
+    this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoDescanso');
   
   /////////////////////////////////////////////////////////// carteles
-  var texto1 = this.add.text(310,753, "cura +1", {
+  var texto1 = this.add.text(330,580, "cura +1", {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
-  var texto2 = this.add.text(770,753, "vida máxima +1", {
+  var texto2 = this.add.text(800,580, "vida máxima +1", {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
-  var texto3 = this.add.text(1400,753, "ataque +1", {
+  var texto3 = this.add.text(1420,580, "ataque +1", {
     fontSize: "50px",
-    fill: "#FFFFFF",
+    //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
-  
+  this.tcant = this.add.text(530, 80, "Selecciona 3 unidades", {
+    fontSize: "85px",
+    //fill: "#FFFFFF",
+    fontFamily: "georgia"
+  })
+
   /////////////////////////////////////////////////////////// sprites humanos
     switch (this.hum1.nombre) {
       case "Arquero":
-        this.humImg1 = this.add.image(500, 535, 'arquero').setInteractive();
+        this.humImg1 = this.add.image(500, 950, 'arquero').setInteractive();
         this.humImg1.setScale(4);
         break;
     
       case "Caballero":
-        this.humImg1 = this.add.image(500, 535, 'caballero').setInteractive();
+        this.humImg1 = this.add.image(500, 950, 'caballero').setInteractive();
         this.humImg1.setScale(4);
         break;
     
       case "Piromano":
-        this.humImg1 = this.add.image(500, 535, 'piromano').setInteractive()
+        this.humImg1 = this.add.image(500, 950, 'piromano').setInteractive()
         this.humImg1.setScale(4);
         break;
     
@@ -71,17 +77,17 @@ mapa;
     
     switch (this.hum2.nombre) {
       case "Arquero":
-        this.humImg2 = this.add.image(900, 535, 'arquero').setInteractive();
+        this.humImg2 = this.add.image(950, 950, 'arquero').setInteractive();
         this.humImg2.setScale(4);
         break;
     
       case "Caballero":
-        this.humImg2 = this.add.image(900, 535, 'caballero').setInteractive();
+        this.humImg2 = this.add.image(950, 950, 'caballero').setInteractive();
         this.humImg2.setScale(4);
         break;
     
       case "Piromano":
-        this.humImg2 = this.add.image(900, 535, 'piromano').setInteractive();
+        this.humImg2 = this.add.image(950, 950, 'piromano').setInteractive();
         this.humImg2.setScale(4);
         break;
     
@@ -91,17 +97,17 @@ mapa;
     
     switch (this.hum3.nombre) {
       case "Arquero":
-        this.humImg3 = this.add.image(1300, 535, 'arquero').setInteractive()
+        this.humImg3 = this.add.image(1450, 950, 'arquero').setInteractive()
         this.humImg3.setScale(4);
         break;
     
       case "Caballero":
-        this.humImg3 = this.add.image(1300, 535, 'caballero').setInteractive()
+        this.humImg3 = this.add.image(1450, 950, 'caballero').setInteractive()
         this.humImg3.setScale(4);
         break;
     
       case "Piromano":
-        this.humImg3 = this.add.image(1300, 535, 'piromano').setInteractive();
+        this.humImg3 = this.add.image(1450, 950, 'piromano').setInteractive();
         this.humImg3.setScale(4);
         break;
     
@@ -110,7 +116,7 @@ mapa;
     }
   
   ////////////////////////////////////////////////// botones power up
-    var ataque = this.add.image(1500,951,'masAtaque').setInteractive()
+    var ataque = this.add.image(1530,450,'masAtaque').setInteractive()
         .on('pointerdown',()=> {
           this.hum1.ataque += 1;
           this.hum2.ataque += 1;
@@ -120,7 +126,7 @@ mapa;
         .on('pointerout', ()=> {ataque.setScale(0.6)});
         ataque.setScale(0.6); 
           
-    var vidaMax = this.add.image(950,951,'vidaMax').setInteractive()
+    var vidaMax = this.add.image(970,450,'vidaMax').setInteractive()
         .on('pointerdown',()=> {
           this.hum1.vidaMax += 1; 
           this.hum2.vidaMax += 1;
@@ -130,7 +136,7 @@ mapa;
         .on('pointerout', ()=> {vidaMax.setScale(0.6)});
         vidaMax.setScale(0.6);
             
-    var vida = this.add.image(400,951,'curarVida').setInteractive()
+    var vida = this.add.image(420,450,'curarVida').setInteractive()
         .on('pointerdown',()=> {
             if (this.hum1.vida < this.hum1.vidaMax){
               this.hum1.vida += 1;
