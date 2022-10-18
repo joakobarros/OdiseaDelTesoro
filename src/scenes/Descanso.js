@@ -48,8 +48,8 @@ tcant;
     //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
-  this.tcant = this.add.text(530, 80, "Selecciona 3 unidades", {
-    fontSize: "85px",
+  this.tcant = this.add.text(520, 80, "Selecciona una de las mejoras", {
+    fontSize: "70px",
     //fill: "#FFFFFF",
     fontFamily: "georgia"
   })
@@ -57,17 +57,17 @@ tcant;
   /////////////////////////////////////////////////////////// sprites humanos
     switch (this.hum1.nombre) {
       case "Arquero":
-        this.humImg1 = this.add.image(500, 950, 'arquero').setInteractive();
+        this.humImg1 = this.add.image(500, 890, 'arquero').setInteractive();
         this.humImg1.setScale(4);
         break;
     
       case "Caballero":
-        this.humImg1 = this.add.image(500, 950, 'caballero').setInteractive();
+        this.humImg1 = this.add.image(500, 890, 'caballero').setInteractive();
         this.humImg1.setScale(4);
         break;
     
       case "Piromano":
-        this.humImg1 = this.add.image(500, 950, 'piromano').setInteractive()
+        this.humImg1 = this.add.image(500, 890, 'piromano').setInteractive()
         this.humImg1.setScale(4);
         break;
     
@@ -77,17 +77,17 @@ tcant;
     
     switch (this.hum2.nombre) {
       case "Arquero":
-        this.humImg2 = this.add.image(950, 950, 'arquero').setInteractive();
+        this.humImg2 = this.add.image(950, 890, 'arquero').setInteractive();
         this.humImg2.setScale(4);
         break;
     
       case "Caballero":
-        this.humImg2 = this.add.image(950, 950, 'caballero').setInteractive();
+        this.humImg2 = this.add.image(950, 890, 'caballero').setInteractive();
         this.humImg2.setScale(4);
         break;
     
       case "Piromano":
-        this.humImg2 = this.add.image(950, 950, 'piromano').setInteractive();
+        this.humImg2 = this.add.image(950, 890, 'piromano').setInteractive();
         this.humImg2.setScale(4);
         break;
     
@@ -97,17 +97,17 @@ tcant;
     
     switch (this.hum3.nombre) {
       case "Arquero":
-        this.humImg3 = this.add.image(1450, 950, 'arquero').setInteractive()
+        this.humImg3 = this.add.image(1450, 890, 'arquero').setInteractive()
         this.humImg3.setScale(4);
         break;
     
       case "Caballero":
-        this.humImg3 = this.add.image(1450, 950, 'caballero').setInteractive()
+        this.humImg3 = this.add.image(1450, 890, 'caballero').setInteractive()
         this.humImg3.setScale(4);
         break;
     
       case "Piromano":
-        this.humImg3 = this.add.image(1450, 950, 'piromano').setInteractive();
+        this.humImg3 = this.add.image(1450, 890, 'piromano').setInteractive();
         this.humImg3.setScale(4);
         break;
     

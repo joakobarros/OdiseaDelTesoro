@@ -339,7 +339,7 @@ ActivarSala(salaPos){
       salaP2.on('pointerdown', ()=>{
         this.mapa.salasPasadas.push("s2");
         this.mapa.salaActual = "s2";
-       this.scene.start("CombateJefe", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
+       this.scene.start("SelectorCriaturas", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, criaturas: this.criaturas, mapa: this.mapa });
       });
       break;
 

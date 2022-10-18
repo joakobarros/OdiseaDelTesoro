@@ -328,6 +328,7 @@ export default class Combate extends Phaser.Scene
       } else {
         this.hum1V.setScale(5); 
         this.criat3V.setScale(0);
+        this.hum3V.setScale(0);
       }
           
       break;
@@ -352,6 +353,7 @@ export default class Combate extends Phaser.Scene
         this.hum2V.setScale(5);
         this.criat1V.setScale(0);
         this.criat3V.setScale(0);
+        this.hum1V.setScale(0);
       }
      
       break;
@@ -363,6 +365,7 @@ export default class Combate extends Phaser.Scene
       } else {
         this.criat2V.setScale(5);
         this.hum2V.setScale(0);
+        this.criat1V.setScale(0);
       }
       
       break;
@@ -374,6 +377,7 @@ export default class Combate extends Phaser.Scene
       } else {
         this.hum3V.setScale(5);
         this.criat2V.setScale(0);
+        this.hum2V.setScale(0);
       }
       
       break;
@@ -385,6 +389,7 @@ export default class Combate extends Phaser.Scene
       } else {
         this.criat3V.setScale(5);
         this.hum3V.setScale(0);
+        this.criat2V.setScale(0);
       }
       break;
   
