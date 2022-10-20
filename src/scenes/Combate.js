@@ -32,13 +32,6 @@ export default class Combate extends Phaser.Scene
  muerte;
  mapa
 
- //// provisional
- criat1V;
- criat2V;
- criat3V;
- hum1V;
- hum2V;
- hum3V;
 
 	constructor()
 	{
@@ -116,22 +109,16 @@ export default class Combate extends Phaser.Scene
     case "Arquero":
       this.humImg1 = this.add.image(200, 535, 'arqueroAtaque').setInteractive();
       this.humImg1.setScale(4);
-      this.hum1V = this.add.image(200, 535, 'arqueroV');
-      this.hum1V.setScale(0);
       break;
   
     case "Caballero":
       this.humImg1 = this.add.image(200, 535, 'caballeroAtaque').setInteractive();
       this.humImg1.setScale(4);
-      this.hum1V = this.add.image(200, 535, 'caballeroV');
-      this.hum1V.setScale(0);
       break;
   
     case "Piromano":
       this.humImg1 = this.add.image(200, 535, 'piromanoAtaque').setInteractive()
       this.humImg1.setScale(4);
-      this.hum1V = this.add.image(200, 535, 'piromanoV');
-      this.hum1V.setScale(0);
       break;
   
     default:
@@ -142,22 +129,16 @@ export default class Combate extends Phaser.Scene
     case "Arquero":
       this.humImg2 = this.add.image(450, 535, 'arqueroAtaque').setInteractive();
       this.humImg2.setScale(4);
-      this.hum2V = this.add.image(450, 535, 'arqueroV');
-      this.hum2V.setScale(0);
       break;
   
     case "Caballero":
       this.humImg2 = this.add.image(450, 535, 'caballeroAtaque').setInteractive();
       this.humImg2.setScale(4);
-      this.hum2V = this.add.image(450, 535, 'caballeroV');
-      this.hum2V.setScale(0);
       break;
   
     case "Piromano":
       this.humImg2 = this.add.image(450, 535, 'piromanoAtaque').setInteractive();
       this.humImg2.setScale(4);
-      this.hum2V = this.add.image(450, 535, 'piromanoV');
-      this.hum2V.setScale(0);
       break;
   
     default:
@@ -168,22 +149,16 @@ export default class Combate extends Phaser.Scene
     case "Arquero":
       this.humImg3 = this.add.image(700, 535, 'arqueroAtaque').setInteractive()
       this.humImg3.setScale(4);
-      this.hum3V = this.add.image(700, 535, 'arqueroV');
-      this.hum3V.setScale(0);
       break;
   
     case "Caballero":
       this.humImg3 = this.add.image(700, 535, 'caballeroAtaque').setInteractive()
       this.humImg3.setScale(4);
-      this.hum3V = this.add.image(200, 535, 'caballeroV');
-      this.hum3V.setScale(0);
       break;
   
     case "Piromano":
       this.humImg3 = this.add.image(700, 535, 'piromanoAtaque').setInteractive();
       this.humImg3.setScale(4);
-      this.hum3V = this.add.image(700, 535, 'piromanoV');
-      this.hum3V.setScale(0);
       break;
   
     default:
@@ -195,22 +170,16 @@ export default class Combate extends Phaser.Scene
     case "Esqueletos":
       this.criatImg1 = this.add.image(1200, 535, 'esqueletos').setInteractive();
       this.criatImg1.setScale(4);
-      this.criat1V = this.add.image(1200, 535, 'esqueletosV').setInteractive();
-      this.criat1V.setScale(0);
       break;
     
     case "Mago":
       this.criatImg1 = this.add.image(1200, 535, 'magoAtaque').setInteractive();
       this.criatImg1.setScale(4);
-      this.criat1V = this.add.image(1200, 535, 'magoV').setInteractive();
-      this.criat1V.setScale(0);
       break;
     
     case "Polilla":
       this.criatImg1 = this.add.image(1200, 535, 'polilla').setInteractive();
       this.criatImg1.setScale(4);
-      this.criat1V = this.add.image(1200, 535, 'polillaV').setInteractive();
-      this.criat1V.setScale(0);
       break;
     
     default:
@@ -221,22 +190,16 @@ export default class Combate extends Phaser.Scene
     case "Esqueletos":
       this.criatImg2 = this.add.image(1450, 535, 'esqueletos').setInteractive();
       this.criatImg2.setScale(4);
-      this.criat2V = this.add.image(1450, 535, 'esqueletosV').setInteractive();
-      this.criat2V.setScale(0);
       break;
     
     case "Mago":
       this.criatImg2 = this.add.image(1450, 535, 'magoAtaque').setInteractive();
       this.criatImg2.setScale(4);
-      this.criat2V = this.add.image(1450, 535, 'magoV').setInteractive();
-      this.criat2V.setScale(0);
       break;
     
     case "Polilla":
       this.criatImg2 = this.add.image(1450, 535, 'polilla').setInteractive();
       this.criatImg2.setScale(4);
-      this.criat2V = this.add.image(1450, 535, 'polillaV').setInteractive();
-      this.criat2V.setScale(0);
       break;
     
     default:
@@ -247,22 +210,16 @@ export default class Combate extends Phaser.Scene
     case "Esqueletos":
       this.criatImg3 = this.add.image(1700, 535, 'esqueletos').setInteractive();
       this.criatImg3.setScale(4);
-      this.criat3V = this.add.image(1700, 535, 'esqueletosV').setInteractive();
-      this.criat3V.setScale(0);
       break;
       
     case "Mago":
       this.criatImg3 = this.add.image(1700, 535, 'magoAtaque').setInteractive();
       this.criatImg3.setScale(4);
-      this.criat3V = this.add.image(1700, 535, 'magoV').setInteractive();
-      this.criat3V.setScale(0);
       break;
       
     case "Polilla":
       this.criatImg3 = this.add.image(1700, 535, 'polilla').setInteractive();
       this.criatImg3.setScale(4);
-      this.criat3V = this.add.image(1700, 535, 'polillaV').setInteractive();
-      this.criat3V.setScale(0);
       break;
       
     default:

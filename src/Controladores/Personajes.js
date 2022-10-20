@@ -1,52 +1,50 @@
 class Personaje {
 
-    constructor(nombre, ataque, vida, vidaMax, sprite, scene)
+    constructor(nombre, ataque, vida, vidaMax)
     {
         this.nombre = nombre;
         this.ataque = ataque;
         this.vida = vida;
         this.vidaMax = vidaMax;
-        this.sprite = sprite;
-        this.scene = scene;
     }
 
 }
 
 class Arquero extends Personaje{
 
-    constructor (scene)
+    constructor ()
     {
-        super('Arquero', 3, 2, 2, "arqueroAtlas");
+        super('Arquero', 3, 2, 2);
     }
 }
 
 class Caballero extends Personaje{
 
-    constructor (scene)
+    constructor ()
     {
-        super('Caballero', 1, 4, 4, "caballeroAtlas");
+        super('Caballero', 1, 4, 4);
     }
 }
 
 class Piromano extends Personaje{
 
-    constructor (scene)
+    constructor ()
     {
-        super('Piromano', 2, 3, 3, "piromanoAtlas");
+        super('Piromano', 2, 3, 3);
     }
 }
 
 class Esqueletos extends Personaje{
 
-    constructor (scene)
+    constructor ()
     {
-        super('Esqueletos', 1, 4, 4, "esqueletosAtlas");
+        super('Esqueletos', 1, 4, 4);
     }
 }
 
 class Polilla extends Personaje{
 
-    constructor (scene)
+    constructor ()
     {
         super('Polilla', 2, 3, 3);
     }
@@ -54,17 +52,17 @@ class Polilla extends Personaje{
 
 class Mago extends Personaje{
 
-    constructor (scene)
+    constructor ()
     {
-        super('Mago', 3, 5, 5);
+        super('Mago', 2, 4, 4);
     }
 }
 
 class Guardian extends Personaje{
 
-    constructor (scene)
+    constructor ()
     {
-        super('Guardian', 3, 20, 20, "jefeAtlas");
+        super('Guardian', 3, 30, 30);
     }
 }
 

@@ -113,12 +113,14 @@ const text10 = this.add.text(1435, 700, "ventaja vs: mago", {
 
 ///////////////////////////////////////////////////// sprite
 let imag1 = this.add.sprite(350, 500, 'arqueroAtaque');
-let imag2 = this.add.image(960, 495, 'caballeroAtaque');
-let imag3 = this.add.image(1550, 500, 'piromanoAtaque');
+let imag2 = this.add.sprite(960, 495, 'caballeroAtaque');
+let imag3 = this.add.sprite(1550, 500, 'piromanoAtaque');
 imag1.setScale(4);
 imag2.setScale(4);
 imag3.setScale(4);
-//imag1.anims.play('arqAtk', true);
+imag1.anims.play('arqAtk', true);
+imag2.anims.play('cabAtk', true);
+imag3.anims.play("piroAtk", true);
 
 
 /////////////////////////////////////////////////////// botones

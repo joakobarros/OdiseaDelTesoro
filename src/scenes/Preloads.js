@@ -64,35 +64,35 @@ export default class Preloads extends Phaser.Scene
 //////////////////////////////// animaciones
   this.anims.create({
     key: "cabAtk",
-    frames: this.anims.generateFrameNumbers("caballeroAtlas",{start:0, end:4}),
-    frameRate: 10,
+    frames: this.anims.generateFrameNumbers("caballeroAtaque",{start:0, end:4}),
+    frameRate: 4,
     repeat: -1,
   })
 
   this.anims.create({
     key: "arqAtk",
-    frames: this.anims.generateFrameNumbers("arqueroAtlas",{start:0, end:3}),
-    frameRate: 10,
+    frames: this.anims.generateFrameNumbers("arqueroAtaque",{start:0, end:3}),
+    frameRate: 4,
     repeat: -1,
   })
 
   this.anims.create({
     key: "piroAtk",
-    frames: this.anims.generateFrameNumbers("piromanoAtlas",{start:0, end:7}),
-    frameRate: 10,
+    frames: this.anims.generateFrameNumbers("piromanoAtaque",{start:0, end:7}),
+    frameRate: 4,
     repeat: -1,
   })
 
   this.anims.create({
     key: "esqAtk",
-    frames: this.anims.generateFrameNumbers("esqueletosAtlas",{start:0, end:3}),
+    frames: this.anims.generateFrameNumbers("esqueletosIdle",{start:0, end:3}),
     frameRate: 15,
     repeat: 1,
   })
 
   this.anims.create({
     key: "jefeAtk",
-    frames: this.anims.generateFrameNumbers("jefeAtlas",{start:0, end:5}),
+    frames: this.anims.generateFrameNumbers("jefeAtaque",{start:0, end:5}),
     frameRate: 10,
     repeat: 1,
   })

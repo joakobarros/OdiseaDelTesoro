@@ -59,7 +59,9 @@ switch (this.mapa.salaActual){
     this.salaAc = this.add.image(1204,200,'salaActual');
     for (let p = 0; p < s1.salasPosibles.length; p++) {
       const salaPos = s1.salasPosibles[p];
-      //this.mapa.salasPosibles.push(salaPos);
+      /*if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }*/
       this.ActivarSala(salaPos);
     }
   break; 
@@ -327,6 +329,16 @@ let pausa = this.add.image(1800,50,'pausa').setInteractive()
 for (let p = 0; p < s4.salasPosibles.length; p++) {
       this.mapa.salasPosibles.push(s4.salasPosibles[p]);
     }
+    for (let s = 0; s < this.mapa.salasPosibles.length; s++) {
+    const salaPos = this.mapa.salasPosibles[s];
+   for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
+      const salaPasada = this.mapa.salasPasadas[n];
+     if (salaPos != salaPasada) {
+       this.ActivarSala(salaPos);
+     }
+   }
+ }
+}
 */
 
 ///////////////////////////////// funcion activar sala
