@@ -59,152 +59,121 @@ switch (this.mapa.salaActual){
     this.salaAc = this.add.image(1204,200,'salaActual');
     for (let p = 0; p < s1.salasPosibles.length; p++) {
       const salaPos = s1.salasPosibles[p];
-      /*if (! this.mapa.salasPosibles.includes(salaPos)) {
+      if (! this.mapa.salasPosibles.Includes(salaPos)) {
         this.mapa.salasPosibles.push(salaPos);
-      }*/
-      this.ActivarSala(salaPos);
+      }
     }
+    this.ComprobacionSala();
   break; 
 
   case "s2":
     this.salaAc = this.add.image(1204,430,'salaActual');
-    for (let s = 0; s < s2.salasPosibles.length; s++) {
-      const salaPos = s2.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s2.salasPosibles.length; p++) {
+      const salaPos = s2.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   case "s3":
     this.salaAc = this.add.image(1204,650,'salaActual');
-    for (let s = 0; s < s3.salasPosibles.length; s++) {
-      const salaPos = s3.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-   
-    //this.ComprobacionSala();
+    for (let p = 0; p < s3.salasPosibles.length; p++) {
+      const salaPos = s3.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
       
   case "s4":
     this.salaAc = this.add.image(1204,876,'salaActual');
-    for (let s = 0; s < s4.salasPosibles.length; s++) {
-      const salaPos = s4.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s4.salasPosibles.length; p++) {
+      const salaPos = s4.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   case "s5":
     this.salaAc = this.add.image(960,200,'salaActual');
-    for (let s = 0; s < s5.salasPosibles.length; s++) {
-      const salaPos = s5.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s5.salasPosibles.length; p++) {
+      const salaPos = s5.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   case "s6":
     this.salaAc = this.add.image(960,430,'salaActual');
-    for (let s = 0; s < s6.salasPosibles.length; s++) {
-      const salaPos = s6.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s6.salasPosibles.length; p++) {
+      const salaPos = s6.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   case "s7":
     this.salaAc = this.add.image(960,650,'salaActual');
-    for (let s = 0; s < s7.salasPosibles.length; s++) {
-      const salaPos = s7.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s7.salasPosibles.length; p++) {
+      const salaPos = s7.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   case "s8":
     this.salaAc = this.add.image(960,876,'salaActual');
-    for (let s = 0; s < s8.salasPosibles.length; s++) {
-      const salaPos = s8.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s8.salasPosibles.length; p++) {
+      const salaPos = s8.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   case "s9":
     this.salaAc = this.add.image(710,200,'salaActual');
-    for (let s = 0; s < s9.salasPosibles.length; s++) {
-      const salaPos = s9.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s9.salasPosibles.length; p++) {
+      const salaPos = s9.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   case "s10":
     this.salaAc = this.add.image(710,430,'salaActual');
-    for (let s = 0; s < s10.salasPosibles.length; s++) {
-      const salaPos = s10.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s10.salasPosibles.length; p++) {
+      const salaPos = s10.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   case "s11":
     this.salaAc = this.add.image(710,650,'salaActual');
-    for (let s = 0; s < s11.salasPosibles.length; s++) {
-      const salaPos = s11.salasPosibles[s];
-     for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-        const salaPasada = this.mapa.salasPasadas[n];
-       if (salaPos != salaPasada) {
-         this.ActivarSala(salaPos);
-       }
-     }
-   }
-    //this.ComprobacionSala();
+    for (let p = 0; p < s11.salasPosibles.length; p++) {
+      const salaPos = s11.salasPosibles[p];
+      if (! this.mapa.salasPosibles.includes(salaPos)) {
+        this.mapa.salasPosibles.push(salaPos);
+      }
+    }
+    this.ComprobacionSala();
   break;
 
   default:
@@ -315,7 +284,7 @@ let pausa = this.add.image(1800,50,'pausa').setInteractive()
 }
 
 ///////////////////////////////// funcion comprobación de sala
-/*ComprobacionSala(){
+ComprobacionSala(){
   for (let s = 0; s < this.mapa.salasPosibles.length; s++) {
     const salaPos = this.mapa.salasPosibles[s];
    for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
@@ -326,7 +295,7 @@ let pausa = this.add.image(1800,50,'pausa').setInteractive()
    }
  }
 }
-for (let p = 0; p < s4.salasPosibles.length; p++) {
+/*for (let p = 0; p < s4.salasPosibles.length; p++) {
       this.mapa.salasPosibles.push(s4.salasPosibles[p]);
     }
     for (let s = 0; s < this.mapa.salasPosibles.length; s++) {

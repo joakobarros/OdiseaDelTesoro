@@ -48,17 +48,8 @@ export default class Preloads extends Phaser.Scene
    this.load.spritesheet("jefeAtaque", "assets/images/jefeAtlas.png",{frameWidth:98, frameHeight:75})
    this.load.spritesheet("esqueletosIdle", "assets/images/esqueletosAtlas.png",{frameWidth:70, frameHeight:61})
    this.load.spritesheet("magoAtaque", "assets/images/magoAtlas.png",{frameWidth:64, frameHeight:64})
-
-   ///////// provisional
-   this.load.image("arqueroV", "assets/images/ArqueroV.png")
-   this.load.image("caballeroV", "assets/images/CaballeroV.png")
-   this.load.image("piromanoV", "assets/images/PiromanoV.png")
-   this.load.image("jefeV", "assets/images/jefeV.png")
-   this.load.image("esqueletosV", "assets/images/EsqueletosV.png")
-   this.load.image("polillaV", "assets/images/polillaV.png")
-   this.load.image("magoV", "assets/images/MagoV.png")
   }
-    
+  
   create() {
 
 //////////////////////////////// animaciones

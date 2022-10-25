@@ -1,11 +1,11 @@
 
 class Mapa {
 
-    constructor(salaActual, salasPasadas){
+    constructor(salaActual, salasPasadas, salasPosibles){
        
         this.salaActual = salaActual;
         this.salasPasadas = salasPasadas;
-        //this.salasPosibles = salasPosibles;
+        this.salasPosibles = salasPosibles;
     }
 }
 

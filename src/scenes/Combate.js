@@ -283,9 +283,9 @@ export default class Combate extends Phaser.Scene
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.hum1V.setScale(5); 
-        this.criat3V.setScale(0);
-        this.hum3V.setScale(0);
+        this.hum1.setScale(5); 
+        this.criat3.setScale(4);
+        this.hum3.setScale(4);
       }
           
       break;
@@ -295,9 +295,9 @@ export default class Combate extends Phaser.Scene
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.criat1V.setScale(5);
-        this.hum1V.setScale(0);
-        this.criat3V.setScale(0);
+        this.criat1.setScale(5);
+        this.hum1.setScale(4);
+        this.criat3.setScale(4);
       }
       
       break;
@@ -307,10 +307,10 @@ export default class Combate extends Phaser.Scene
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.hum2V.setScale(5);
-        this.criat1V.setScale(0);
-        this.criat3V.setScale(0);
-        this.hum1V.setScale(0);
+        this.hum2.setScale(5);
+        this.criat1.setScale(4);
+        this.criat3.setScale(4);
+        this.hum1.setScale(4);
       }
      
       break;
@@ -320,9 +320,9 @@ export default class Combate extends Phaser.Scene
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.criat2V.setScale(5);
-        this.hum2V.setScale(0);
-        this.criat1V.setScale(0);
+        this.criat2.setScale(5);
+        this.hum2.setScale(4);
+        this.criat1.setScale(4);
       }
       
       break;
@@ -332,9 +332,9 @@ export default class Combate extends Phaser.Scene
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.hum3V.setScale(5);
-        this.criat2V.setScale(0);
-        this.hum2V.setScale(0);
+        this.hum3.setScale(5);
+        this.criat2.setScale(4);
+        this.hum2.setScale(4);
       }
       
       break;
@@ -344,9 +344,9 @@ export default class Combate extends Phaser.Scene
         this.turno = 1;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.criat3V.setScale(5);
-        this.hum3V.setScale(0);
-        this.criat2V.setScale(0);
+        this.criat3.setScale(5);
+        this.hum3.setScale(4);
+        this.criat2.setScale(4);
       }
       break;
   
