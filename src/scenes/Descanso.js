@@ -144,7 +144,7 @@ tcant;
             if (this.hum2.vida < this.hum2.vidaMax){
               this.hum2.vida += 1;
              }
-            if (this.hum3.vida < this.hum3.vidaMax) {
+            if (this.hum3.vida < this.hum3.vidaMax){
               this.hum3.vida += 1;
             }
             this.scene.start("Mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, mapa: this.mapa, criaturas: this.criaturas });})
