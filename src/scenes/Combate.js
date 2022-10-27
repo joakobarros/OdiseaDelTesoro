@@ -283,7 +283,7 @@ export default class Combate extends Phaser.Scene
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.hum1.setScale(5); 
+        this.humImg1.setScale(5); 
         this.criat3.setScale(4);
         this.hum3.setScale(4);
       }

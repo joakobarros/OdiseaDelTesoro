@@ -1,7 +1,12 @@
-import Phaser from 'phaser'
+import Phaser, { Tilemaps } from 'phaser'
 import { sala1, sala10, sala11, sala2, sala3, sala4, sala5, sala6, sala7, sala8, sala9 } from '../Controladores/Salas';
 
-export default class Menu extends Phaser.Scene
+import { sharedInstance as events } from '../scenes/EventCenter'
+
+import { Personaje } from '../Controladores/Personajes';
+
+
+export default class Mapa extends Phaser.Scene
 {
 
   hum1;
@@ -28,272 +33,334 @@ export default class Menu extends Phaser.Scene
 	}
 
     init(data) {
-        this.hum1 = data.hum1;
+        
+        this.hum1 = data.hum1        
         this.hum2 = data.hum2;
         this.hum3 = data.hum3;
+
         this.mapa = data.mapa;
         this.criaturas = data.criaturas;
-        console.log(data);
     }
 
 create() {
 
-//////////////////////////////////////////////// variante de mapa
+  //////////////////////////////////////////////// variante de mapa
 
-this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'mapa').setScale(1.5,1.5);
-let s1 = new sala1();
-let s2 = new sala2();
-let s3 = new sala3();
-let s4 = new sala4();
-let s5 = new sala5();
-let s6 = new sala6();
-let s7 = new sala7();
-let s8 = new sala8();
-let s9 = new sala9();
-let s10 = new sala10();
-let s11 = new sala11();
+  this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'mapa').setScale(1.5,1.5);
+  let s1 = new sala1();
+  let s2 = new sala2();
+  let s3 = new sala3();
+  let s4 = new sala4();
+  let s5 = new sala5();
+  let s6 = new sala6();
+  let s7 = new sala7();
+  let s8 = new sala8();
+  let s9 = new sala9();
+  let s10 = new sala10();
+  let s11 = new sala11();
 
-switch (this.mapa.salaActual){
+  this.mapa.salasPosibles = []
 
-  case "s1":
-    this.salaAc = this.add.image(1204,200,'salaActual');
-    for (let p = 0; p < s1.salasPosibles.length; p++) {
-      const salaPos = s1.salasPosibles[p];
-      if (! this.mapa.salasPosibles.Includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+  switch (this.mapa.salaActual){
+
+    case "s1":
+      this.salaAc = this.add.image(1204,200,'salaActual');
+      for (let p = 0; p < s1.salasPosibles.length; p++) {
+        const salaPos = s1.salasPosibles[p];
+        //console.log(this.mapa.salasPosibles)
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break; 
+      this.ComprobacionSala();
+    break; 
 
-  case "s2":
-    this.salaAc = this.add.image(1204,430,'salaActual');
-    for (let p = 0; p < s2.salasPosibles.length; p++) {
-      const salaPos = s2.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s2":
+      this.salaAc = this.add.image(1204,430,'salaActual');
+      for (let p = 0; p < s2.salasPosibles.length; p++) {
+        const salaPos = s2.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  case "s3":
-    this.salaAc = this.add.image(1204,650,'salaActual');
-    for (let p = 0; p < s3.salasPosibles.length; p++) {
-      const salaPos = s3.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s3":
+      this.salaAc = this.add.image(1204,650,'salaActual');
+      for (let p = 0; p < s3.salasPosibles.length; p++) {
+        const salaPos = s3.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
-      
-  case "s4":
-    this.salaAc = this.add.image(1204,876,'salaActual');
-    for (let p = 0; p < s4.salasPosibles.length; p++) {
-      const salaPos = s4.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+      this.ComprobacionSala();
+    break;
+        
+    case "s4":
+      this.salaAc = this.add.image(1204,876,'salaActual');
+      for (let p = 0; p < s4.salasPosibles.length; p++) {
+        const salaPos = s4.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  case "s5":
-    this.salaAc = this.add.image(960,200,'salaActual');
-    for (let p = 0; p < s5.salasPosibles.length; p++) {
-      const salaPos = s5.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s5":
+      this.salaAc = this.add.image(960,200,'salaActual');
+      for (let p = 0; p < s5.salasPosibles.length; p++) {
+        const salaPos = s5.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  case "s6":
-    this.salaAc = this.add.image(960,430,'salaActual');
-    for (let p = 0; p < s6.salasPosibles.length; p++) {
-      const salaPos = s6.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s6":
+      this.salaAc = this.add.image(960,430,'salaActual');
+      for (let p = 0; p < s6.salasPosibles.length; p++) {
+        const salaPos = s6.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  case "s7":
-    this.salaAc = this.add.image(960,650,'salaActual');
-    for (let p = 0; p < s7.salasPosibles.length; p++) {
-      const salaPos = s7.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s7":
+      this.salaAc = this.add.image(960,650,'salaActual');
+      for (let p = 0; p < s7.salasPosibles.length; p++) {
+        const salaPos = s7.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  case "s8":
-    this.salaAc = this.add.image(960,876,'salaActual');
-    for (let p = 0; p < s8.salasPosibles.length; p++) {
-      const salaPos = s8.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s8":
+      this.salaAc = this.add.image(960,876,'salaActual');
+      for (let p = 0; p < s8.salasPosibles.length; p++) {
+        const salaPos = s8.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  case "s9":
-    this.salaAc = this.add.image(710,200,'salaActual');
-    for (let p = 0; p < s9.salasPosibles.length; p++) {
-      const salaPos = s9.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s9":
+      this.salaAc = this.add.image(710,200,'salaActual');
+      for (let p = 0; p < s9.salasPosibles.length; p++) {
+        const salaPos = s9.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  case "s10":
-    this.salaAc = this.add.image(710,430,'salaActual');
-    for (let p = 0; p < s10.salasPosibles.length; p++) {
-      const salaPos = s10.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s10":
+      this.salaAc = this.add.image(710,430,'salaActual');
+      for (let p = 0; p < s10.salasPosibles.length; p++) {
+        const salaPos = s10.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  case "s11":
-    this.salaAc = this.add.image(710,650,'salaActual');
-    for (let p = 0; p < s11.salasPosibles.length; p++) {
-      const salaPos = s11.salasPosibles[p];
-      if (! this.mapa.salasPosibles.includes(salaPos)) {
-        this.mapa.salasPosibles.push(salaPos);
+    case "s11":
+      this.salaAc = this.add.image(710,650,'salaActual');
+      for (let p = 0; p < s11.salasPosibles.length; p++) {
+        const salaPos = s11.salasPosibles[p];
+        if (! this.mapa.salasPosibles.includes(salaPos)) {
+          this.mapa.salasPosibles.push(salaPos);
+        }
       }
-    }
-    this.ComprobacionSala();
-  break;
+      this.ComprobacionSala();
+    break;
 
-  default:
-  break;
-  }
-
-//////////////////////////////////////////////// selector de sprites
-  switch (this.hum1.nombre) {
-    case "Arquero":
-      this.humImg1 = this.add.image(133, 185, 'arqueroAtaque');
-      this.humImg1.setScale(2);
-      break;
-          
-    case "Caballero":
-      this.humImg1 = this.add.image(133, 185, 'caballeroAtaque');
-      this.humImg1.setScale(2);
-      break;
-          
-    case "Piromano":
-      this.humImg1 = this.add.image(133, 185, 'piromanoAtaque');
-      this.humImg1.setScale(2);
-      break;
-          
     default:
-      break;
-  }
-          
-  switch (this.hum2.nombre) {
-    case "Arquero":
-      this.humImg2 = this.add.image(133, 544, 'arqueroAtaque')
-      this.humImg2.setScale(2);
-      break;
-          
-    case "Caballero":
-      this.humImg2 = this.add.image(133, 544, 'caballeroAtaque')
-      this.humImg2.setScale(2);
-      break;
-          
-    case "Piromano":
-      this.humImg2 = this.add.image(133, 544, 'piromanoAtaque')
-      this.humImg2.setScale(2);
-      break;
-          
-    default:
-      break;
-  }
-          
-  switch (this.hum3.nombre) {
-    case "Arquero":
-      this.humImg3 = this.add.image(133, 900, 'arqueroAtaque').setInteractive()
-      this.humImg3.setScale(2);
-      break;
-          
-    case "Caballero":
-      this.humImg3 = this.add.image(133, 900, 'caballeroAtaque').setInteractive()
-      this.humImg3.setScale(2);
-      break;
-          
-    case "Piromano":
-      this.humImg3 = this.add.image(133, 900, 'piromanoAtaque').setInteractive();
-      this.humImg3.setScale(2);
-      break;
-          
-    default:
-      break;
-  }
+    break;
+    }
+
+  //////////////////////////////////////////////// selector de sprites
+    switch (this.hum1.nombre) {
+      case "Arquero":
+        this.humImg1 = this.add.image(133, 185, 'arqueroAtaque');
+        this.humImg1.setScale(2);
+        break;
+            
+      case "Caballero":
+        this.humImg1 = this.add.image(133, 185, 'caballeroAtaque');
+        this.humImg1.setScale(2);
+        break;
+            
+      case "Piromano":
+        this.humImg1 = this.add.image(133, 185, 'piromanoAtaque');
+        this.humImg1.setScale(2);
+        break;
+            
+      default:
+        break;
+    }
+            
+    switch (this.hum2.nombre) {
+      case "Arquero":
+        this.humImg2 = this.add.image(133, 544, 'arqueroAtaque')
+        this.humImg2.setScale(2);
+        break;
+            
+      case "Caballero":
+        this.humImg2 = this.add.image(133, 544, 'caballeroAtaque')
+        this.humImg2.setScale(2);
+        break;
+            
+      case "Piromano":
+        this.humImg2 = this.add.image(133, 544, 'piromanoAtaque')
+        this.humImg2.setScale(2);
+        break;
+            
+      default:
+        break;
+    }
+            
+    switch (this.hum3.nombre) {
+      case "Arquero":
+        this.humImg3 = this.add.image(133, 900, 'arqueroAtaque').setInteractive()
+        this.humImg3.setScale(2);
+        break;
+            
+      case "Caballero":
+        this.humImg3 = this.add.image(133, 900, 'caballeroAtaque').setInteractive()
+        this.humImg3.setScale(2);
+        break;
+            
+      case "Piromano":
+        this.humImg3 = this.add.image(133, 900, 'piromanoAtaque').setInteractive();
+        this.humImg3.setScale(2);
+        break;
+            
+      default:
+        break;
+    }
 
 
-//////////////////////////////////////////////////// estadisticas
-this.atk1 = this.add.text(220, 150, "atk: " + this.hum1.ataque, {
-  fontSize: "37px",
-  fontFamily: "georgia"
+  //////////////////////////////////////////////////// estadisticas
+  this.atk1 = this.add.text(220, 150, "atk: " + this.hum1.ataque, {
+    fontSize: "37px",
+    fontFamily: "georgia"
+    })
+  this.vida1 = this.add.text(220, 200, "vida: " + this.hum1.vida + "/" + this.hum1.vidaMax, {
+    fontSize: "37px",
+    fontFamily: "georgia"
   })
-this.vida1 = this.add.text(220, 200, "vida: " + this.hum1.vida + "/" + this.hum1.vidaMax, {
-  fontSize: "37px",
-  fontFamily: "georgia"
-})
 
-this.atk2 = this.add.text(220, 500, "atk: " + this.hum2.ataque, {
-  fontSize: "37px",
-  fontFamily: "georgia"
-})
-this.vida2 = this.add.text(220, 550, "vida: " + this.hum2.vida + "/" + this.hum2.vidaMax, {
-  fontSize: "37px",
-  fontFamily: "georgia"
-})
+  this.atk2 = this.add.text(220, 500, "atk: " + this.hum2.ataque, {
+    fontSize: "37px",
+    fontFamily: "georgia"
+  })
+  this.vida2 = this.add.text(220, 550, "vida: " + this.hum2.vida + "/" + this.hum2.vidaMax, {
+    fontSize: "37px",
+    fontFamily: "georgia"
+  })
 
-this.atk3 = this.add.text(220, 860, "atk: " + this.hum3.ataque, {
-  fontSize: "37px",
-  fontFamily: "georgia"
-})
-this.vida3 = this.add.text(220, 910, "vida: " + this.hum3.vida + "/" + this.hum3.vidaMax, {
-  fontSize: "37px",
-  fontFamily: "georgia"
-})
+  this.atk3 = this.add.text(220, 860, "atk: " + this.hum3.ataque, {
+    fontSize: "37px",
+    fontFamily: "georgia"
+  })
+  this.vida3 = this.add.text(220, 910, "vida: " + this.hum3.vida + "/" + this.hum3.vidaMax, {
+    fontSize: "37px",
+    fontFamily: "georgia"
+  })
 
-this.cantCriaturas = this.add.text(1545, 590, "criaturas: " + this.criaturas, {
-  fontSize: "50px",
-  fontFamily: "georgia"
-})
+  this.cantCriaturas = this.add.text(1545, 590, "criaturas: " + this.criaturas, {
+    fontSize: "50px",
+    fontFamily: "georgia"
+  })
 
 
-let pausa = this.add.image(1800,50,'pausa').setInteractive()
-  .on('pointerdown',()=> {this.scene.start("Pausa");})
-  .on('pointerover',()=> {pausa.setScale(3.1)})
-  .on('pointerout', ()=> {pausa.setScale(3)});
-  pausa.setScale(3);  
+  let pausa = this.add.image(1800,50,'pausa').setInteractive()
+    .on('pointerdown',()=> {this.scene.start("Pausa");})
+    .on('pointerover',()=> {pausa.setScale(3.1)})
+    .on('pointerout', ()=> {pausa.setScale(3)});
+    pausa.setScale(3);  
+
+
+  this.hum1 = new Personaje(this.hum1.nombre, this.hum1.ataque, this.hum1.vida, this.hum1.vidaMax, this, 100, 100, this.hum1.key_asset, this.hum1.tipo)
+  this.hum2 = new Personaje(this.hum2.nombre, this.hum2.ataque, this.hum2.vida, this.hum2.vidaMax, this, 100, 300, this.hum2.key_asset, this.hum2.tipo)
+  this.hum3 = new Personaje(this.hum3.nombre, this.hum3.ataque, this.hum3.vida, this.hum3.vidaMax, this, 100, 500, this.hum3.key_asset, this.hum3.tipo)
+
+
+  events.on('Personaje_atacado', this.handlePersonajeAtacado, this)
+  events.on('ataque_uno_a_otro', this.handleAtaque, this)
+
+}
+
+handleAtaque({atacante, atacado}){
+  console.log("atacante", atacante)
+  console.log("atacado", atacado)
+}
+
+handlePersonajeAtacado(personaje) {
+  if (! this.turnoTipo == personaje.tipo) {
+    //estar atacando a uno que no es de tu bando
+
+    if (this.turnoTipo == 'HUMANO') {
+      events.emit('ataque_uno_a_otro', 
+        {"atacante": this.humanos[this.turno], 
+        "atacado": personaje})
+    } else {
+      events.emit('ataque_uno_a_otro', 
+        {"atacante": this.criaturas[this.turno], 
+        "atacado": personaje})
+
+    }
+   /* 
+    
+    logica de cambio de bando y turno
+    comprobar si esta muerto
+
+    this.turnoTipo == el distinto del que habia
+    this.turno === proximo numero si es criatura
+    */
+  }
+
+
+
+  console.log("le hicieron click a ", personaje)
+  events.emit('ataque_uno_a_otro', 
+    {"atacante": personaje, 
+    "atacado": personaje})
+    /*
+    if personaje.tipo "HUMANO" //al que le hacen clic es HUMANO
+    events.emit('ataque_uno_a_otro', 
+    {"atacante": criatura[turno], 
+    "atacado": personaje})
+    
+    else    //al que le hacen clic es riatura
+    events.emit('ataque_uno_a_otro', 
+    {"atacante": humanos[turno], 
+    "atacado": personaje})
+    */
 }
 
 ///////////////////////////////// funcion comprobación de sala
 ComprobacionSala(){
-  for (let s = 0; s < this.mapa.salasPosibles.length; s++) {
-    const salaPos = this.mapa.salasPosibles[s];
-   for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-      const salaPasada = this.mapa.salasPasadas[n];
-     if (salaPos != salaPasada) {
-       this.ActivarSala(salaPos);
-     }
-   }
- }
+  console.log("ComprobacionSala")
+  console.log("salas posibles", this.mapa.salasPosibles)
+  console.log("salas pasadas", this.mapa.salasPasadas)
+
+  this.mapa.salasPosibles.map((item)=> {
+    if (! this.mapa.salasPasadas.includes(item)) {
+      this.ActivarSala(item);
+    }
+  } )
 }
 /*for (let p = 0; p < s4.salasPosibles.length; p++) {
       this.mapa.salasPosibles.push(s4.salasPosibles[p]);
