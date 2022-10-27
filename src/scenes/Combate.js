@@ -9,7 +9,7 @@ export default class Combate extends Phaser.Scene
  hum1;
  hum2;
  hum3;
- criaturas;
+ criaturasT;
  criat1;
  criat2;
  criat3;
@@ -26,6 +26,8 @@ export default class Combate extends Phaser.Scene
  muerte;
  mapa
  turnoTipo = "HUMANO";
+ criaturas;
+ humanos;
 
 
 	constructor()
@@ -38,7 +40,7 @@ export default class Combate extends Phaser.Scene
         this.hum2 = data.hum2;
         this.hum3 = data.hum3;
         this.mapa = data.mapa;
-        this.criaturas = data.criaturas;
+        this.criaturasT = data.criaturas;
         this.criat1 = data.criat1;
         this.criat2 = data.criat2;
         this.criat3 = data.criat3;
@@ -107,7 +109,7 @@ create() {
   this.hum2.setScale(4);
   this.hum3.setScale(4);
 
-  let humanos= [this.hum1,this.hum2,this.hum3];
+  this.humanos= [this.hum1,this.hum2,this.hum3];
 
   ////////////////////////////////////////////// selector de sprites criaturas
   this.criat1 = new Personaje(this.criat1.nombre, this.criat1.ataque, this.criat1.vida, this.criat1.vidaMax, this, 1200, 535, this.criat1.key_asset, this.criat1.tipo)
@@ -117,7 +119,7 @@ create() {
   this.criat2.setScale(4);
   this.criat3.setScale(4);
 
-  let criaturas= [this.criat1,this.criat2,this.criat3];
+  this.criaturas= [this.criat1,this.criat2,this.criat3];
 
   
   var atacar = this.add.image(950,910,'atacar').setInteractive()
@@ -144,7 +146,7 @@ update(){
     if (this.criat1.vida <= 0 && this.criat2.vida <= 0 && this.criat3.vida <= 0) {
       setTimeout(()=>{ 
         this.turno = 1;
-        this.scene.start("Mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, mapa: this.mapa, criaturas: this.criaturas })}
+        this.scene.start("Mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, mapa: this.mapa, criaturas: this.criaturasT })}
         ,1000) 
     }
   
