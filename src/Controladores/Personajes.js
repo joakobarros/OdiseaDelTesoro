@@ -26,30 +26,6 @@ class Personaje extends Phaser.GameObjects.Sprite{
 
 }
 
-class Esqueletos extends Personaje{
-
-    constructor ()
-    {
-        super('Esqueletos', 1, 4, 4);
-    }
-}
-
-class Polilla extends Personaje{
-
-    constructor ()
-    {
-        super('Polilla', 2, 3, 3);
-    }
-}
-
-class Mago extends Personaje{
-
-    constructor ()
-    {
-        super('Mago', 2, 4, 4);
-    }
-}
-
 class Guardian extends Personaje{
 
     constructor ()
@@ -58,4 +34,4 @@ class Guardian extends Personaje{
     }
 }
 
-export {Personaje, Mago, Guardian, Polilla, Esqueletos}
+export {Personaje, Guardian}

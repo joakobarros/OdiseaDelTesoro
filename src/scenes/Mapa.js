@@ -1,8 +1,6 @@
 import Phaser, { Tilemaps } from 'phaser'
 import { sala1, sala10, sala11, sala2, sala3, sala4, sala5, sala6, sala7, sala8, sala9 } from '../Controladores/Salas';
-
 import { sharedInstance as events } from '../scenes/EventCenter'
-
 import { Personaje } from '../Controladores/Personajes';
 
 
@@ -20,9 +18,6 @@ export default class Mapa extends Phaser.Scene
   vida2;
   vida3;
   cantCriaturas;
-  humImg1;
-  humImg2;
-  humImg3;
   mapa;
   salaAc;
 
@@ -188,68 +183,6 @@ create() {
     default:
     break;
     }
-/*
-  //////////////////////////////////////////////// selector de sprites
-    switch (this.hum1.nombre) {
-      case "Arquero":
-        this.humImg1 = this.add.image(133, 185, 'arqueroAtaque');
-        this.humImg1.setScale(2);
-        break;
-            
-      case "Caballero":
-        this.humImg1 = this.add.image(133, 185, 'caballeroAtaque');
-        this.humImg1.setScale(2);
-        break;
-            
-      case "Piromano":
-        this.humImg1 = this.add.image(133, 185, 'piromanoAtaque');
-        this.humImg1.setScale(2);
-        break;
-            
-      default:
-        break;
-    }
-            
-    switch (this.hum2.nombre) {
-      case "Arquero":
-        this.humImg2 = this.add.image(133, 544, 'arqueroAtaque')
-        this.humImg2.setScale(2);
-        break;
-            
-      case "Caballero":
-        this.humImg2 = this.add.image(133, 544, 'caballeroAtaque')
-        this.humImg2.setScale(2);
-        break;
-            
-      case "Piromano":
-        this.humImg2 = this.add.image(133, 544, 'piromanoAtaque')
-        this.humImg2.setScale(2);
-        break;
-            
-      default:
-        break;
-    }
-            
-    switch (this.hum3.nombre) {
-      case "Arquero":
-        this.humImg3 = this.add.image(133, 900, 'arqueroAtaque').setInteractive()
-        this.humImg3.setScale(2);
-        break;
-            
-      case "Caballero":
-        this.humImg3 = this.add.image(133, 900, 'caballeroAtaque').setInteractive()
-        this.humImg3.setScale(2);
-        break;
-            
-      case "Piromano":
-        this.humImg3 = this.add.image(133, 900, 'piromanoAtaque').setInteractive();
-        this.humImg3.setScale(2);
-        break;
-            
-      default:
-        break;
-    }
-*/
 
   //////////////////////////////////////////////////// estadisticas
   this.atk1 = this.add.text(220, 150, "atk: " + this.hum1.ataque, {
@@ -299,57 +232,6 @@ create() {
   this.hum2.setScale(2);
   this.hum3.setScale(2);
 
-  events.on('Personaje_atacado', this.handlePersonajeAtacado, this)
-  events.on('ataque_uno_a_otro', this.handleAtaque, this)
-
-}
-
-handleAtaque({atacante, atacado}){
-  console.log("atacante", atacante)
-  console.log("atacado", atacado)
-}
-
-handlePersonajeAtacado(personaje) {
-  if (! this.turnoTipo == personaje.tipo) {
-    //estar atacando a uno que no es de tu bando
-
-    if (this.turnoTipo == 'HUMANO') {
-      events.emit('ataque_uno_a_otro', 
-        {"atacante": this.humanos[this.turno], 
-        "atacado": personaje})
-    } else {
-      events.emit('ataque_uno_a_otro', 
-        {"atacante": this.criaturas[this.turno], 
-        "atacado": personaje})
-
-    }
-   /* 
-    
-    logica de cambio de bando y turno
-    comprobar si esta muerto
-
-    this.turnoTipo == el distinto del que habia
-    this.turno === proximo numero si es criatura
-    */
-  }
-
-
-
-  console.log("le hicieron click a ", personaje)
-  events.emit('ataque_uno_a_otro', 
-    {"atacante": personaje, 
-    "atacado": personaje})
-    /*
-    if personaje.tipo "HUMANO" //al que le hacen clic es HUMANO
-    events.emit('ataque_uno_a_otro', 
-    {"atacante": criatura[turno], 
-    "atacado": personaje})
-    
-    else    //al que le hacen clic es riatura
-    events.emit('ataque_uno_a_otro', 
-    {"atacante": humanos[turno], 
-    "atacado": personaje})
-    */
 }
 
 ///////////////////////////////// funcion comprobación de sala

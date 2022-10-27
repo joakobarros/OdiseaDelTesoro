@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import { Personaje } from '../Controladores/Personajes';
-
+import { sharedInstance as events } from '../scenes/EventCenter'
 
 
 export default class Combate extends Phaser.Scene
@@ -16,12 +16,6 @@ export default class Combate extends Phaser.Scene
  turno;
  Tturno;
  ataque = "";
- criatImg1;
- criatImg2;
- criatImg3;
- humImg1;
- humImg2;
- humImg3;
  vidaH1;
  vidaH2;
  vidaH3;
@@ -31,6 +25,7 @@ export default class Combate extends Phaser.Scene
  daño;
  muerte;
  mapa
+ turnoTipo = "HUMANO";
 
 
 	constructor()
@@ -112,7 +107,7 @@ create() {
   this.hum2.setScale(4);
   this.hum3.setScale(4);
 
-  let humanos[hum1,hum2,hum3];
+  let humanos= [this.hum1,this.hum2,this.hum3];
 
   ////////////////////////////////////////////// selector de sprites criaturas
   this.criat1 = new Personaje(this.criat1.nombre, this.criat1.ataque, this.criat1.vida, this.criat1.vidaMax, this, 1200, 535, this.criat1.key_asset, this.criat1.tipo)
@@ -122,7 +117,7 @@ create() {
   this.criat2.setScale(4);
   this.criat3.setScale(4);
 
-  let criaturas[criat1,criat2,criat3];
+  let criaturas= [this.criat1,this.criat2,this.criat3];
 
   
   var atacar = this.add.image(950,910,'atacar').setInteractive()
@@ -130,6 +125,12 @@ create() {
   .on('pointerover',()=> {atacar.setScale(5.1)})
   .on('pointerout',()=> {atacar.setScale(5)})
   atacar.setScale(5)
+
+/////////// EVENTOS
+  events.on('Personaje_atacado', this.handlePersonajeAtacado, this)
+  events.on('ataque_uno_a_otro', this.handleAtaque, this)
+
+  
 }
   
   
@@ -150,27 +151,27 @@ update(){
   
   ///////////////////////////////////////////////// eliminar unidades
   if (this.hum1.vida <= 0) {
-    this.humImg1.destroy();
+    this.hum1.destroy();
     this.vidaH1.text  = "";
   }
   if (this.hum2.vida <= 0) {
-    this.humImg2.destroy();
+    this.hum2.destroy();
     this.vidaH2.text  = "";
   }
   if (this.hum3.vida <= 0) {
-    this.humImg3.destroy();
+    this.hum3.destroy();
     this.vidaH3.text  = "";
   }
   if (this.criat1.vida <= 0) {
-    this.criatImg1.destroy();
+    this.criat1.destroy();
     this.vidaC1.text  = "";
   }
   if (this.criat2.vida <= 0) {
-    this.criatImg2.destroy();
+    this.criat2.destroy();
     this.vidaC2.text  = "";
   }
   if (this.criat3.vida <= 0) {
-    this.criatImg3.destroy();
+    this.criat3.destroy();
     this.vidaC3.text  = "";
   }
   
@@ -182,7 +183,7 @@ update(){
         this.turno++;
         this.Tturno.text = "turno: " +this.turno;
       } else {
-        this.humImg1.setScale(5); 
+        this.hum1.setScale(5); 
         this.criat3.setScale(4);
         this.hum3.setScale(4);
       }
@@ -254,7 +255,7 @@ update(){
   }
     
     
-      
+/*   
   //////////////////////////////////////////////// humanos
   this.humImg1.on('pointerdown',()=> {
       if (this.ataque == "si") {
@@ -646,5 +647,55 @@ update(){
     this.criatImg3.on('pointerout', ()=> {
       this.criatImg3.setScale(4);
     })
+   */
+  }
+
+
+  handleAtaque({atacante, atacado}){
+    console.log("atacante", atacante)
+    console.log("atacado", atacado)
+  }
+  
+  handlePersonajeAtacado(personaje) {
+    if (! this.turnoTipo == personaje.tipo) {
+      //estar atacando a uno que no es de tu bando
+  
+      if (this.turnoTipo == 'HUMANO') {
+        events.emit('ataque_uno_a_otro', 
+          {"atacante": this.humanos[this.turno], 
+          "atacado": personaje})
+      } else {
+        events.emit('ataque_uno_a_otro', 
+          {"atacante": this.criaturas[this.turno], 
+          "atacado": personaje})
+  
+      }
+     /* 
+      
+      logica de cambio de bando y turno
+      comprobar si esta muerto
+  
+      this.turnoTipo == el distinto del que habia
+      this.turno === proximo numero si es criatura
+      */
+    }
+  
+  
+  
+    console.log("le hicieron click a ", personaje)
+    events.emit('ataque_uno_a_otro', 
+      {"atacante": personaje, 
+      "atacado": personaje})
+      /*
+      if personaje.tipo "HUMANO" //al que le hacen clic es HUMANO
+      events.emit('ataque_uno_a_otro', 
+      {"atacante": criatura[turno], 
+      "atacado": personaje})
+      
+      else    //al que le hacen clic es riatura
+      events.emit('ataque_uno_a_otro', 
+      {"atacante": humanos[turno], 
+      "atacado": personaje})
+      */
   }
 }
