@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-
+import { Personaje } from '../Controladores/Personajes';
 
 
 
@@ -50,7 +50,7 @@ export default class Combate extends Phaser.Scene
         console.log(data);
     }
   
-  create() {
+create() {
   
     this.turno = 1;
 
@@ -105,136 +105,35 @@ export default class Combate extends Phaser.Scene
   })
   
   ////////////////////////////////////////////// selector de sprites humanos
-  switch (this.hum1.nombre) {
-    case "Arquero":
-      this.humImg1 = this.add.image(200, 535, 'arqueroAtaque').setInteractive();
-      this.humImg1.setScale(4);
-      break;
-  
-    case "Caballero":
-      this.humImg1 = this.add.image(200, 535, 'caballeroAtaque').setInteractive();
-      this.humImg1.setScale(4);
-      break;
-  
-    case "Piromano":
-      this.humImg1 = this.add.image(200, 535, 'piromanoAtaque').setInteractive()
-      this.humImg1.setScale(4);
-      break;
-  
-    default:
-      break;
-  }
-  
-  switch (this.hum2.nombre) {
-    case "Arquero":
-      this.humImg2 = this.add.image(450, 535, 'arqueroAtaque').setInteractive();
-      this.humImg2.setScale(4);
-      break;
-  
-    case "Caballero":
-      this.humImg2 = this.add.image(450, 535, 'caballeroAtaque').setInteractive();
-      this.humImg2.setScale(4);
-      break;
-  
-    case "Piromano":
-      this.humImg2 = this.add.image(450, 535, 'piromanoAtaque').setInteractive();
-      this.humImg2.setScale(4);
-      break;
-  
-    default:
-      break;
-  }
-  
-  switch (this.hum3.nombre) {
-    case "Arquero":
-      this.humImg3 = this.add.image(700, 535, 'arqueroAtaque').setInteractive()
-      this.humImg3.setScale(4);
-      break;
-  
-    case "Caballero":
-      this.humImg3 = this.add.image(700, 535, 'caballeroAtaque').setInteractive()
-      this.humImg3.setScale(4);
-      break;
-  
-    case "Piromano":
-      this.humImg3 = this.add.image(700, 535, 'piromanoAtaque').setInteractive();
-      this.humImg3.setScale(4);
-      break;
-  
-    default:
-      break;
-  }
-  
+  this.hum1 = new Personaje(this.hum1.nombre, this.hum1.ataque, this.hum1.vida, this.hum1.vidaMax, this, 200, 535, this.hum1.key_asset, this.hum1.tipo)
+  this.hum2 = new Personaje(this.hum2.nombre, this.hum2.ataque, this.hum2.vida, this.hum2.vidaMax, this, 450, 535, this.hum2.key_asset, this.hum2.tipo)
+  this.hum3 = new Personaje(this.hum3.nombre, this.hum3.ataque, this.hum3.vida, this.hum3.vidaMax, this, 700, 535, this.hum3.key_asset, this.hum3.tipo)
+  this.hum1.setScale(4);
+  this.hum2.setScale(4);
+  this.hum3.setScale(4);
+
+  let humanos[hum1,hum2,hum3];
+
   ////////////////////////////////////////////// selector de sprites criaturas
-  switch (this.criat1.nombre) {
-    case "Esqueletos":
-      this.criatImg1 = this.add.image(1200, 535, 'esqueletos').setInteractive();
-      this.criatImg1.setScale(4);
-      break;
-    
-    case "Mago":
-      this.criatImg1 = this.add.image(1200, 535, 'magoAtaque').setInteractive();
-      this.criatImg1.setScale(4);
-      break;
-    
-    case "Polilla":
-      this.criatImg1 = this.add.image(1200, 535, 'polilla').setInteractive();
-      this.criatImg1.setScale(4);
-      break;
-    
-    default:
-      break;
-  }
-  
-  switch (this.criat2.nombre) {
-    case "Esqueletos":
-      this.criatImg2 = this.add.image(1450, 535, 'esqueletos').setInteractive();
-      this.criatImg2.setScale(4);
-      break;
-    
-    case "Mago":
-      this.criatImg2 = this.add.image(1450, 535, 'magoAtaque').setInteractive();
-      this.criatImg2.setScale(4);
-      break;
-    
-    case "Polilla":
-      this.criatImg2 = this.add.image(1450, 535, 'polilla').setInteractive();
-      this.criatImg2.setScale(4);
-      break;
-    
-    default:
-      break;
-  }
-  
-  switch (this.criat3.nombre) {
-    case "Esqueletos":
-      this.criatImg3 = this.add.image(1700, 535, 'esqueletos').setInteractive();
-      this.criatImg3.setScale(4);
-      break;
-      
-    case "Mago":
-      this.criatImg3 = this.add.image(1700, 535, 'magoAtaque').setInteractive();
-      this.criatImg3.setScale(4);
-      break;
-      
-    case "Polilla":
-      this.criatImg3 = this.add.image(1700, 535, 'polilla').setInteractive();
-      this.criatImg3.setScale(4);
-      break;
-      
-    default:
-      break;
-  }
+  this.criat1 = new Personaje(this.criat1.nombre, this.criat1.ataque, this.criat1.vida, this.criat1.vidaMax, this, 1200, 535, this.criat1.key_asset, this.criat1.tipo)
+  this.criat2 = new Personaje(this.criat2.nombre, this.criat2.ataque, this.criat2.vida, this.criat2.vidaMax, this, 1450, 535, this.criat2.key_asset, this.criat2.tipo)
+  this.criat3 = new Personaje(this.criat3.nombre, this.criat3.ataque, this.criat3.vida, this.criat3.vidaMax, this, 1700, 535, this.criat3.key_asset, this.criat3.tipo)
+  this.criat1.setScale(4);
+  this.criat2.setScale(4);
+  this.criat3.setScale(4);
+
+  let criaturas[criat1,criat2,criat3];
+
   
   var atacar = this.add.image(950,910,'atacar').setInteractive()
   .on('pointerdown',()=> {this.ataque = "si" })
   .on('pointerover',()=> {atacar.setScale(5.1)})
   .on('pointerout',()=> {atacar.setScale(5)})
   atacar.setScale(5)
-  }
+}
   
   
-  update(){
+update(){
   
   ///////////////////////////////////////////////// win condition
     if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {

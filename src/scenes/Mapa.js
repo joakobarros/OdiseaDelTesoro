@@ -188,7 +188,7 @@ create() {
     default:
     break;
     }
-
+/*
   //////////////////////////////////////////////// selector de sprites
     switch (this.hum1.nombre) {
       case "Arquero":
@@ -249,7 +249,7 @@ create() {
       default:
         break;
     }
-
+*/
 
   //////////////////////////////////////////////////// estadisticas
   this.atk1 = this.add.text(220, 150, "atk: " + this.hum1.ataque, {
@@ -292,10 +292,12 @@ create() {
     pausa.setScale(3);  
 
 
-  this.hum1 = new Personaje(this.hum1.nombre, this.hum1.ataque, this.hum1.vida, this.hum1.vidaMax, this, 100, 100, this.hum1.key_asset, this.hum1.tipo)
-  this.hum2 = new Personaje(this.hum2.nombre, this.hum2.ataque, this.hum2.vida, this.hum2.vidaMax, this, 100, 300, this.hum2.key_asset, this.hum2.tipo)
-  this.hum3 = new Personaje(this.hum3.nombre, this.hum3.ataque, this.hum3.vida, this.hum3.vidaMax, this, 100, 500, this.hum3.key_asset, this.hum3.tipo)
-
+  this.hum1 = new Personaje(this.hum1.nombre, this.hum1.ataque, this.hum1.vida, this.hum1.vidaMax, this, 133, 185, this.hum1.key_asset, this.hum1.tipo)
+  this.hum2 = new Personaje(this.hum2.nombre, this.hum2.ataque, this.hum2.vida, this.hum2.vidaMax, this, 133, 544, this.hum2.key_asset, this.hum2.tipo)
+  this.hum3 = new Personaje(this.hum3.nombre, this.hum3.ataque, this.hum3.vida, this.hum3.vidaMax, this, 133, 900, this.hum3.key_asset, this.hum3.tipo)
+  this.hum1.setScale(2);
+  this.hum2.setScale(2);
+  this.hum3.setScale(2);
 
   events.on('Personaje_atacado', this.handlePersonajeAtacado, this)
   events.on('ataque_uno_a_otro', this.handleAtaque, this)

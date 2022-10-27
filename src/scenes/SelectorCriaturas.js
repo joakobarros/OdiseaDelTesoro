@@ -1,7 +1,5 @@
 import Phaser from 'phaser'
-import {Mago} from "../Controladores/Personajes.js"
-import {Polilla} from "../Controladores/Personajes.js"
-import {Esqueletos} from "../Controladores/Personajes.js"
+import { Personaje } from '../Controladores/Personajes';
 
 export default class SelectorCriaturas extends Phaser.Scene
 {
@@ -60,11 +58,6 @@ this.text3 = this.add.text(1525, 870, "0", {
   //fill: "#FFFFFF",
   fontFamily: "georgia"
 })
-/*this.tmax = this.add.text(1150, 75, "max/min: 3", {
-  fontSize: "37px",
-  //fill: "#FFFFFF",
-  fontFamily: "georgia"
-})*/
 this.tcant = this.add.text(485, 150, "Selecciona 3 unidades", {
   fontSize: "60px",
   //fill: "#FFFFFF",
@@ -106,9 +99,9 @@ let text9 = this.add.text(1500, 660, "daño: 3", {
 
 
 //////////////////////////////////////////////////// sprites
-  let imag1 = this.add.image(350, 515, 'esqueletos');
-  let imag2 = this.add.image(960, 515, 'polilla');
-  let imag3 = this.add.image(1550, 515, 'magoAtaque');
+  let imag1 = new Personaje('Esqueleto', 1, 4, 4, this, 350, 515, 'esqueletos', 'CRIATURA');
+  let imag2 = new Personaje('Polilla', 2, 3, 3, this, 960, 515, 'polilla', 'CRIATURA');
+  let imag3 = new Personaje('Mago', 2, 4, 4, this, 1550, 515, 'magoAtaque', 'CRIATURA');
   imag1.setScale(4);
   imag2.setScale(4);
   imag3.setScale(4);
@@ -198,13 +191,13 @@ var continuar = this.add.image(1300, 190,'continuar').setInteractive()
     if (cant == 3) {
       
     for (let i = 0; i < num1; i++) {
-     criats.push(new Esqueletos)
+     criats.push(imag1)
     }
     for (let i = 0; i < num2; i++) {
-     criats.push(new Polilla)
+     criats.push(imag2)
     }
     for (let i = 0; i < num3; i++) {
-     criats.push(new Mago)
+     criats.push(imag3)
     }
 
     this.criaturas -= 3;
@@ -215,5 +208,5 @@ var continuar = this.add.image(1300, 190,'continuar').setInteractive()
   .on('pointerout', ()=> {continuar.setScale(5)});
   continuar.setScale(5);
 
-}
+ }
 }

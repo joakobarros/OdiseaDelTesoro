@@ -17,37 +17,13 @@ class Personaje extends Phaser.GameObjects.Sprite{
 
         this.setInteractive();
         this.on('pointerdown',()=> { 
-            events.emit('Personaje_atacado', this)
+           events.emit('Personaje_atacado', this)
         })
         
     }
 
 
 
-}
-
-class Arquero extends Personaje{
-
-    constructor ()
-    {
-        super('Arquero', 3, 2, 2);
-    }
-}
-
-class Caballero extends Personaje{
-
-    constructor ()
-    {
-        super('Caballero', 1, 4, 4);
-    }
-}
-
-class Piromano extends Personaje{
-
-    constructor ()
-    {
-        super('Piromano', 2, 3, 3);
-    }
 }
 
 class Esqueletos extends Personaje{
@@ -82,4 +58,4 @@ class Guardian extends Personaje{
     }
 }
 
-export {Personaje, Mago, Guardian, Polilla, Piromano, Arquero, Caballero, Esqueletos}
+export {Personaje, Mago, Guardian, Polilla, Esqueletos}

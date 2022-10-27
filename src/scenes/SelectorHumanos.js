@@ -1,9 +1,5 @@
 import Phaser from 'phaser'
-import {Arquero} from "../Controladores/Personajes.js"
-import {Caballero} from "../Controladores/Personajes.js"
-import {Piromano} from "../Controladores/Personajes.js"
 import { Mapa } from '../Controladores/mapa';
-
 import { Personaje } from '../Controladores/Personajes';
 
 export class SelectorHumanos extends Phaser.Scene {
@@ -114,11 +110,9 @@ const text10 = this.add.text(1435, 700, "ventaja vs: mago", {
 
 
 ///////////////////////////////////////////////////// sprite
-let imag1 = new Personaje('NN', 100, 12, 12, this, 350, 500, 'arqueroAtaque', 'HUMANO') 
-//this.add.sprite(350, 500, 'arqueroAtaque');
-
-let imag2 = this.add.sprite(960, 495, 'caballeroAtaque');
-let imag3 = this.add.sprite(1550, 500, 'piromanoAtaque');
+let imag1 = new Personaje('Arquero', 3, 2, 2, this, 350, 500, 'arqueroAtaque', 'HUMANO');
+let imag2 = new Personaje('Caballero', 1, 4, 4, this, 960, 495, 'caballeroAtaque', 'HUMANO');
+let imag3 = new Personaje('Piromano', 2, 3, 3, this, 1550, 500, 'piromanoAtaque', 'HUMANO');
 imag1.setScale(4);
 imag2.setScale(4);
 imag3.setScale(4);
@@ -214,10 +208,10 @@ var continuar = this.add.image(1300, 190,'continuar').setInteractive()
       hums.push(imag1)
     }
     for (let i = 0; i < num2; i++) {
-      hums.push(new Caballero(this))
+      hums.push(imag2)
     }
     for (let i = 0; i < num3; i++) {
-      hums.push(new Piromano(this))
+      hums.push(imag3)
     }
     this.scene.start("Mapa", { hum1: hums[0], hum2: hums[1], hum3: hums[2], mapa: this.mapa, criaturas: this.criaturas });
   }})  
