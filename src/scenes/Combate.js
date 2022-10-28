@@ -1,142 +1,265 @@
-import Phaser from 'phaser'
-import { Personaje } from '../Controladores/Personajes';
-import { sharedInstance as events } from '../scenes/EventCenter'
+import Phaser from "phaser";
+import { Personaje } from "../Controladores/Personajes";
+import { sharedInstance as events } from "../scenes/EventCenter";
 
+export default class Combate extends Phaser.Scene {
+  mapa;
+  criaturasT;
 
-export default class Combate extends Phaser.Scene
-{
+  //datos para gestion de turno
+  turno; // contiene HUMANO o CRIATURA
+  Tturno;
 
- hum1;
- hum2;
- hum3;
- criaturasT;
- criat1;
- criat2;
- criat3;
- turno;
- Tturno;
- ataque = "";
- vidaH1;
- vidaH2;
- vidaH3;
- vidaC1;
- vidaC2;
- vidaC3;
- daño;
- muerte;
- mapa
- turnoTipo = "HUMANO";
- criaturas;
- humanos;
+  // INDICE DEL ULTIMO PERSONAJE QUE ATACO
+  ultimoTurnoHumano;
+  ultimoTurnoCriatura;
 
+  // Personaje al que le corresponde el turno
+  PersonajeAtacante;
+  // Personaje clickado para atacarlo
+  personajeAtacar;
 
-	constructor()
-	{
-		super('Combate')
-	}
+  // lista de humanos y criaturas
+  criaturas;
+  humanos;
 
-	init(data) {
-        this.hum1 = data.hum1;
-        this.hum2 = data.hum2;
-        this.hum3 = data.hum3;
-        this.mapa = data.mapa;
-        this.criaturasT = data.criaturas;
-        this.criat1 = data.criat1;
-        this.criat2 = data.criat2;
-        this.criat3 = data.criat3;
-        console.log(data);
+  constructor() {
+    super("Combate");
+    this.humanos = [];
+    this.criaturas = [];
+  }
+
+  init(data) {
+    //console.log(data);
+
+    this.mapa = data.mapa;
+    this.criaturasT = data.criaturas;
+
+    this.hum1 = data.hum1;
+    this.hum2 = data.hum2;
+    this.hum3 = data.hum3;
+    this.criat1 = data.criat1;
+    this.criat2 = data.criat2;
+    this.criat3 = data.criat3;
+  }
+
+  create() {
+    this.add.image(
+      this.cameras.main.centerX,
+      this.cameras.main.centerY,
+      "fondocombate"
+    );
+
+    ////////////////////////////////////////////// sonidos
+    this.daño = this.sound.add("daño", { loop: false });
+    this.muerte = this.sound.add("muerte", { loop: false });
+
+    /////////////////////////////////////////////// humanos
+    let humano;
+    humano = new Personaje(
+      this.hum1.nombre,
+      this.hum1.ataque,
+      this.hum1.vida,
+      this.hum1.vidaMax,
+      this,
+      200,
+      535,
+      this.hum1.key_asset,
+      this.hum1.tipo
+    );
+    this.humanos.push(humano);
+    humano = new Personaje(
+      this.hum2.nombre,
+      this.hum2.ataque,
+      this.hum2.vida,
+      this.hum2.vidaMax,
+      this,
+      450,
+      535,
+      this.hum2.key_asset,
+      this.hum2.tipo
+    );
+    this.humanos.push(humano);
+    humano = new Personaje(
+      this.hum3.nombre,
+      this.hum3.ataque,
+      this.hum3.vida,
+      this.hum3.vidaMax,
+      this,
+      700,
+      535,
+      this.hum3.key_asset,
+      this.hum3.tipo
+    );
+    this.humanos.push(humano);
+
+    //Se escalan los humanos
+    this.humanos.forEach((humano) => {
+      humano.setScale(4);
+
+      humano.vidaText = this.add.text(
+        humano.x - 30,
+        753,
+        humano.vida + "/" + humano.vidaMax,
+        {
+          fontSize: "50px",
+          //fill: "#FFFFFF",
+          fontFamily: "georgia",
+        }
+      );
+    });
+
+    ////////////////////////////////////////////// criaturas
+    let criatura;
+    criatura = new Personaje(
+      this.criat1.nombre,
+      this.criat1.ataque,
+      this.criat1.vida,
+      this.criat1.vidaMax,
+      this,
+      1200,
+      535,
+      this.criat1.key_asset,
+      this.criat1.tipo
+    );
+    this.criaturas.push(criatura);
+    criatura = new Personaje(
+      this.criat2.nombre,
+      this.criat2.ataque,
+      this.criat2.vida,
+      this.criat2.vidaMax,
+      this,
+      1450,
+      535,
+      this.criat2.key_asset,
+      this.criat2.tipo
+    );
+    this.criaturas.push(criatura);
+    criatura = new Personaje(
+      this.criat3.nombre,
+      this.criat3.ataque,
+      this.criat3.vida,
+      this.criat3.vidaMax,
+      this,
+      1700,
+      535,
+      this.criat3.key_asset,
+      this.criat3.tipo
+    );
+    this.criaturas.push(criatura);
+
+    //Se escalan las criaturas
+    this.criaturas.forEach((criatura) => {
+      criatura.setScale(4);
+
+      criatura.vidaText = this.add.text(
+        criatura.x - 30,
+        753,
+        humano.vida + "/" + humano.vidaMax,
+        {
+          fontSize: "50px",
+          //fill: "#FFFFFF",
+          fontFamily: "georgia",
+        }
+      );
+    });
+
+    // Al iniciar, se asigna el primer humano como el que tiene el turno
+    this.PersonajeAtacante = this.humanos[0];
+    this.turno = "HUMANO";
+
+    // Los arrays son base 0, o sea que el primer elemento es el 0
+    this.ultimoTurnoHumano = 0;
+    this.ultimoTurnoCriatura = -1;
+
+    this.Tturno = this.add.text(850, 150, "turno: " + this.turno, {
+      fontSize: "80px",
+      //fill: "#FFFFFF",
+      fontFamily: "georgia",
+    });
+
+    ////////////////////////////////////////////// selector de sprites humanos
+
+    var atacar = this.add
+      .image(950, 910, "atacar")
+      .setInteractive()
+      .on("pointerdown", () => {
+        this.handleAtaque(this.PersonajeAtacante, this.personajeAtacar);
+      })
+      .on("pointerover", () => {
+        atacar.setScale(5.1);
+      })
+      .on("pointerout", () => {
+        atacar.setScale(5);
+      });
+    atacar.setScale(5);
+
+    /////////// EVENTOS
+    events.on("click_en_personaje", this.handleClickEnPersonaje, this);
+    events.on("ataque_uno_a_otro", this.handleAtaque, this);
+  }
+
+  handleClickEnPersonaje(personaje) {
+    if (this.turno !== personaje.tipo) {
+      //Se hizo click en un personaje del equipo contrario
+      this.personajeAtacar = personaje;
+      //console.log(this.PersonajeAtacante, " atacar a ", personaje);
     }
-  
-create() {
-  
-    this.turno = 1;
+  }
+  handleCambioTurno() {
+    if (this.turno === "HUMANO") {
+      this.turno = "CRIATURA";
+      this.ultimoTurnoCriatura += 1;
+      //controlar
+      // que pasa cuando llega al ultimo elemento y suma una
+      // que pasa cuando cae en un elemento que esta muerto
 
-    this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondocombate');
-  
-  ////////////////////////////////////////////// sonidos
-  this.daño = this.sound.add('daño', {loop: false});
-  this.muerte = this.sound.add('muerte', {loop: false});
-      
-  
-  ////////////////////////////////////////////// carteles de salud
-  this.vidaH1 = this.add.text(160,753,this.hum1.vida + "/" + this.hum1.vidaMax, {
-    fontSize: "50px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  
-  this.vidaH2 = this.add.text(420, 753, this.hum2.vida + "/" + this.hum2.vidaMax, {
-    fontSize: "50px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  
-  this.vidaH3 = this.add.text(700, 753, this.hum3.vida + "/" + this.hum3.vidaMax, {
-    fontSize: "50px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  
-  this.vidaC1 = this.add.text(1170, 753, this.criat1.vida + "/" + this.criat1.vidaMax, {
-    fontSize: "50px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  
-  this.vidaC2 = this.add.text(1430, 753, this.criat2.vida + "/" + this.criat2.vidaMax, {
-    fontSize: "50px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  
-  this.vidaC3 = this.add.text(1670, 753, this.criat3.vida + "/" + this.criat3.vidaMax, {
-    fontSize: "50px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  
-  this.Tturno = this.add.text(850, 150, "turno: " + this.turno, {
-    fontSize: "80px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  
-  ////////////////////////////////////////////// selector de sprites humanos
-  this.hum1 = new Personaje(this.hum1.nombre, this.hum1.ataque, this.hum1.vida, this.hum1.vidaMax, this, 200, 535, this.hum1.key_asset, this.hum1.tipo)
-  this.hum2 = new Personaje(this.hum2.nombre, this.hum2.ataque, this.hum2.vida, this.hum2.vidaMax, this, 450, 535, this.hum2.key_asset, this.hum2.tipo)
-  this.hum3 = new Personaje(this.hum3.nombre, this.hum3.ataque, this.hum3.vida, this.hum3.vidaMax, this, 700, 535, this.hum3.key_asset, this.hum3.tipo)
-  this.hum1.setScale(4);
-  this.hum2.setScale(4);
-  this.hum3.setScale(4);
+      // luego de controles, asignar el proximo personaje
+      this.PersonajeAtacante = this.criaturas[this.ultimoTurnoCriatura];
+    } else {
+      this.turno = "HUMANO";
+      this.ultimoTurnoHumano += 1;
+      //controlar
+      // que pasa cuando llega al ultimo elemento y suma una
+      // que pasa cuando cae en un elemento que esta muerto
 
-  this.humanos= [this.hum1,this.hum2,this.hum3];
+      // luego de controles, asignar el proximo personaje
+      this.PersonajeAtacante = this.humanos[this.ultimoTurnoHumano];
+    }
+    this.Tturno.setText("turno: " + this.turno);
 
-  ////////////////////////////////////////////// selector de sprites criaturas
-  this.criat1 = new Personaje(this.criat1.nombre, this.criat1.ataque, this.criat1.vida, this.criat1.vidaMax, this, 1200, 535, this.criat1.key_asset, this.criat1.tipo)
-  this.criat2 = new Personaje(this.criat2.nombre, this.criat2.ataque, this.criat2.vida, this.criat2.vidaMax, this, 1450, 535, this.criat2.key_asset, this.criat2.tipo)
-  this.criat3 = new Personaje(this.criat3.nombre, this.criat3.ataque, this.criat3.vida, this.criat3.vidaMax, this, 1700, 535, this.criat3.key_asset, this.criat3.tipo)
-  this.criat1.setScale(4);
-  this.criat2.setScale(4);
-  this.criat3.setScale(4);
+    console.log("turno: ", this.turno);
+    //Se le suma 1 al console log para que sea mas claro, ya que el array es base 0
+    console.log("proximo turno humano: ", this.ultimoTurnoHumano + 1);
+    console.log("proximo turno criatura: ", this.ultimoTurnoCriatura + 1);
+  }
 
-  this.criaturas= [this.criat1,this.criat2,this.criat3];
+  handleAtaque(personajeAtacante, personajeAtacado) {
+    personajeAtacado.vida -= personajeAtacante.ataque;
+    personajeAtacado.vidaText.setText(
+      personajeAtacado.vida + "/" + personajeAtacado.vidaMax
+    );
 
-  
-  var atacar = this.add.image(950,910,'atacar').setInteractive()
-  .on('pointerdown',()=> {this.ataque = "si" })
-  .on('pointerover',()=> {atacar.setScale(5.1)})
-  .on('pointerout',()=> {atacar.setScale(5)})
-  atacar.setScale(5)
+    if (personajeAtacado.vida <= 0) {
+      personajeAtacado.vidaText.setText("0/" + personajeAtacado.vidaMax);
+      // Hacer animacion de muerte ?
+    } else {
+      // Hacer animacion de ataque recibido ?
+    }
 
-/////////// EVENTOS
-  events.on('Personaje_atacado', this.handlePersonajeAtacado, this)
-  events.on('ataque_uno_a_otro', this.handleAtaque, this)
+    if (this.turno === "HUMANO") {
+      //comprobar si hay al menos una CRIATURA viva
+      //SINO, HUMANO GANA
+    } else {
+      //comprobar si hay al menos un HUMANO vivo
+      //SINO, CRIATURA GANA
+    }
 
-  
-}
-  
-  
-update(){
+    this.handleCambioTurno();
+  }
+
+  update() {
+    /*
   
   ///////////////////////////////////////////////// win condition
     if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {
@@ -650,54 +773,5 @@ update(){
       this.criatImg3.setScale(4);
     })
    */
-  }
-
-
-  handleAtaque({atacante, atacado}){
-    console.log("atacante", atacante)
-    console.log("atacado", atacado)
-  }
-  
-  handlePersonajeAtacado(personaje) {
-    if (! this.turnoTipo == personaje.tipo) {
-      //estar atacando a uno que no es de tu bando
-  
-      if (this.turnoTipo == 'HUMANO') {
-        events.emit('ataque_uno_a_otro', 
-          {"atacante": this.humanos[this.turno], 
-          "atacado": personaje})
-      } else {
-        events.emit('ataque_uno_a_otro', 
-          {"atacante": this.criaturas[this.turno], 
-          "atacado": personaje})
-  
-      }
-     /* 
-      
-      logica de cambio de bando y turno
-      comprobar si esta muerto
-  
-      this.turnoTipo == el distinto del que habia
-      this.turno === proximo numero si es criatura
-      */
-    }
-  
-  
-  
-    console.log("le hicieron click a ", personaje)
-    events.emit('ataque_uno_a_otro', 
-      {"atacante": personaje, 
-      "atacado": personaje})
-      /*
-      if personaje.tipo "HUMANO" //al que le hacen clic es HUMANO
-      events.emit('ataque_uno_a_otro', 
-      {"atacante": criatura[turno], 
-      "atacado": personaje})
-      
-      else    //al que le hacen clic es riatura
-      events.emit('ataque_uno_a_otro', 
-      {"atacante": humanos[turno], 
-      "atacado": personaje})
-      */
   }
 }
