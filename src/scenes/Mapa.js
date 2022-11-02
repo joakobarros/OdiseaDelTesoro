@@ -61,17 +61,15 @@ export default class Mapa extends Phaser.Scene {
     let s10 = new sala10();
     let s11 = new sala11();
 
-    this.mapa.salasPosibles = [];
-
+console.log(this.mapa.salasPosibles)
     switch (this.mapa.salaActual) {
       case "s1":
         this.salaAc = this.add.image(1204, 200, "salaActual");
+        this.mapa.salasPosibles = [];
         for (let p = 0; p < s1.salasPosibles.length; p++) {
           const salaPos = s1.salasPosibles[p];
-          //console.log(this.mapa.salasPosibles)
-          if (!this.mapa.salasPosibles.includes(salaPos)) {
+          
             this.mapa.salasPosibles.push(salaPos);
-          }
         }
         this.ComprobacionSala();
         break;
@@ -407,7 +405,7 @@ export default class Mapa extends Phaser.Scene {
         salaP5.on("pointerdown", () => {
           this.mapa.salasPasadas.push("s5");
           this.mapa.salaActual = "s5";
-          this.scene.start("SelectorCriaturas", {
+          this.scene.start("Descanso", {
             hum1: this.hum1,
             hum2: this.hum2,
             hum3: this.hum3,

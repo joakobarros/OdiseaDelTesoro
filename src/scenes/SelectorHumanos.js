@@ -298,4 +298,4 @@ export class SelectorHumanos extends Phaser.Scene {
       });
     continuar.setScale(5);
   }
-}
+} 

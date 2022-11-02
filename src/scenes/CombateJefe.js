@@ -1,32 +1,41 @@
 import Phaser from 'phaser'
 import {Guardian} from "../Controladores/Personajes";
 
-
+import { Personaje } from "../Controladores/Personajes";
 
 export default class CombateJefe extends Phaser.Scene{
 
-hum1;
-hum2;
-hum3;
-humImg1;
-humImg2;
-humImg3;
-vidaH1;
-vidaH2;
-vidaH3;
-vidaJefe;
-ataque;
-jefe;
-jefeImg;
-turno;
-Tturno;
-daño;
-muerte;
-golpe;
+  hum1;
+  hum2;
+  hum3;
+  vidaH1;
+  vidaH2;
+  vidaH3;
+  vidaJefe;
+  ataque;
+  jefe;
+  turno;
+  Tturno;
+  daño;
+  muerte;
+  golpe;
+
+  // INDICE DEL ULTIMO PERSONAJE QUE ATACO
+  ultimoTurnoHumano;
+  ultimoTurnoCriatura;
+
+  // Personaje al que le corresponde el turno
+  PersonajeAtacante;
+  // Personaje clickado para atacarlo
+  personajeAtacar;
+
+  // lista de humanos
+  humanos;
 
 	constructor()
 	{
 		super('CombateJefe')
+    this.humanos = [];
 	}
 
     init(data) {
@@ -45,17 +54,9 @@ golpe;
   this.daño = this.sound.add('daño', {loop: false});
   this.muerte = this.sound.add('muerte', {loop: false});
   this.golpe = this.sound.add('golpe', {loop: false});
-  
-  ////////////////////////////////////////////////////// jefe
-  this.jefe = new Guardian;
-  this.jefeImg = this.add.image(1450, 510, 'jefeAtaque').setInteractive();
-  this.jefeImg.setScale(8);
-  this.jefeV = this.add.image(1450, 510, 'jefeV');
-  this.jefeV.setScale(0);
-  
-  
+   
   ////////////////////////////////////////////////////// indicadores de vida
-  this.vidaH1 = this.add.text(160,753,this.hum1.vida + "/" + this.hum1.vidaMax, {
+  /* this.vidaH1 = this.add.text(160,753,this.hum1.vida + "/" + this.hum1.vidaMax, {
   fontSize: "50px",
   fontFamily: "georgia"
   })
@@ -66,7 +67,7 @@ golpe;
   this.vidaH3 = this.add.text(700, 753, this.hum3.vida + "/" + this.hum3.vidaMax, {
   fontSize: "50px",
   fontFamily: "georgia"
-  })
+  })*/
   this.vidaJefe = this.add.text(1430, 753, this.jefe.vida + "/" + this.jefe.vidaMax, {
     fontSize: "50px",
   })
@@ -74,78 +75,90 @@ golpe;
     fontSize: "60px",
   })
   
+  ////////////////////////////////////////////////////// jefe
+  this.jefe = new Personaje(
+    "Guardian",
+    3,
+    30,
+    30,
+    this,
+    1450,
+    510,
+    "jefeAtaque",
+    "CRIATURA"
+  );
+  this.jefe.setScale(8);
   
   ////////////////////////////////////////////// selector de sprites humanos
-  switch (this.hum1.nombre) {
-    case "Arquero":
-      this.humImg1 = this.add.image(200, 535, 'arqueroAtaque').setInteractive();
-      this.humImg1.setScale(4);
-      break;
+  this.hum1 = new Personaje(
+    this.hum1.nombre,
+    this.hum1.ataque,
+    this.hum1.vida,
+    this.hum1.vidaMax,
+    this,
+    500,
+    890,
+    this.hum1.key_asset,
+    this.hum1.tipo
+  );
+  this.hum2 = new Personaje(
+    this.hum2.nombre,
+    this.hum2.ataque,
+    this.hum2.vida,
+    this.hum2.vidaMax,
+    this,
+    950,
+    890,
+    this.hum2.key_asset,
+    this.hum2.tipo
+  );
+  this.hum3 = new Personaje(
+    this.hum3.nombre,
+    this.hum3.ataque,
+    this.hum3.vida,
+    this.hum3.vidaMax,
+    this,
+    1450,
+    890,
+    this.hum3.key_asset,
+    this.hum3.tipo
+  );
+  //Se escalan los humanos
+  this.humanos.forEach((humano) => {
+    humano.setScale(4);
+    // funcion de animaciones idle
+
+    humano.vidaText = this.add.text(
+      humano.x - 30,
+      753,
+      humano.vida + "/" + humano.vidaMax,
+      {
+        fontSize: "50px",
+        //fill: "#FFFFFF",
+        fontFamily: "georgia",
+      }
+    );
+  }); 
   
-    case "Caballero":
-      this.humImg1 = this.add.image(200, 535, 'caballeroAtaque').setInteractive();
-      this.humImg1.setScale(4);
-      break;
-  
-    case "Piromano":
-      this.humImg1 = this.add.image(200, 535, 'piromanoAtaque').setInteractive()
-      this.humImg1.setScale(4);
-      break;
-  
-    default:
-      break;
-  }
-  
-  switch (this.hum2.nombre) {
-    case "Arquero":
-      this.humImg2 = this.add.image(450, 535, 'arqueroAtaque').setInteractive();
-      this.humImg2.setScale(4);
-      break;
-  
-    case "Caballero":
-      this.humImg2 = this.add.image(450, 535, 'caballeroAtaque').setInteractive();
-      this.humImg2.setScale(4);
-      break;
-  
-    case "Piromano":
-      this.humImg2 = this.add.image(450, 535, 'piromanoAtaque').setInteractive();
-      this.humImg2.setScale(4);
-      break;
-  
-    default:
-      break;
-  }
-  
-  switch (this.hum3.nombre) {
-    case "Arquero":
-      this.humImg3 = this.add.image(700, 535, 'arqueroAtaque').setInteractive()
-      this.humImg3.setScale(4);
-      break;
-  
-    case "Caballero":
-      this.humImg3 = this.add.image(700, 535, 'caballeroAtaque').setInteractive()
-      this.humImg3.setScale(4);
-      break;
-  
-    case "Piromano":
-      this.humImg3 = this.add.image(700, 535, 'piromanoAtaque').setInteractive();
-      this.humImg3.setScale(4);
-      break;
-  
-    default:
-      break;
-  }
-  
-  
-  var atacar = this.add.image(900,950,'atacar').setInteractive()
-  .on('pointerdown',()=> {this.ataque = "si" })
-  .on('pointerover',()=> {atacar.setScale(5.1)})
-  .on('pointerout',()=> {atacar.setScale(5)})
+  var atacar = this.add
+    .image(900,950,'atacar')
+    .setInteractive()
+  .on('pointerdown',()=> {
+    this.handleAtaque(this.PersonajeAtacante, this.personajeAtacar);
+  })
+  .on('pointerover',()=> {
+    atacar.setScale(5.1)
+  })
+  .on('pointerout',()=> {
+    atacar.setScale(5)
+  })
   atacar.setScale(5) 
+
+
   }
-              
+               
   update() {
-  
+  /*
   ///////////////////////////////////////////////// win condition
   if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {
     this.scene.start("WinGuardian")
@@ -323,6 +336,6 @@ golpe;
   })
   this.jefeImg.on('pointerout', ()=> {
     this.jefeImg.setScale(7);
-  })
+  })*/
   }
 }

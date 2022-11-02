@@ -96,6 +96,7 @@ export default class Combate extends Phaser.Scene {
     //Se escalan los humanos
     this.humanos.forEach((humano) => {
       humano.setScale(4);
+      // funcion de animaciones idle
 
       humano.vidaText = this.add.text(
         humano.x - 30,
@@ -151,6 +152,7 @@ export default class Combate extends Phaser.Scene {
     //Se escalan las criaturas
     this.criaturas.forEach((criatura) => {
       criatura.setScale(4);
+      // funcion de animaciones idle
 
       criatura.vidaText = this.add.text(
         criatura.x - 30,
@@ -178,8 +180,7 @@ export default class Combate extends Phaser.Scene {
       fontFamily: "georgia",
     });
 
-    ////////////////////////////////////////////// selector de sprites humanos
-
+    ////////////////////////////////////////////// boton atacar
     var atacar = this.add
       .image(950, 910, "atacar")
       .setInteractive()
@@ -206,25 +207,44 @@ export default class Combate extends Phaser.Scene {
       //console.log(this.PersonajeAtacante, " atacar a ", personaje);
     }
   }
+
   handleCambioTurno() {
     if (this.turno === "HUMANO") {
+      this.PersonajeAtacante.setScale(4);
       this.turno = "CRIATURA";
       this.ultimoTurnoCriatura += 1;
       //controlar
       // que pasa cuando llega al ultimo elemento y suma una
+      if (this.ultimoTurnoCriatura == 3) {
+        this.ultimoTurnoCriatura = 0;
+      }
       // que pasa cuando cae en un elemento que esta muerto
-
       // luego de controles, asignar el proximo personaje
-      this.PersonajeAtacante = this.criaturas[this.ultimoTurnoCriatura];
+      if (this.criaturas[this.ultimoTurnoCriatura] <= 0) {
+        this.handleCambioTurno();
+      }else{
+        this.PersonajeAtacante = this.criaturas[this.ultimoTurnoCriatura];
+        this.PersonajeAtacante.setScale(5);
+        // funcion con animaciones de ataque
+      }
     } else {
+      this.PersonajeAtacante.setScale(4);
       this.turno = "HUMANO";
       this.ultimoTurnoHumano += 1;
       //controlar
       // que pasa cuando llega al ultimo elemento y suma una
+      if (this.ultimoTurnoHumano == 3) {
+        this.ultimoTurnoHumano = 0;
+      }
       // que pasa cuando cae en un elemento que esta muerto
-
       // luego de controles, asignar el proximo personaje
-      this.PersonajeAtacante = this.humanos[this.ultimoTurnoHumano];
+      if (this.humanos[this.ultimoTurnoHumano] <= 0) {
+        this.handleCambioTurno();
+      }else{
+        this.PersonajeAtacante = this.humanos[this.ultimoTurnoHumano];
+        this.PersonajeAtacante.setScale(5);
+        // funcion con animaciones de ataque
+      }
     }
     this.Tturno.setText("turno: " + this.turno);
 
@@ -235,10 +255,19 @@ export default class Combate extends Phaser.Scene {
   }
 
   handleAtaque(personajeAtacante, personajeAtacado) {
-    personajeAtacado.vida -= personajeAtacante.ataque;
-    personajeAtacado.vidaText.setText(
+    if (
+      personajeAtacante.nombre == "Arquero" && personajeAtacado.nombre == "Polilla" ||
+      personajeAtacante.nombre == "Caballero" && personajeAtacado.nombre == "Esqueletos" ||
+      personajeAtacante.nombre == "Piromano" && personajeAtacado.nombre == "Mago"
+      ){
+      personajeAtacado.vida = 0;
+    } else {
+      personajeAtacado.vida -= personajeAtacante.ataque;
+      personajeAtacado.vidaText.setText(
       personajeAtacado.vida + "/" + personajeAtacado.vidaMax
     );
+    }
+    
 
     if (personajeAtacado.vida <= 0) {
       personajeAtacado.vidaText.setText("0/" + personajeAtacado.vidaMax);
@@ -250,29 +279,28 @@ export default class Combate extends Phaser.Scene {
     if (this.turno === "HUMANO") {
       //comprobar si hay al menos una CRIATURA viva
       //SINO, HUMANO GANA
+      if (this.criat1.vida <= 0 && this.criat2.vida <= 0 && this.criat3.vida <= 0) {
+        setTimeout(()=>{ 
+          this.scene.start("Mapa", { 
+            hum1: this.hum1, 
+            hum2: this.hum2, 
+            hum3: this.hum3, 
+            mapa: this.mapa, 
+            criaturas: this.criaturasT 
+          })},1000) 
+      }
     } else {
       //comprobar si hay al menos un HUMANO vivo
       //SINO, CRIATURA GANA
+      if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {
+        setTimeout(()=>{ this.scene.start("WinGuardian")},1000)
     }
-
     this.handleCambioTurno();
+    }
   }
-
+}
+/*
   update() {
-    /*
-  
-  ///////////////////////////////////////////////// win condition
-    if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {
-      setTimeout(()=>{ this.scene.start("WinGuardian")},1000)
-    }
-
-    if (this.criat1.vida <= 0 && this.criat2.vida <= 0 && this.criat3.vida <= 0) {
-      setTimeout(()=>{ 
-        this.turno = 1;
-        this.scene.start("Mapa", { hum1: this.hum1, hum2: this.hum2, hum3: this.hum3, mapa: this.mapa, criaturas: this.criaturasT })}
-        ,1000) 
-    }
-  
   
   ///////////////////////////////////////////////// eliminar unidades
   if (this.hum1.vida <= 0) {
@@ -773,5 +801,3 @@ export default class Combate extends Phaser.Scene {
       this.criatImg3.setScale(4);
     })
    */
-  }
-}
