@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import {Guardian} from "../Controladores/Personajes";
-
+import { sharedInstance as events } from "../scenes/EventCenter";
 import { Personaje } from "../Controladores/Personajes";
 
 export default class CombateJefe extends Phaser.Scene{
@@ -35,7 +35,6 @@ export default class CombateJefe extends Phaser.Scene{
 	constructor()
 	{
 		super('CombateJefe')
-    this.humanos = [];
 	}
 
     init(data) {
@@ -46,296 +45,192 @@ export default class CombateJefe extends Phaser.Scene{
   
   create() {    
   
+    this.humanos = [];
+    console.log(this.data);
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondocombate');
 
-    this.turno = 1;
-  
-  ////////////////////////////////////////////////////// sonidos
-  this.daño = this.sound.add('daño', {loop: false});
-  this.muerte = this.sound.add('muerte', {loop: false});
-  this.golpe = this.sound.add('golpe', {loop: false});
-   
-  ////////////////////////////////////////////////////// indicadores de vida
-  /* this.vidaH1 = this.add.text(160,753,this.hum1.vida + "/" + this.hum1.vidaMax, {
-  fontSize: "50px",
-  fontFamily: "georgia"
-  })
-  this.vidaH2 = this.add.text(420, 753, this.hum2.vida + "/" + this.hum2.vidaMax, {
-  fontSize: "50px",
-  fontFamily: "georgia"
-  })
-  this.vidaH3 = this.add.text(700, 753, this.hum3.vida + "/" + this.hum3.vidaMax, {
-  fontSize: "50px",
-  fontFamily: "georgia"
-  })*/
-  this.vidaJefe = this.add.text(1430, 753, this.jefe.vida + "/" + this.jefe.vidaMax, {
-    fontSize: "50px",
-  })
-  this.Tturno = this.add.text(850, 100, "turno: " + this.turno, {
-    fontSize: "60px",
-  })
-  
-  ////////////////////////////////////////////////////// jefe
-  this.jefe = new Personaje(
-    "Guardian",
-    3,
-    30,
-    30,
-    this,
-    1450,
-    510,
-    "jefeAtaque",
-    "CRIATURA"
-  );
-  this.jefe.setScale(8);
-  
-  ////////////////////////////////////////////// selector de sprites humanos
-  this.hum1 = new Personaje(
-    this.hum1.nombre,
-    this.hum1.ataque,
-    this.hum1.vida,
-    this.hum1.vidaMax,
-    this,
-    500,
-    890,
-    this.hum1.key_asset,
-    this.hum1.tipo
-  );
-  this.hum2 = new Personaje(
-    this.hum2.nombre,
-    this.hum2.ataque,
-    this.hum2.vida,
-    this.hum2.vidaMax,
-    this,
-    950,
-    890,
-    this.hum2.key_asset,
-    this.hum2.tipo
-  );
-  this.hum3 = new Personaje(
-    this.hum3.nombre,
-    this.hum3.ataque,
-    this.hum3.vida,
-    this.hum3.vidaMax,
-    this,
-    1450,
-    890,
-    this.hum3.key_asset,
-    this.hum3.tipo
-  );
-  //Se escalan los humanos
-  this.humanos.forEach((humano) => {
-    humano.setScale(4);
-    // funcion de animaciones idle
-
-    humano.vidaText = this.add.text(
-      humano.x - 30,
-      753,
-      humano.vida + "/" + humano.vidaMax,
-      {
-        fontSize: "50px",
-        //fill: "#FFFFFF",
-        fontFamily: "georgia",
-      }
+    ////////////////////////////////////////////////////// sonidos
+    this.daño = this.sound.add('daño', {loop: false});
+    this.muerte = this.sound.add('muerte', {loop: false});
+    this.golpe = this.sound.add('golpe', {loop: false});
+    
+    ////////////////////////////////////////////////////// jefe
+    this.jefe = new Personaje(
+      "Guardian",
+      3,
+      30,
+      30,
+      this,
+      1450,
+      500,
+      "jefeAtaque",
+      "CRIATURA"
     );
-  }); 
-  
-  var atacar = this.add
-    .image(900,950,'atacar')
-    .setInteractive()
-  .on('pointerdown',()=> {
-    this.handleAtaque(this.PersonajeAtacante, this.personajeAtacar);
-  })
-  .on('pointerover',()=> {
-    atacar.setScale(5.1)
-  })
-  .on('pointerout',()=> {
-    atacar.setScale(5)
-  })
-  atacar.setScale(5) 
+    this.jefe.setScale(8);
+    this.vidaJefe = this.add.text(1430, 753, this.jefe.vida + "/" + this.jefe.vidaMax), {
+      fontSize: "50px",
+      fontFamily: "georgia",
+    };
+    this.vidaJefe.setScale(4);
+    
+    ////////////////////////////////////////////// selector de sprites humanos
+    let humano;
+      humano = new Personaje(
+        this.hum1.nombre,
+        this.hum1.ataque,
+        this.hum1.vida,
+        this.hum1.vidaMax,
+        this,
+        200,
+        535,
+        this.hum1.key_asset,
+        this.hum1.tipo
+      );
+      this.humanos.push(humano);
+      humano = new Personaje(
+        this.hum2.nombre,
+        this.hum2.ataque,
+        this.hum2.vida,
+        this.hum2.vidaMax,
+        this,
+        450,
+        535,
+        this.hum2.key_asset,
+        this.hum2.tipo
+      );
+      this.humanos.push(humano);
+      humano = new Personaje(
+        this.hum3.nombre,
+        this.hum3.ataque,
+        this.hum3.vida,
+        this.hum3.vidaMax,
+        this,
+        700,
+        535,
+        this.hum3.key_asset,
+        this.hum3.tipo
+      );
+      this.humanos.push(humano);
 
+    //Se escalan los humanos
+    this.humanos.forEach((humano) => {
+      humano.setScale(4);
+      // funcion de animaciones idle
 
-  }
-               
-  update() {
-  /*
-  ///////////////////////////////////////////////// win condition
-  if (this.hum1.vida <= 0 && this.hum3.vida <= 0 && this.hum2.vida <= 0) {
-    this.scene.start("WinGuardian")
-  }
-  if (this.jefe.vida <= 0) {
-    setTimeout(()=>{this.scene.start("WinHumanos")},1000)
-  }
-  
-  ///////////////////////////////////////////////// indicador de turno
-  switch (this.turno) {
-    case 1:
-      if (this.hum1.vida <= 0 && this.turno == 1) {
-        this.turno++;
-        this.Tturno.text = "turno: " + this.turno;
-      } else {
-        this.hum1.setScale(5);
-        this.jefe.setScale(4); 
-      } 
-      break;
-          
-    case 2:
-      if (this.hum2.vida <= 0 && this.turno == 2) {
-        this.turno++;
-        this.Tturno.text = "turno: " +this.turno;
-      } else {
-        this.hum2.setScale(5);
-        this.hum1.setScale(4);
-        this.jefe.setScale(4);
-      }
-      break;
-  
-    case 3:
-      if (this.hum3.vida <= 0 && this.turno == 3) {
-        this.turno++;
-        this.Tturno.text = "turno: " +this.turno;
-      } else {
-        this.hum3.setScale(5);
-        this.hum2.setScale(4);
-        this.jefe.setScale(4);
-      }
-      break;
+      humano.vidaText = this.add.text(
+        humano.x - 30,
+        753,
+        humano.vida + "/" + humano.vidaMax,
+        {
+          fontSize: "50px",
+          //fill: "#FFFFFF",
+          fontFamily: "georgia",
+        }
+      );
+    }); 
 
-    case 4:
-      this.hum3.setScale(4);
-      this.jefe.setScale(8);
-      break;
-      
-    default:
-      break;
+      /// inicio del combate
+      this.PersonajeAtacante = this.humanos[0];
+      this.turno = "HUMANO";
+      this.PersonajeAtacante.setScale(5);
+      this.ultimoTurnoHumano = 0;
+
+    this.Tturno = this.add.text(800, 100, "turno: " + this.turno, {
+      fontSize: "60px",
+    })
+    
+    var atacar = this.add
+      .image(900,950,'atacar')
+      .setInteractive()
+    .on('pointerdown',()=> {
+      this.handleAtaque(this.PersonajeAtacante, this.personajeAtacar);
+    })
+    .on('pointerover',()=> {
+      atacar.setScale(5.1)
+    })
+    .on('pointerout',()=> {
+      atacar.setScale(5)
+    })
+    atacar.setScale(5) 
+
+    /////////// EVENTOS
+    events.on("click_en_personaje", this.handleClickEnPersonaje, this);
+    events.on("ataque_uno_a_otro", this.handleAtaque, this);
+}
+
+handleClickEnPersonaje(personaje) {
+  if (this.turno !== personaje.tipo) {
+    //Se hizo click en un personaje del equipo contrario
+    this.personajeAtacar = personaje;
+    //console.log(this.PersonajeAtacante, " atacar a ", personaje);
   }
-  
-  ///////////////////////////////////////////////// eliminar unidades
-  if (this.hum1.vida <= 0) {
-    this.humImg1.destroy();
-    this.vidaH1.text  = "";
+}
+
+handleCambioTurno() {
+  //// win condition
+  let humMuertos = 0;
+  this.humanos.forEach((humano) =>{
+    if (humano.vida <= 0) {
+      humMuertos += 1;
+    }
+    if (humMuertos == 3) {
+      setTimeout(()=>{
+        this.scene.start("WinGuardian"
+      )},1000)
+    }   
+  })
+  ///// cambio de turno
+  if (this.turno === "HUMANO") {
+    this.PersonajeAtacante.setScale(4);
+    this.ultimoTurnoHumano += 1;
+
+    if (this.ultimoTurnoHumano == 3) {
+      this.ultimoTurnoHumano = 0;
+      this.turno = "CRIATURA"
+      this.PersonajeAtacante.setScale(4);
+      this.PersonajeAtacante = this.jefe;      
+      this.PersonajeAtacante.setScale(9);
+    }
+    if (this.humanos[this.ultimoTurnoHumano].vida <= 0) {
+      this.handleCambioTurno();
+    }else{
+      this.PersonajeAtacante = this.humanos[this.ultimoTurnoHumano];
+      this.PersonajeAtacante.setScale(5);
+      // funcion con animaciones de ataque
+    }
+  } else {
+    this.PersonajeAtacante.setScale(4);
+    this.PersonajeAtacante = this.jefe;
+    this.turno = "HUMANO"
+    this.PersonajeAtacante.setScale(9);
+    // animacion ataque
   }
-  if (this.hum2.vida <= 0) {
-    this.humImg2.destroy();
-    this.vidaH2.text  = "";
-  }
-  if (this.hum3.vida <= 0) {
-    this.humImg3.destroy();
-    this.vidaH3.text  = "";
-  }
-  
-  //////////////////////////////////////////////// sprites humanos
-  this.humImg1.on('pointerdown',()=> {
-    if (this.ataque == "si" && this.turno == 4) {
-      this.hum1.vida -= this.jefe.ataque;
-          if (this.hum1.vida <= 0) {
-            this.muerte.play();
-            this.turno= 1;
-          } else {
-            this.golpe.play();
-            this.vidaH1.text = this.hum1.vida + "/" + this.hum1.vidaMax;
-            this.ataque = "no";
-            this.turno= 1;
-            this.Tturno.text = "turno: " + this.turno;
+  this.Tturno.setText("turno: " + this.turno);
+}
+  handleAtaque(personajeAtacante, personajeAtacado) {
+    if (personajeAtacado.vida > 0) {
+
+    
+      personajeAtacado.vida -= personajeAtacante.ataque;
+      if (personajeAtacado.nombre == "Guardian") {
+          this.jefe.vida = personajeAtacado.vida;
+          this.vidaJefe.setText(personajeAtacado.vida + "/" + personajeAtacado.vidaMax);
+          if (this.jefe.vida <= 0){
+            setTimeout(()=>{
+              this.scene.start("WinHumanos"
+            )},1000)
           }
-    }})
-    this.humImg1.on('pointerover',()=> {
-    if (this.turno == 4) {
-      this.humImg1.setScale(4.1); 
-    }
-  })
-  this.humImg1.on('pointerout', ()=> {
-    this.humImg1.setScale(4);
-  })
-  
-  this.humImg2.on('pointerdown',()=> {
-    if (this.ataque == "si" && this.turno == 4) {
-      this.hum2.vida -= this.jefe.ataque;
-      if (this.hum2.vida <= 0) {
-        this.muerte.play();
-        this.turno= 1;
       } else {
-        this.golpe.play();
-        this.vidaH2.text = this.hum2.vida + "/" + this.hum2.vidaMax;
-        this.ataque = "no";
-        this.turno= 1;
-        this.Tturno.text = "turno: " +this.turno;
+          personajeAtacado.vidaText.setText(
+          personajeAtacado.vida + "/" + personajeAtacado.vidaMax) 
       }
-  }})
-  this.humImg2.on('pointerover',()=> {
-    if (this.turno == 4) {
-      this.humImg2.setScale(4.1); 
+    
+    if (personajeAtacado.vida <= 0) {
+      personajeAtacado.vidaText.setText("0/" + personajeAtacado.vidaMax);
+      // Hacer animacion de muerte ?
+    } else {
+      // Hacer animacion de ataque recibido ?
     }
-  })
-  this.humImg2.on('pointerout', ()=> {
-    this.humImg2.setScale(4);
-  })
-  
-  this.humImg3.on('pointerdown',()=> {
-    if (this.ataque == "si" && this.turno == 4) {
-      this.hum3.vida -= this.jefe.ataque;
-      if (this.hum3.vida <= 0) {
-        this.muerte.play();
-        this.turno= 1;
-      } else {
-        this.golpe.play();
-        this.vidaH3.text = this.hum3.vida + "/" + this.hum3.vidaMax;
-        this.ataque = "no";
-        this.turno= 1;
-        this.Tturno.text = "turno: " +this.turno;
-      }
-  }})
-  this.humImg3.on('pointerover',()=> {
-    if (this.turno == 4) {
-      this.humImg3.setScale(4.1); 
-    }
-  })
-  this.humImg3.on('pointerout', ()=> {
-    this.humImg3.setScale(4);
-  })
-  
-  
-  ////////////////////////////////////////////////////////// sprite jefe
-  this.jefeImg.on('pointerdown',()=> {
-    if (this.ataque == "si") {
-      switch (this.turno) {
-          case 1:
-            this.jefe.vida -= this.hum1.ataque;
-            this.turno++;
-            this.daño.play();
-            this.Tturno.text = "turno: " +this.turno;
-            this.vidaJefe.text = this.jefe.vida + "/" + this.jefe.vidaMax;
-            this.ataque = "no";
-          break;
-  
-          case 2:
-            this.jefe.vida -= this.hum2.ataque;
-            this.turno++;
-            this.daño.play();
-            this.Tturno.text = "turno: " +this.turno;
-            this.vidaJefe.text = this.jefe.vida + "/" + this.jefe.vidaMax;
-            this.ataque = "no";
-          break;
-  
-          case 3:
-            this.jefe.vida -= this.hum3.ataque;
-            this.turno++;
-            this.daño.play();
-            this.Tturno.text = "turno: " +this.turno;
-            this.vidaJefe.text = this.jefe.vida + "/" + this.jefe.vidaMax;
-            this.ataque = "no";
-          break;
-      
-        default:
-          break;
-      }}})
-      this.jefeImg.on('pointerover',()=> {
-    if (this.turno < 4) {
-      this.jefeImg.setScale(7.2); 
-    }
-  })
-  this.jefeImg.on('pointerout', ()=> {
-    this.jefeImg.setScale(7);
-  })*/
+    this.handleCambioTurno();}
   }
 }

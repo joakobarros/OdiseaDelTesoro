@@ -336,7 +336,7 @@ console.log(this.mapa.salasPosibles)
         salaP2.on("pointerdown", () => {
           this.mapa.salasPasadas.push("s2");
           this.mapa.salaActual = "s2";
-          this.scene.start("SelectorCriaturas", {
+          this.scene.start("CombateJefe", {
             hum1: this.hum1,
             hum2: this.hum2,
             hum3: this.hum3,
@@ -405,7 +405,7 @@ console.log(this.mapa.salasPosibles)
         salaP5.on("pointerdown", () => {
           this.mapa.salasPasadas.push("s5");
           this.mapa.salaActual = "s5";
-          this.scene.start("Descanso", {
+          this.scene.start("SelectorCriaturas", {
             hum1: this.hum1,
             hum2: this.hum2,
             hum3: this.hum3,
