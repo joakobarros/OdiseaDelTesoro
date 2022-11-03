@@ -26,10 +26,4 @@ class Personaje extends Phaser.GameObjects.Sprite {
   }
 }
 
-class Guardian extends Personaje {
-  constructor() {
-    super("Guardian", 3, 30, 30);
-  }
-}
-
-export { Personaje, Guardian };
+export {Personaje};
