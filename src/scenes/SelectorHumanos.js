@@ -50,15 +50,11 @@ export class SelectorHumanos extends Phaser.Scene {
       //fill: "#FFFFFF",
       fontFamily: "georgia",
     });
-    /*this.text9 = this.add.text(1150, 100, "max/min: 3", {
-    fontSize: "40px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })*/
-    this.tcant = this.add.text(485, 150, "Selecciona 3 unidades", {
-      fontSize: "60px",
+    this.tcant = this.add.text(470, 160, "Selecciona 3 unidades", {
+      fontSize: "50px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
+      wordWrap: { width: 1000 }
     });
 
     //////////////////////////////////////////////// estadisticas
@@ -145,9 +141,9 @@ export class SelectorHumanos extends Phaser.Scene {
     imag1.setScale(4);
     imag2.setScale(4);
     imag3.setScale(4);
-    imag1.anims.play("arqAtk", true);
-    imag2.anims.play("cabAtk", true);
-    imag3.anims.play("piroAtk", true);
+    imag1.anims.play("arqIdle", true);
+    imag2.anims.play("cabIdle", true);
+    imag3.anims.play("piroIdle", true);
 
     /////////////////////////////////////////////////////// botones
     var menos3 = this.add
@@ -162,7 +158,7 @@ export class SelectorHumanos extends Phaser.Scene {
         }
       })
       .on("pointerover", () => {
-        menos3.setScale(4.4);
+        menos3.setScale(4.4); 
       })
       .on("pointerout", () => {
         menos3.setScale(4.3);

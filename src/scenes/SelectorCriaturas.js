@@ -118,7 +118,7 @@ let text9 = this.add.text(1500, 660, "daño: 3", {
     this, 
     960, 
     515, 
-    'polilla', 
+    'polillaAtaque', 
     'CRIATURA'
   );
   let imag3 = new Personaje(
@@ -137,6 +137,9 @@ let text9 = this.add.text(1500, 660, "daño: 3", {
   imag2.setScale(4);
   imag3.setScale(4);
 // animaciones idle
+  imag1.anims.play("esqIdle", true);
+  imag2.anims.play("polIdle", true);
+  imag3.anims.play("magoIdle", true);
 
 ////////////////////////////////////////////////// botones
   var menos3 = this.add.image(1440,950, 'menos').setInteractive()

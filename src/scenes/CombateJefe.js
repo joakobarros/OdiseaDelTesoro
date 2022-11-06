@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import {Guardian} from "../Controladores/Personajes";
 import { sharedInstance as events } from "../scenes/EventCenter";
 import { Personaje } from "../Controladores/Personajes";
 
@@ -37,11 +36,11 @@ export default class CombateJefe extends Phaser.Scene{
 		super('CombateJefe')
 	}
 
-    init(data) {
-        this.hum1 = data.hum1;
-        this.hum2 = data.hum2;
-        this.hum3 = data.hum3;
-    }
+  init(data) {
+    this.hum1 = data.hum1;
+    this.hum2 = data.hum2;
+    this.hum3 = data.hum3;
+  }
   
   create() {    
   

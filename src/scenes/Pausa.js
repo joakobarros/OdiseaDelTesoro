@@ -9,6 +9,8 @@ export default class Pausa extends Phaser.Scene
 
 	create() {
 
+        this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoPiedras');
+
         var volver = this.add.image(this.cameras.main.centerX,500,'volver').setInteractive()
         .on('pointerdown',()=> {this.scene.start("Mapa")})
         .on('pointerover',()=> {volver.setScale(5.1)})

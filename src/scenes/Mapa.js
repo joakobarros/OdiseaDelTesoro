@@ -47,8 +47,7 @@ export default class Mapa extends Phaser.Scene {
     //////////////////////////////////////////////// variante de mapa
 
     this.add
-      .image(this.cameras.main.centerX, this.cameras.main.centerY, "mapa")
-      .setScale(1.5, 1.5);
+      .image(this.cameras.main.centerX, this.cameras.main.centerY, "mapa");
     let s1 = new sala1();
     let s2 = new sala2();
     let s3 = new sala3();
@@ -295,30 +294,12 @@ console.log(this.mapa.salasPosibles)
 
   ///////////////////////////////// funcion comprobación de sala
   ComprobacionSala() {
-    //console.log("ComprobacionSala")
-    //console.log("salas posibles", this.mapa.salasPosibles)
-    //console.log("salas pasadas", this.mapa.salasPasadas)
-
     this.mapa.salasPosibles.map((item) => {
       if (!this.mapa.salasPasadas.includes(item)) {
         this.ActivarSala(item);
       }
     });
   }
-  /*for (let p = 0; p < s4.salasPosibles.length; p++) {
-      this.mapa.salasPosibles.push(s4.salasPosibles[p]);
-    }
-    for (let s = 0; s < this.mapa.salasPosibles.length; s++) {
-    const salaPos = this.mapa.salasPosibles[s];
-   for (let n = 0; n < this.mapa.salasPasadas.length; n++) {
-      const salaPasada = this.mapa.salasPasadas[n];
-     if (salaPos != salaPasada) {
-       this.ActivarSala(salaPos);
-     }
-   }
- }
-}
-*/
 
   ///////////////////////////////// funcion activar sala
   ActivarSala(salaPos) {
@@ -336,7 +317,7 @@ console.log(this.mapa.salasPosibles)
         salaP2.on("pointerdown", () => {
           this.mapa.salasPasadas.push("s2");
           this.mapa.salaActual = "s2";
-          this.scene.start("CombateJefe", {
+          this.scene.start("SelectorCriaturas", {
             hum1: this.hum1,
             hum2: this.hum2,
             hum3: this.hum3,
