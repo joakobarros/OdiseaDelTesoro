@@ -203,20 +203,22 @@ export default class Combate extends Phaser.Scene {
       if (this.humanos[1].vida <= 0) {
         this.PersonajeAtacante = this.humanos[2];
         this.humanos[2].anims.play(this.humanos[2].key_atk, true);
+        this.ultimoTurnoHumano = 2;
       }else{ 
       this.PersonajeAtacante = this.humanos[1];
       this.humanos[1].anims.play(this.humanos[1].key_atk, true);
+      this.ultimoTurnoHumano = 1;
       }
     } else {
       this.PersonajeAtacante = this.humanos[0];
       this.humanos[0].anims.play(this.humanos[0].key_atk, true);
+      this.ultimoTurnoHumano = 0;
     }
     
     this.turno = "HUMANO";
     this.PersonajeAtacante.setScale(5);
 
     // Los arrays son base 0, o sea que el primer elemento es el 0
-    this.ultimoTurnoHumano = 0;
     this.ultimoTurnoCriatura = -1;
 
     this.Tturno = this.add.text(650, 150, "turno: " + this.turno, {
