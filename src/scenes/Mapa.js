@@ -60,7 +60,12 @@ export default class Mapa extends Phaser.Scene {
     let s10 = new sala10();
     let s11 = new sala11();
 
-console.log(this.mapa.salasPosibles)
+  console.log(this.mapa.salasPasadas)
+  /// salas pasadas
+  this.mapa.salasPasadas.forEach(sala => {
+   this.ActivarSalaPasada(sala)
+  });
+
     switch (this.mapa.salaActual) {
       case "s1":
         this.salaAc = this.add.image(1204, 200, "salaActual");
@@ -188,71 +193,59 @@ console.log(this.mapa.salasPosibles)
     }
 
     //////////////////////////////////////////////////// estadisticas
-    this.atk1 = this.add.text(220, 150, "atk: " + this.hum1.ataque, {
-      fontSize: "37px",
-      fontFamily: "georgia",
-    });
-    this.vida1 = this.add.text(
-      220,
-      200,
+    this.atk1 = this.add.text(240, 150,
+      "atk: " + this.hum1.ataque, 
+      { fontSize: "37px", fontFamily: "Pixel",}
+    );
+    this.vida1 = this.add.text(240, 200,
       "vida: " + this.hum1.vida + "/" + this.hum1.vidaMax,
-      {
-        fontSize: "37px",
-        fontFamily: "georgia",
-      }
+      { fontSize: "37px", fontFamily: "Pixel",}
     );
 
-    this.atk2 = this.add.text(220, 500, "atk: " + this.hum2.ataque, {
-      fontSize: "37px",
-      fontFamily: "georgia",
-    });
-    this.vida2 = this.add.text(
-      220,
-      550,
+    this.atk2 = this.add.text(240, 500,
+      "atk: " + this.hum2.ataque, 
+      { fontSize: "37px", fontFamily: "Pixel",}
+    );
+    this.vida2 = this.add.text(240, 550,
       "vida: " + this.hum2.vida + "/" + this.hum2.vidaMax,
-      {
-        fontSize: "37px",
-        fontFamily: "georgia",
-      }
+      { fontSize: "37px", fontFamily: "Pixel",}
     );
 
-    this.atk3 = this.add.text(220, 860, "atk: " + this.hum3.ataque, {
-      fontSize: "37px",
-      fontFamily: "georgia",
-    });
-    this.vida3 = this.add.text(
-      220,
-      910,
+    this.atk3 = this.add.text(240, 840,
+      "atk: " + this.hum3.ataque, 
+      { fontSize: "37px", fontFamily: "Pixel",}
+    );
+    this.vida3 = this.add.text(240, 890,
       "vida: " + this.hum3.vida + "/" + this.hum3.vidaMax,
-      {
-        fontSize: "37px",
-        fontFamily: "georgia",
-      }
+      { fontSize: "37px", fontFamily: "Pixel",}
     );
 
-    this.cantCriaturas = this.add.text(
-      1545,
-      590,
+    this.cantCriaturas = this.add.text(1475, 775,
       "criaturas: " + this.criaturas,
-      {
-        fontSize: "50px",
-        fontFamily: "georgia",
-      }
+      { fontSize: "43px", fontFamily: "Pixel",}
     );
+
+    let calavera = this.add.image(1630, 670, "calavera");
+    calavera.setScale(2.5);
 
     let pausa = this.add
-      .image(1800, 50, "pausa")
+      .image(1625, 320, "boton")
       .setInteractive()
       .on("pointerdown", () => {
         this.scene.start("Pausa");
       })
       .on("pointerover", () => {
-        pausa.setScale(3.1);
+        pausa.setScale(5.2);
       })
       .on("pointerout", () => {
-        pausa.setScale(3);
+        pausa.setScale(5);
       });
-    pausa.setScale(3);
+    pausa.setScale(5);
+
+    this.pausatxt = this.add.text(1490, 270,
+       "Pausa",
+      { fontSize: "80px", fill: "#330C03", fontFamily: "Pixel",}
+    );
 
     this.hum1 = new Personaje(
       this.hum1.nombre,
@@ -260,9 +253,11 @@ console.log(this.mapa.salasPosibles)
       this.hum1.vida,
       this.hum1.vidaMax,
       this,
-      133,
-      185,
+      170,
+      190,
       this.hum1.key_asset,
+      this.hum1.key_idle,
+      this.hum1.key_atk,
       this.hum1.tipo
     );
     this.hum2 = new Personaje(
@@ -271,9 +266,11 @@ console.log(this.mapa.salasPosibles)
       this.hum2.vida,
       this.hum2.vidaMax,
       this,
-      133,
-      544,
+      170,
+      540,
       this.hum2.key_asset,
+      this.hum2.key_idle,
+      this.hum2.key_atk,
       this.hum2.tipo
     );
     this.hum3 = new Personaje(
@@ -282,20 +279,25 @@ console.log(this.mapa.salasPosibles)
       this.hum3.vida,
       this.hum3.vidaMax,
       this,
-      133,
-      900,
+      170,
+      880,
       this.hum3.key_asset,
+      this.hum3.key_idle,
+      this.hum3.key_atk,
       this.hum3.tipo
     );
     this.hum1.setScale(2);
     this.hum2.setScale(2);
     this.hum3.setScale(2);
+    this.hum1.anims.play(this.hum1.key_idle, true);
+    this.hum2.anims.play(this.hum2.key_idle, true);
+    this.hum3.anims.play(this.hum3.key_idle, true);
   }
 
   ///////////////////////////////// funcion comprobación de sala
   ComprobacionSala() {
     this.mapa.salasPosibles.map((item) => {
-      if (!this.mapa.salasPasadas.includes(item)) {
+      if (!this.mapa.salasPasadas.includes(item) && item != this.mapa.salaActual ) {
         this.ActivarSala(item);
       }
     });
@@ -305,17 +307,17 @@ console.log(this.mapa.salasPosibles)
   ActivarSala(salaPos) {
     switch (salaPos) {
       case "s2":
-        let salaP2 = this.add
+        this.salaP2 = this.add
           .image(1204, 430, "salaDisponible")
           .setInteractive();
-        salaP2.on("pointerover", () => {
-          salaP2.setScale(1.1);
+        this.salaP2.on("pointerover", () => {
+          this.salaP2.setScale(1.1);
         });
-        salaP2.on("pointerout", () => {
-          salaP2.setScale(1);
+        this.salaP2.on("pointerout", () => {
+          this.salaP2.setScale(1);
         });
-        salaP2.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s2");
+        this.salaP2.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s2";
           this.scene.start("SelectorCriaturas", {
             hum1: this.hum1,
@@ -328,17 +330,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s3":
-        let salaP3 = this.add
+        this.salaP3 = this.add
           .image(1204, 650, "salaDisponible")
           .setInteractive();
-        salaP3.on("pointerover", () => {
-          salaP3.setScale(1.1);
+        this.salaP3.on("pointerover", () => {
+          this.salaP3.setScale(1.1);
         });
-        salaP3.on("pointerout", () => {
-          salaP3.setScale(1);
+        this.salaP3.on("pointerout", () => {
+          this.salaP3.setScale(1);
         });
-        salaP3.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s3");
+        this.salaP3.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s3";
           this.scene.start("Descanso", {
             hum1: this.hum1,
@@ -351,17 +353,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s4":
-        let salaP4 = this.add
+        this.salaP4 = this.add
           .image(1204, 876, "salaDisponible")
           .setInteractive();
-        salaP4.on("pointerover", () => {
-          salaP4.setScale(1.1);
+        this.salaP4.on("pointerover", () => {
+          this.salaP4.setScale(1.1);
         });
-        salaP4.on("pointerout", () => {
-          salaP4.setScale(1);
+        this.salaP4.on("pointerout", () => {
+          this.salaP4.setScale(1);
         });
-        salaP4.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s4");
+        this.salaP4.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s4";
           this.scene.start("SelectorCriaturas", {
             hum1: this.hum1,
@@ -374,17 +376,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s5":
-        let salaP5 = this.add
+        this.salaP5 = this.add
           .image(960, 200, "salaDisponible")
           .setInteractive();
-        salaP5.on("pointerover", () => {
-          salaP5.setScale(1.1);
+        this.salaP5.on("pointerover", () => {
+          this.salaP5.setScale(1.1);
         });
-        salaP5.on("pointerout", () => {
-          salaP5.setScale(1);
+        this.salaP5.on("pointerout", () => {
+          this.salaP5.setScale(1);
         });
-        salaP5.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s5");
+        this.salaP5.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s5";
           this.scene.start("SelectorCriaturas", {
             hum1: this.hum1,
@@ -397,17 +399,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s6":
-        let salaP6 = this.add
+        this.salaP6 = this.add
           .image(960, 430, "salaDisponible")
           .setInteractive();
-        salaP6.on("pointerover", () => {
-          salaP6.setScale(1.1);
+        this.salaP6.on("pointerover", () => {
+          this.salaP6.setScale(1.1);
         });
-        salaP6.on("pointerout", () => {
-          salaP6.setScale(1);
+        this.salaP6.on("pointerout", () => {
+          this.salaP6.setScale(1);
         });
-        salaP6.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s6");
+        this.salaP6.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s6";
           this.scene.start("Descanso", {
             hum1: this.hum1,
@@ -420,17 +422,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s7":
-        let salaP7 = this.add
+        this.salaP7 = this.add
           .image(960, 650, "salaDisponible")
           .setInteractive();
-        salaP7.on("pointerover", () => {
-          salaP7.setScale(1.1);
+        this.salaP7.on("pointerover", () => {
+          this.salaP7.setScale(1.1);
         });
-        salaP7.on("pointerout", () => {
-          salaP7.setScale(1);
+        this.salaP7.on("pointerout", () => {
+          this.salaP7.setScale(1);
         });
-        salaP7.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s7");
+        this.salaP7.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s7";
           this.scene.start("SelectorCriaturas", {
             hum1: this.hum1,
@@ -443,17 +445,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s8":
-        let salaP8 = this.add
+        this.salaP8 = this.add
           .image(960, 876, "salaDisponible")
           .setInteractive();
-        salaP8.on("pointerover", () => {
-          salaP8.setScale(1.1);
+        this.salaP8.on("pointerover", () => {
+          this.salaP8.setScale(1.1);
         });
-        salaP8.on("pointerout", () => {
-          salaP8.setScale(1);
+        this.salaP8.on("pointerout", () => {
+          this.salaP8.setScale(1);
         });
-        salaP8.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s8");
+        this.salaP8.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s8";
           this.scene.start("Descanso", {
             hum1: this.hum1,
@@ -466,17 +468,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s9":
-        let salaP9 = this.add
+        this.salaP9 = this.add
           .image(710, 200, "salaDisponible")
           .setInteractive();
-        salaP9.on("pointerover", () => {
-          salaP9.setScale(1.1);
+        this.salaP9.on("pointerover", () => {
+          this.salaP9.setScale(1.1);
         });
-        salaP9.on("pointerout", () => {
-          salaP9.setScale(1);
+        this.salaP9.on("pointerout", () => {
+          this.salaP9.setScale(1);
         });
-        salaP9.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s9");
+        this.salaP9.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s9";
           this.scene.start("Descanso", {
             hum1: this.hum1,
@@ -489,17 +491,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s10":
-        let salaP10 = this.add
+        this.salaP10 = this.add
           .image(710, 430, "salaDisponible")
           .setInteractive();
-        salaP10.on("pointerover", () => {
-          salaP10.setScale(1.1);
+        this.salaP10.on("pointerover", () => {
+          this.salaP10.setScale(1.1);
         });
-        salaP10.on("pointerout", () => {
-          salaP10.setScale(1);
+        this.salaP10.on("pointerout", () => {
+          this.salaP10.setScale(1);
         });
-        salaP10.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s10");
+        this.salaP10.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s10";
           this.scene.start("SelectorCriaturas", {
             hum1: this.hum1,
@@ -512,17 +514,17 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s11":
-        let salaP11 = this.add
+        this.salaP11 = this.add
           .image(710, 650, "salaDisponible")
           .setInteractive();
-        salaP11.on("pointerover", () => {
-          salaP11.setScale(1.1);
+        this.salaP11.on("pointerover", () => {
+          this.salaP11.setScale(1.1);
         });
-        salaP11.on("pointerout", () => {
-          salaP11.setScale(1);
+        this.salaP11.on("pointerout", () => {
+          this.salaP11.setScale(1);
         });
-        salaP11.on("pointerdown", () => {
-          this.mapa.salasPasadas.push("s11");
+        this.salaP11.on("pointerdown", () => {
+          this.mapa.salasPasadas.push(this.mapa.salaActual);
           this.mapa.salaActual = "s11";
           this.scene.start("Descanso", {
             hum1: this.hum1,
@@ -535,16 +537,16 @@ console.log(this.mapa.salasPosibles)
         break;
 
       case "s12":
-        let salaP12 = this.add
+        this.salaP12 = this.add
           .image(710, 876, "salaDisponible")
           .setInteractive();
-        salaP12.on("pointerover", () => {
-          salaP12.setScale(1.1);
+        this.salaP12.on("pointerover", () => {
+          this.salaP12.setScale(1.1);
         });
-        salaP12.on("pointerout", () => {
-          salaP12.setScale(1);
+        this.salaP12.on("pointerout", () => {
+          this.salaP12.setScale(1);
         });
-        salaP12.on("pointerdown", () => {
+        this.salaP12.on("pointerdown", () => {
           this.scene.start("CombateJefe", {
             hum1: this.hum1,
             hum2: this.hum2,
@@ -557,4 +559,57 @@ console.log(this.mapa.salasPosibles)
         break;
     }
   }
+
+  //////////////////////////////// funcion de sprites para salas pasadas
+  ActivarSalaPasada(salaPas){
+    switch (salaPas) {
+      case "s1":
+        this.sala1p =this.add.image(1204,200,"salaPasada");
+      break;
+
+      case "s2":
+        this.sala2p =this.add.image(1204,430,"salaPasada");
+      break;
+
+      case "s3":
+        this.sala3p =this.add.image(1204,650,"salaPasada");
+      break;
+
+      case "s4":
+        this.sala4p =this.add.image(1204,876,"salaPasada");
+      break;
+
+      case "s5":
+        this.sala5p =this.add.image(960,200,"salaPasada");
+      break;
+
+      case "s6":
+        this.sala6p =this.add.image(960,430,"salaPasada");
+      break;
+
+      case "s7":
+        this.sala7p =this.add.image(960,650,"salaPasada");
+      break;
+
+      case "s8":
+        this.sala8p =this.add.image(960,876,"salaPasada");
+      break;
+
+      case "s9":
+        this.sala9p =this.add.image(710,200,"salaPasada");
+      break;
+
+      case "s10":
+        this.sala10p =this.add.image(710,430,"salaPasada");
+      break;
+
+      case "s11":
+        this.sala11p =this.add.image(710,650,"salaPasada");
+      break;
+
+      default:
+      break;
+    }
+  }
 }
+

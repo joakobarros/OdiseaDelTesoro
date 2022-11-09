@@ -30,25 +30,25 @@ create() {
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoDescanso');
   
   /////////////////////////////////////////////////////////// carteles
-  var texto1 = this.add.text(330,580, "cura +1", {
+  var texto1 = this.add.text(320,580, "cura +1", {
     fontSize: "50px",
     //fill: "#FFFFFF",
-    fontFamily: "georgia"
+    fontFamily: "Pixel"
   })
-  var texto2 = this.add.text(800,580, "vida máxima +1", {
+  var texto2 = this.add.text(797,580, "vida máxima +1", {
+    fontSize: "45px",
+    //fill: "#FFFFFF",
+    fontFamily: "Pixel"
+  })
+  var texto3 = this.add.text(1400,580, "ataque +1", {
     fontSize: "50px",
     //fill: "#FFFFFF",
-    fontFamily: "georgia"
+    fontFamily: "Pixel"
   })
-  var texto3 = this.add.text(1420,580, "ataque +1", {
-    fontSize: "50px",
+  this.tcant = this.add.text(510, 100, "Selecciona una de las mejoras", {
+    fontSize: "53px",
     //fill: "#FFFFFF",
-    fontFamily: "georgia"
-  })
-  this.tcant = this.add.text(520, 80, "Selecciona una de las mejoras", {
-    fontSize: "70px",
-    //fill: "#FFFFFF",
-    fontFamily: "georgia"
+    fontFamily: "Pixel"
   })
 
   /////////////////////////////////////////////////////////// sprites humanos
@@ -61,6 +61,8 @@ create() {
     500,
     890,
     this.hum1.key_asset,
+    this.hum1.key_idle,
+    this.hum1.key_atk,
     this.hum1.tipo
   );
   this.hum2 = new Personaje(
@@ -72,6 +74,8 @@ create() {
     950,
     890,
     this.hum2.key_asset,
+    this.hum2.key_idle,
+    this.hum2.key_atk,
     this.hum2.tipo
   );
   this.hum3 = new Personaje(
@@ -83,11 +87,16 @@ create() {
     1450,
     890,
     this.hum3.key_asset,
+    this.hum3.key_idle,
+    this.hum3.key_atk,
     this.hum3.tipo
   );
   this.hum1.setScale(4);
   this.hum2.setScale(4);
   this.hum3.setScale(4);  
+  this.hum1.anims.play(this.hum1.key_idle, true);
+  this.hum2.anims.play(this.hum2.key_idle, true);
+  this.hum3.anims.play(this.hum3.key_idle, true);
   
   ////////////////////////////////////////////////// botones power up
   var ataque = this.add
@@ -105,7 +114,7 @@ create() {
       });
     })
   .on('pointerover', ()=> {
-    ataque.setScale(0.6)
+    ataque.setScale(0.55)
   })
   .on('pointerout', ()=> {
     ataque.setScale(0.5)
@@ -116,8 +125,11 @@ create() {
     .image(970,450,'vidaMax').setInteractive()
     .on('pointerdown',()=> {
       this.hum1.vidaMax += 1; 
+      this.hum1.vida += 1;
       this.hum2.vidaMax += 1;
+      this.hum2.vida += 1;
       this.hum3.vidaMax += 1;
+      this.hum3.vida += 1;
       this.scene.start("Mapa", { 
         hum1: this.hum1, 
         hum2: this.hum2, 
@@ -127,7 +139,7 @@ create() {
       })
     })
   .on('pointerover', ()=> {
-    vidaMax.setScale(0.6)
+    vidaMax.setScale(0.55)
   })
   .on('pointerout', ()=> {
     vidaMax.setScale(0.5)
@@ -141,7 +153,7 @@ create() {
         this.hum1.vida += 1;
       }
       if (this.hum2.vida < this.hum2.vidaMax){
-        this.hum2.vida += 1;
+        this.hum2.vida = 1;
       }
       if (this.hum3.vida < this.hum3.vidaMax){
         this.hum3.vida += 1;
@@ -155,7 +167,7 @@ create() {
       });
     })
   .on('pointerover', ()=> {
-    vida.setScale(0.6)
+    vida.setScale(0.55)
   })
   .on('pointerout', ()=> {
     vida.setScale(0.5)

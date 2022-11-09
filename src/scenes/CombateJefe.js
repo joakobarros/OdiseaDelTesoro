@@ -63,12 +63,14 @@ export default class CombateJefe extends Phaser.Scene{
       1450,
       500,
       "jefeAtaque",
+      "jefeIdle",
+      "jefeAtk",
       "CRIATURA"
     );
-    this.jefe.setScale(8);
+    this.jefe.setScale(4);
     this.vidaJefe = this.add.text(1430, 753, this.jefe.vida + "/" + this.jefe.vidaMax), {
       fontSize: "50px",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     };
     this.vidaJefe.setScale(4);
     
@@ -83,6 +85,8 @@ export default class CombateJefe extends Phaser.Scene{
         200,
         535,
         this.hum1.key_asset,
+        this.hum1.key_idle,
+        this.hum1.key_atk,
         this.hum1.tipo
       );
       this.humanos.push(humano);
@@ -95,6 +99,8 @@ export default class CombateJefe extends Phaser.Scene{
         450,
         535,
         this.hum2.key_asset,
+        this.hum2.key_idle,
+        this.hum2.key_atk,
         this.hum2.tipo
       );
       this.humanos.push(humano);
@@ -107,6 +113,8 @@ export default class CombateJefe extends Phaser.Scene{
         700,
         535,
         this.hum3.key_asset,
+        this.hum3.key_idle,
+        this.hum3.key_atk,
         this.hum3.tipo
       );
       this.humanos.push(humano);
@@ -123,23 +131,50 @@ export default class CombateJefe extends Phaser.Scene{
         {
           fontSize: "50px",
           //fill: "#FFFFFF",
-          fontFamily: "georgia",
+          fontFamily: "Pixel",
         }
       );
     }); 
 
-      /// inicio del combate
-      this.PersonajeAtacante = this.humanos[0];
-      this.turno = "HUMANO";
-      this.PersonajeAtacante.setScale(5);
-      this.ultimoTurnoHumano = 0;
+    ///// invisibiliza las unidades muertas
+    this.humanos.forEach(humano => {
+      if (humano.vida == 0) {
+        humano.visible = false;
+        humano.vidaText.visible = false;
+      }
+    });
 
-    this.Tturno = this.add.text(800, 100, "turno: " + this.turno, {
-      fontSize: "60px",
+    //// animaciones inicio
+    this.humanos[0].anims.play(this.humanos[0].key_atk, true);
+    this.humanos[1].anims.play(this.humanos[1].key_idle, true);
+    this.humanos[2].anims.play(this.humanos[2].key_idle, true);
+    this.jefe.anims.play(this.jefe.key_idle, true);
+
+    /// inicio del combate
+    if (this.humanos[0].vida <= 0) {
+      if (this.humanos[1].vida <= 0) {
+        this.PersonajeAtacante = this.humanos[2];
+        this.humanos[2].anims.play(this.humanos[2].key_atk, true);
+      }else{ 
+      this.PersonajeAtacante = this.humanos[1];
+      this.humanos[1].anims.play(this.humanos[1].key_atk, true);
+      }
+    } else {
+      this.PersonajeAtacante = this.humanos[0];
+      this.humanos[0].anims.play(this.humanos[0].key_atk, true);
+    }
+
+    this.turno = "HUMANO";
+    this.PersonajeAtacante.setScale(5);
+    this.ultimoTurnoHumano = 0;
+
+    this.Tturno = this.add.text(650, 130, "turno: " + this.turno, {
+      fontSize: "80px", 
+      fontFamily: "Pixel",
     })
     
     var atacar = this.add
-      .image(900,950,'atacar')
+      .image(950,910,'boton')
       .setInteractive()
     .on('pointerdown',()=> {
       this.handleAtaque(this.PersonajeAtacante, this.personajeAtacar);
@@ -152,6 +187,12 @@ export default class CombateJefe extends Phaser.Scene{
     })
     atacar.setScale(5) 
 
+    this.atacartxt = this.add.text(790, 860, "atacar", {
+      fontSize: "80px",
+      fill: "#330C03",
+      fontFamily: "Pixel",
+    });
+
     /////////// EVENTOS
     events.on("click_en_personaje", this.handleClickEnPersonaje, this);
     events.on("ataque_uno_a_otro", this.handleAtaque, this);
@@ -161,7 +202,6 @@ handleClickEnPersonaje(personaje) {
   if (this.turno !== personaje.tipo) {
     //Se hizo click en un personaje del equipo contrario
     this.personajeAtacar = personaje;
-    //console.log(this.PersonajeAtacante, " atacar a ", personaje);
   }
 }
 
@@ -184,51 +224,63 @@ handleCambioTurno() {
     this.ultimoTurnoHumano += 1;
 
     if (this.ultimoTurnoHumano == 3) {
+      this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_idle, true)
       this.ultimoTurnoHumano = 0;
       this.turno = "CRIATURA"
       this.PersonajeAtacante.setScale(4);
       this.PersonajeAtacante = this.jefe;      
-      this.PersonajeAtacante.setScale(9);
+      this.PersonajeAtacante.setScale(5);
+      this.jefe.anims.play(this.jefe.key_atk, true)
+    }else{ 
+    if (this.humanos[this.ultimoTurnoHumano].vida <= 0) {
+      this.handleCambioTurno();
+    }else{
+      this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_idle, true)
+      this.PersonajeAtacante = this.humanos[this.ultimoTurnoHumano];
+      this.PersonajeAtacante.setScale(5);
+      this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_atk, true)
     }
+   }
+  } else {
+    this.jefe.anims.play(this.jefe.key_idle, true)
+    this.PersonajeAtacante.setScale(4);
+    this.turno = "HUMANO"
     if (this.humanos[this.ultimoTurnoHumano].vida <= 0) {
       this.handleCambioTurno();
     }else{
       this.PersonajeAtacante = this.humanos[this.ultimoTurnoHumano];
       this.PersonajeAtacante.setScale(5);
-      // funcion con animaciones de ataque
+      this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_atk, true)
     }
-  } else {
-    this.PersonajeAtacante.setScale(4);
-    this.PersonajeAtacante = this.jefe;
-    this.turno = "HUMANO"
-    this.PersonajeAtacante.setScale(9);
-    // animacion ataque
   }
   this.Tturno.setText("turno: " + this.turno);
 }
   handleAtaque(personajeAtacante, personajeAtacado) {
-    if (personajeAtacado.vida > 0) {
 
-    
+    if (personajeAtacado.vida > 0) {
       personajeAtacado.vida -= personajeAtacante.ataque;
       if (personajeAtacado.nombre == "Guardian") {
           this.jefe.vida = personajeAtacado.vida;
           this.vidaJefe.setText(personajeAtacado.vida + "/" + personajeAtacado.vidaMax);
+          this.daño.play();
           if (this.jefe.vida <= 0){
+            this.muerte.play();
             setTimeout(()=>{
               this.scene.start("WinHumanos"
             )},1000)
           }
       } else {
-          personajeAtacado.vidaText.setText(
-          personajeAtacado.vida + "/" + personajeAtacado.vidaMax) 
+        personajeAtacado.vidaText.setText(
+        personajeAtacado.vida + "/" + personajeAtacado.vidaMax) 
       }
     
     if (personajeAtacado.vida <= 0) {
       personajeAtacado.vidaText.setText("0/" + personajeAtacado.vidaMax);
-      // Hacer animacion de muerte ?
-    } else {
-      // Hacer animacion de ataque recibido ?
+      personajeAtacado.visible = false;
+      personajeAtacado.vidaText.visible = false;
+      this.muerte.play();
+    }else{
+      this.golpe.play();
     }
     this.handleCambioTurno();}
   }

@@ -7,17 +7,28 @@ export default class WinGuardian extends Phaser.Scene
 		super('WinGuardian')
 	}
 
-    create() {
+  create() {
 
-        this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winGuardian');
-        
-        var Salir = this.add.image(1000,945,'salir').setInteractive()
-        .on('pointerdown',()=> {
-          this.sound.stopAll(); 
-          this.scene.start("MainMenu")})
-        .on('pointerover',()=> {Salir.setScale(5.1)})
-        .on('pointerout',()=> {Salir.setScale(5)})
-        Salir.setScale(5);
-                
-    }
+    this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winGuardian');
+
+    this.tcant = this.add.text(517, 170, 'Victoria del Guardian', {
+      fontSize: "75px",
+      fill: "#774407",
+      fontFamily: "Pixel",
+    });
+    
+    var Salir = this.add.image(950,945,'boton').setInteractive()
+    .on('pointerdown',()=> {
+      this.sound.stopAll(); 
+      this.scene.start("MainMenu")})
+    .on('pointerover',()=> {Salir.setScale(5.1)})
+    .on('pointerout',()=> {Salir.setScale(5)})
+    Salir.setScale(5);
+
+    this.volvertxt = this.add.text(805, 880,"salir",{ 
+      fontSize: "100px", 
+      fill: "#330C03", 
+      fontFamily: "Pixel",
+    });
+  }      
 }

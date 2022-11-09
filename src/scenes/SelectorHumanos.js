@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { Mapa } from "../Controladores/mapa";
 import { Personaje } from "../Controladores/Personajes";
+import { getTranslations, getPhrase } from '../services/translations'
 
 export class SelectorHumanos extends Phaser.Scene {
   mapa;
@@ -38,19 +39,19 @@ export class SelectorHumanos extends Phaser.Scene {
     this.text1 = this.add.text(315, 870, "0", {
       fontSize: "120px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
     this.text2 = this.add.text(925, 870, "0", {
       fontSize: "120px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
     this.text3 = this.add.text(1525, 870, "0", {
       fontSize: "120px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
-    this.tcant = this.add.text(470, 160, "Selecciona 3 unidades", {
+    this.tcant = this.add.text(470, 160, getPhrase('Selecciona 3 unidades'), {
       fontSize: "50px",
       //fill: "#FFFFFF",
       fontFamily: "Pixel",
@@ -58,50 +59,55 @@ export class SelectorHumanos extends Phaser.Scene {
     });
 
     //////////////////////////////////////////////// estadisticas
-    const text4 = this.add.text(280, 665, "vida: 2", {
+
+    const vidatxt = getPhrase('Vida')
+    const dañotxt = getPhrase('Daño')
+
+    const text4 = this.add.text(280, 665, vidatxt + ": 2", {
       fontSize: "37px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
-    const text5 = this.add.text(280, 625, "daño: 3", {
+    const text5 = this.add.text(280, 625, dañotxt +": 3", {
       fontSize: "37px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
-    const text12 = this.add.text(210, 700, "ventaja vs: polilla", {
+    const text12 = this.add.text(140, 700, "ventaja vs: polilla", {
       fontSize: "37px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
-    const text6 = this.add.text(895, 665, "vida: 4", {
+    const text6 = this.add.text(895, 665, vidatxt +": 4", {
       fontSize: "37px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
-    const text7 = this.add.text(895, 625, "daño: 1", {
+    const text7 = this.add.text(895, 625, dañotxt +": 1", {
       fontSize: "37px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
-    const text11 = this.add.text(790, 700, "ventaja vs: esqueletos", {
-      fontSize: "37px",
+    const text11 = this.add.text(753, 707, "ventaja vs: esqueletos", {
+      fontSize: "31px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
+      wordWrap: { width: 1000 }
     });
-    const text8 = this.add.text(1500, 665, "vida: 3", {
+    const text8 = this.add.text(1500, 665, vidatxt +": 3", {
       fontSize: "37px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
-    const text9 = this.add.text(1500, 625, "daño: 2", {
+    const text9 = this.add.text(1500, 625, dañotxt +": 2", {
       fontSize: "37px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
-    const text10 = this.add.text(1435, 700, "ventaja vs: mago", {
+    const text10 = this.add.text(1390, 700, "ventaja vs: mago", {
       fontSize: "37px",
       //fill: "#FFFFFF",
-      fontFamily: "georgia",
+      fontFamily: "Pixel",
     });
 
     ///////////////////////////////////////////////////// sprite
@@ -114,6 +120,8 @@ export class SelectorHumanos extends Phaser.Scene {
       350,
       500,
       "arqueroAtaque",
+      "arqIdle",
+      "arqAtk",
       "HUMANO"
     );
     let imag2 = new Personaje(
@@ -125,6 +133,8 @@ export class SelectorHumanos extends Phaser.Scene {
       960,
       495,
       "caballeroAtaque",
+      "cabIdle",
+      "cabAtk",
       "HUMANO"
     );
     let imag3 = new Personaje(
@@ -136,14 +146,16 @@ export class SelectorHumanos extends Phaser.Scene {
       1550,
       500,
       "piromanoAtaque",
+      "piroIdle",
+      "piroAtk",
       "HUMANO"
     );
     imag1.setScale(4);
     imag2.setScale(4);
     imag3.setScale(4);
-    imag1.anims.play("arqIdle", true);
-    imag2.anims.play("cabIdle", true);
-    imag3.anims.play("piroIdle", true);
+    imag1.anims.play(imag1.key_idle, true);
+    imag2.anims.play(imag2.key_idle, true);
+    imag3.anims.play(imag3.key_idle, true);
 
     /////////////////////////////////////////////////////// botones
     var menos3 = this.add
@@ -154,7 +166,6 @@ export class SelectorHumanos extends Phaser.Scene {
           num3--;
           cant--;
           this.text3.text = num3;
-          //this.tcant.text = "cantidad: " + cant;
         }
       })
       .on("pointerover", () => {
@@ -173,7 +184,6 @@ export class SelectorHumanos extends Phaser.Scene {
           num3++;
           cant++;
           this.text3.text = num3;
-          //this.tcant.text = "cantidad: " + cant;
         }
       })
       .on("pointerover", () => {
@@ -192,7 +202,6 @@ export class SelectorHumanos extends Phaser.Scene {
           num2++;
           cant++;
           this.text2.text = num2;
-          //this.tcant.text = "cantidad: " + cant;
         }
       })
       .on("pointerover", () => {
@@ -211,7 +220,6 @@ export class SelectorHumanos extends Phaser.Scene {
           num2--;
           cant--;
           this.text2.text = num2;
-          //this.tcant.text = "cantidad: " + cant;
         }
       })
       .on("pointerover", () => {
@@ -230,7 +238,6 @@ export class SelectorHumanos extends Phaser.Scene {
           num1++;
           cant++;
           this.text1.text = num1;
-          //this.tcant.text = "cantidad: " + cant;
         }
       })
       .on("pointerover", () => {
@@ -249,7 +256,6 @@ export class SelectorHumanos extends Phaser.Scene {
           num1--;
           cant--;
           this.text1.text = num1;
-          //this.tcant.text = "cantidad: " + cant;
         }
       })
       .on("pointerover", () => {
@@ -264,7 +270,7 @@ export class SelectorHumanos extends Phaser.Scene {
     var hums = [];
 
     var continuar = this.add
-      .image(1300, 190, "continuar")
+      .image(1300, 190, "boton")
       .setInteractive()
       .on("pointerdown", () => {
         if (cant == 3) {
@@ -293,5 +299,12 @@ export class SelectorHumanos extends Phaser.Scene {
         continuar.setScale(5);
       });
     continuar.setScale(5);
+
+    this.continuartxt = this.add.text(1130, 150, "Continuar", {
+      fontSize: "60px",
+      fill: "#330C03",
+      fontFamily: "Pixel",
+    });
   }
+
 } 

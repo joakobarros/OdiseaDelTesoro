@@ -11,18 +11,32 @@ export default class Pausa extends Phaser.Scene
 
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoPiedras');
 
-        var volver = this.add.image(this.cameras.main.centerX,500,'volver').setInteractive()
+        var volver = this.add.image(this.cameras.main.centerX,400,'boton').setInteractive()
         .on('pointerdown',()=> {this.scene.start("Mapa")})
-        .on('pointerover',()=> {volver.setScale(5.1)})
-        .on('pointerout',()=> {volver.setScale(5)})
-        volver.setScale(5);
+        .on('pointerover',()=> {volver.setScale(9.3)})
+        .on('pointerout',()=> {volver.setScale(9)})
+        volver.setScale(9);
         
-        var Salir = this.add.image(this.cameras.main.centerX,700,'salir').setInteractive()
+        var Salir = this.add.image(this.cameras.main.centerX,700,'boton').setInteractive()
         .on('pointerdown',()=> {
             this.sound.stopAll(); 
             this.scene.start("MainMenu")})
-        .on('pointerover',()=> {Salir.setScale(5.1)})
-        .on('pointerout',()=> {Salir.setScale(5)})
-        Salir.setScale(5);
+        .on('pointerover',()=> {Salir.setScale(9.3)})
+        .on('pointerout',()=> {Salir.setScale(9)})
+        Salir.setScale(9);
+
+        this.pausatxt = this.add
+        .text(
+            675, 310,
+            "volver",
+           { fontSize: "150px", fill: "#330C03", fontFamily: "Pixel",}
+        );
+
+        this.pausatxt = this.add
+        .text(
+            730, 605,
+            "salir",
+           { fontSize: "150px", fill: "#330C03", fontFamily: "Pixel",}
+        );
     }
 }
