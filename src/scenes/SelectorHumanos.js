@@ -38,22 +38,18 @@ export class SelectorHumanos extends Phaser.Scene {
 
     this.text1 = this.add.text(315, 870, "0", {
       fontSize: "120px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     this.text2 = this.add.text(925, 870, "0", {
       fontSize: "120px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     this.text3 = this.add.text(1525, 870, "0", {
       fontSize: "120px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     this.tcant = this.add.text(470, 160, getPhrase('Selecciona 3 unidades'), {
       fontSize: "50px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
       wordWrap: { width: 1000 }
     });
@@ -65,48 +61,39 @@ export class SelectorHumanos extends Phaser.Scene {
 
     const text4 = this.add.text(280, 665, vidatxt + ": 2", {
       fontSize: "37px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     const text5 = this.add.text(280, 625, dañotxt +": 3", {
       fontSize: "37px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     const text12 = this.add.text(140, 700, "ventaja vs: polilla", {
       fontSize: "37px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     const text6 = this.add.text(895, 665, vidatxt +": 4", {
       fontSize: "37px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     const text7 = this.add.text(895, 625, dañotxt +": 1", {
       fontSize: "37px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     const text11 = this.add.text(753, 707, "ventaja vs: esqueletos", {
       fontSize: "31px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
       wordWrap: { width: 1000 }
     });
     const text8 = this.add.text(1500, 665, vidatxt +": 3", {
       fontSize: "37px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     const text9 = this.add.text(1500, 625, dañotxt +": 2", {
       fontSize: "37px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
     const text10 = this.add.text(1390, 700, "ventaja vs: mago", {
       fontSize: "37px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
 

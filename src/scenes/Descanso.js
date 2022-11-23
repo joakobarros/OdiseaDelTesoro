@@ -27,27 +27,23 @@ tcant;
     
 create() {
   
-    this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoDescanso');
+  this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoDescanso');
   
   /////////////////////////////////////////////////////////// carteles
   var texto1 = this.add.text(320,580, "cura +1", {
     fontSize: "50px",
-    //fill: "#FFFFFF",
     fontFamily: "Pixel"
   })
   var texto2 = this.add.text(797,580, "vida máxima +1", {
     fontSize: "45px",
-    //fill: "#FFFFFF",
     fontFamily: "Pixel"
   })
   var texto3 = this.add.text(1400,580, "ataque +1", {
     fontSize: "50px",
-    //fill: "#FFFFFF",
     fontFamily: "Pixel"
   })
   this.tcant = this.add.text(510, 100, "Selecciona una de las mejoras", {
     fontSize: "53px",
-    //fill: "#FFFFFF",
     fontFamily: "Pixel"
   })
 

@@ -18,16 +18,13 @@ export default class CombateJefe extends Phaser.Scene{
   daño;
   muerte;
   golpe;
-
   // INDICE DEL ULTIMO PERSONAJE QUE ATACO
   ultimoTurnoHumano;
   ultimoTurnoCriatura;
-
   // Personaje al que le corresponde el turno
   PersonajeAtacante;
   // Personaje clickado para atacarlo
   personajeAtacar;
-
   // lista de humanos
   humanos;
 
@@ -73,7 +70,8 @@ export default class CombateJefe extends Phaser.Scene{
       fontFamily: "Pixel",
     };
     this.vidaJefe.setScale(4);
-    
+    this.jefe.anims.play(this.jefe.key_idle, true);
+
     ////////////////////////////////////////////// selector de sprites humanos
     let humano;
       humano = new Personaje(
@@ -119,36 +117,22 @@ export default class CombateJefe extends Phaser.Scene{
       );
       this.humanos.push(humano);
 
-    //Se escalan los humanos
     this.humanos.forEach((humano) => {
-      humano.setScale(4);
-      // funcion de animaciones idle
-
-      humano.vidaText = this.add.text(
-        humano.x - 30,
-        753,
-        humano.vida + "/" + humano.vidaMax,
-        {
-          fontSize: "50px",
-          //fill: "#FFFFFF",
-          fontFamily: "Pixel",
-        }
-      );
-    }); 
-
-    ///// invisibiliza las unidades muertas
-    this.humanos.forEach(humano => {
-      if (humano.vida == 0) {
-        humano.visible = false;
-        humano.vidaText.visible = false;
+      if (humano.vida != 0) {
+        humano.setScale(4);
+        humano.play(humano.key_idle, true)
+  
+        humano.vidaText = this.add.text(
+          humano.x - 30,
+          753,
+          humano.vida + "/" + humano.vidaMax,
+          {
+            fontSize: "50px",
+            fontFamily: "Pixel",
+          }
+        );
       }
-    });
-
-    //// animaciones inicio
-    this.humanos[0].anims.play(this.humanos[0].key_atk, true);
-    this.humanos[1].anims.play(this.humanos[1].key_idle, true);
-    this.humanos[2].anims.play(this.humanos[2].key_idle, true);
-    this.jefe.anims.play(this.jefe.key_idle, true);
+    }); 
 
     /// inicio del combate
     if (this.humanos[0].vida <= 0) {
