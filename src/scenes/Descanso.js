@@ -18,11 +18,11 @@ tcant;
 	}
 
     init(data) {
-        this.hum1 = data.hum1;
-        this.hum2 = data.hum2;
-        this.hum3 = data.hum3;
-        this.mapa = data.mapa;
-        this.criaturas = data.criaturas;
+      this.hum1 = data.hum1;
+      this.hum2 = data.hum2;
+      this.hum3 = data.hum3;
+      this.mapa = data.mapa;
+      this.criaturas = data.criaturas;
     }
     
 create() {
@@ -56,9 +56,9 @@ create() {
     this,
     500,
     890,
-    this.hum1.key_asset,
-    this.hum1.key_idle,
-    this.hum1.key_atk,
+    this.hum1.keyAsset,
+    this.hum1.keyIdle,
+    this.hum1.keyAtk,
     this.hum1.tipo
   );
   this.hum2 = new Personaje(
@@ -69,9 +69,9 @@ create() {
     this,
     950,
     890,
-    this.hum2.key_asset,
-    this.hum2.key_idle,
-    this.hum2.key_atk,
+    this.hum2.keyAsset,
+    this.hum2.keyIdle,
+    this.hum2.keyAtk,
     this.hum2.tipo
   );
   this.hum3 = new Personaje(
@@ -82,17 +82,17 @@ create() {
     this,
     1450,
     890,
-    this.hum3.key_asset,
-    this.hum3.key_idle,
-    this.hum3.key_atk,
+    this.hum3.keyAsset,
+    this.hum3.keyIdle,
+    this.hum3.keyAtk,
     this.hum3.tipo
   );
   this.hum1.setScale(4);
   this.hum2.setScale(4);
   this.hum3.setScale(4);  
-  this.hum1.anims.play(this.hum1.key_idle, true);
-  this.hum2.anims.play(this.hum2.key_idle, true);
-  this.hum3.anims.play(this.hum3.key_idle, true);
+  this.hum1.anims.play(this.hum1.keyIdle, true);
+  this.hum2.anims.play(this.hum2.keyIdle, true);
+  this.hum3.anims.play(this.hum3.keyIdle, true);
   
   ////////////////////////////////////////////////// botones power up
   var ataque = this.add

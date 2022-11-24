@@ -59,9 +59,9 @@ export default class Combate extends Phaser.Scene {
       this,
       200,
       535,
-      this.hum1.key_asset,
-      this.hum1.key_idle,
-      this.hum1.key_atk,
+      this.hum1.keyAsset,
+      this.hum1.keyIdle,
+      this.hum1.keyAtk,
       this.hum1.tipo
     );
     this.humanos.push(humano);
@@ -73,9 +73,9 @@ export default class Combate extends Phaser.Scene {
       this,
       450,
       535,
-      this.hum2.key_asset,
-      this.hum2.key_idle,
-      this.hum2.key_atk,
+      this.hum2.keyAsset,
+      this.hum2.keyIdle,
+      this.hum2.keyAtk,
       this.hum2.tipo
     );
     this.humanos.push(humano);
@@ -87,9 +87,9 @@ export default class Combate extends Phaser.Scene {
       this,
       700,
       535,
-      this.hum3.key_asset,
-      this.hum3.key_idle,
-      this.hum3.key_atk,
+      this.hum3.keyAsset,
+      this.hum3.keyIdle,
+      this.hum3.keyAtk,
       this.hum3.tipo
     );
     this.humanos.push(humano);
@@ -98,7 +98,7 @@ export default class Combate extends Phaser.Scene {
     this.humanos.forEach((humano) => {
       if (humano.vida != 0) {
         humano.setScale(4);
-        humano.play(humano.key_idle, true)
+        humano.play(humano.keyIdle, true)
   
         humano.vidaText = this.add.text(
           humano.x - 30,
@@ -122,9 +122,9 @@ export default class Combate extends Phaser.Scene {
       this,
       1200,
       535,
-      this.criat1.key_asset,
-      this.criat1.key_idle,
-      this.criat1.key_atk,
+      this.criat1.keyAsset,
+      this.criat1.keyIdle,
+      this.criat1.keyAtk,
       this.criat1.tipo
     );
     this.criaturas.push(criatura);
@@ -136,9 +136,9 @@ export default class Combate extends Phaser.Scene {
       this,
       1450,
       535,
-      this.criat2.key_asset,
-      this.criat2.key_idle,
-      this.criat2.key_atk,
+      this.criat2.keyAsset,
+      this.criat2.keyIdle,
+      this.criat2.keyAtk,
       this.criat2.tipo
     );
     this.criaturas.push(criatura);
@@ -150,9 +150,9 @@ export default class Combate extends Phaser.Scene {
       this,
       1700,
       535,
-      this.criat3.key_asset,
-      this.criat3.key_idle,
-      this.criat3.key_atk,
+      this.criat3.keyAsset,
+      this.criat3.keyIdle,
+      this.criat3.keyAtk,
       this.criat3.tipo
     );
     this.criaturas.push(criatura);
@@ -160,7 +160,7 @@ export default class Combate extends Phaser.Scene {
     //Se escalan las criaturas
     this.criaturas.forEach((criatura) => {
       criatura.setScale(4);
-      criatura.play(criatura.key_idle, true)
+      criatura.play(criatura.keyIdle, true)
 
       criatura.vidaText = this.add.text(
         criatura.x - 30,
@@ -177,16 +177,16 @@ export default class Combate extends Phaser.Scene {
     if (this.humanos[0].vida <= 0) {
       if (this.humanos[1].vida <= 0) {
         this.PersonajeAtacante = this.humanos[2];
-        this.humanos[2].anims.play(this.humanos[2].key_atk, true);
+        this.humanos[2].anims.play(this.humanos[2].keyAtk, true);
         this.ultimoTurnoHumano = 2;
       }else{ 
       this.PersonajeAtacante = this.humanos[1];
-      this.humanos[1].anims.play(this.humanos[1].key_atk, true);
+      this.humanos[1].anims.play(this.humanos[1].keyAtk, true);
       this.ultimoTurnoHumano = 1;
       }
     } else {
       this.PersonajeAtacante = this.humanos[0];
-      this.humanos[0].anims.play(this.humanos[0].key_atk, true);
+      this.humanos[0].anims.play(this.humanos[0].keyAtk, true);
       this.ultimoTurnoHumano = 0;
     }
     
@@ -273,10 +273,10 @@ export default class Combate extends Phaser.Scene {
       if (this.criaturas[this.ultimoTurnoCriatura].vida <= 0) {
         this.handleCambioTurno();
       }else{
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_idle, true)
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyIdle, true)
         this.PersonajeAtacante = this.criaturas[this.ultimoTurnoCriatura];
         this.PersonajeAtacante.setScale(5);
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_atk, true)
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyAtk, true)
       }
     }else{
       this.PersonajeAtacante.setScale(4);
@@ -290,10 +290,10 @@ export default class Combate extends Phaser.Scene {
       if (this.humanos[this.ultimoTurnoHumano].vida <= 0) {
         this.handleCambioTurno();
       }else{
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_idle, true)
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyIdle, true)
         this.PersonajeAtacante = this.humanos[this.ultimoTurnoHumano];
         this.PersonajeAtacante.setScale(5);
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_atk, true)
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyAtk, true)
       }
     }
     this.Tturno.setText("turno: " + this.turno);

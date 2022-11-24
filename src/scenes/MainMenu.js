@@ -56,7 +56,7 @@ export default class MainMenu extends Phaser.Scene
        fill: "#330C03", 
        fontFamily:'Pixel'
     })
-  /*
+  
     const BotonEspañol = this.add.image(1830, 950, "menos")
     .setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
     this.getTranslations(ES_AR)
@@ -86,6 +86,6 @@ export default class MainMenu extends Phaser.Scene
     this.creditosTxt.setText(getPhrase('Créditos'));
     this.jugarTxt.setText(getPhrase('Jugar'));
     
-	}*/
+	}
  }
 }

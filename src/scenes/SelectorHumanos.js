@@ -26,7 +26,7 @@ export class SelectorHumanos extends Phaser.Scene {
       "selector"
     );
 
-    this.mapa = new Mapa("s1", []);
+    this.mapa = new Mapa("s1", [], []);
     this.criaturas = 15;
 
     //////////////////////////////////////////// indicadores de cantidad
@@ -140,9 +140,9 @@ export class SelectorHumanos extends Phaser.Scene {
     imag1.setScale(4);
     imag2.setScale(4);
     imag3.setScale(4);
-    imag1.anims.play(imag1.key_idle, true);
-    imag2.anims.play(imag2.key_idle, true);
-    imag3.anims.play(imag3.key_idle, true);
+    imag1.anims.play(imag1.keyIdle, true);
+    imag2.anims.play(imag2.keyIdle, true);
+    imag3.anims.play(imag3.keyIdle, true);
 
     /////////////////////////////////////////////////////// botones
     var menos3 = this.add

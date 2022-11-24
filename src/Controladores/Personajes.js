@@ -2,16 +2,16 @@ import Phaser, { Tilemaps } from "phaser";
 import { sharedInstance as events } from "../scenes/EventCenter";
 
 class Personaje extends Phaser.GameObjects.Sprite {
-  constructor(nombre, ataque, vida, vidaMax, escena, x, y, key_asset, key_idle, key_atk, tipo) {
-    super(escena, x, y, key_asset);
+  constructor(nombre, ataque, vida, vidaMax, escena, x, y, keyAsset, keyIdle, keyAtk, tipo) {
+    super(escena, x, y, keyAsset);
     escena.add.existing(this);
     this.nombre = nombre;
     this.ataque = ataque;
     this.vida = vida;
     this.vidaMax = vidaMax;
-    this.key_asset = key_asset;
-    this.key_idle = key_idle;
-    this.key_atk = key_atk;
+    this.keyAsset = keyAsset;
+    this.keyIdle = keyIdle;
+    this.keyAtk = keyAtk;
     this.tipo = tipo;
 
     this.setInteractive();

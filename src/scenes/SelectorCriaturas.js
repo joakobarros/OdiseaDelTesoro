@@ -135,9 +135,9 @@ export default class SelectorCriaturas extends Phaser.Scene{
     this.imag2.setScale(4);
     this.imag3.setScale(4);
     // animaciones idle
-    this.imag1.anims.play(this.imag1.key_idle, true);
-    this.imag2.anims.play(this.imag2.key_idle, true);
-    this.imag3.anims.play(this.imag3.key_idle, true);
+    this.imag1.anims.play(this.imag1.keyIdle, true);
+    this.imag2.anims.play(this.imag2.keyIdle, true);
+    this.imag3.anims.play(this.imag3.keyIdle, true);
 
     ////////////////////////////////////////////////// botones
     var menos3 = this.add.image(1440,950, 'menos').setInteractive()
