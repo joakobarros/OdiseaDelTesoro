@@ -2,6 +2,9 @@ import Phaser from 'phaser'
 import { EN_US, ES_AR } from '../enums/lenguages'
 import { FETCHED, FETCHING, READY, TODO } from '../enums/status'
 import { getTranslations, getPhrase } from '../services/translations'
+import { getData } from '../services/dataBase'
+
+import { sharedInstance as events } from '../scenes/EventCenter'
 
 export default class MainMenu extends Phaser.Scene
 {
@@ -24,6 +27,7 @@ export default class MainMenu extends Phaser.Scene
   }
 
 	create() {
+    
 
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondomenu');
 
@@ -72,6 +76,13 @@ export default class MainMenu extends Phaser.Scene
 			this.getTranslations(EN_US)
 		})
 		.setScale(4);
+
+    getData();
+    events.on('dato-recibido', this.dato, this);
+    events.on('dato-recibido1', this.dato1, this);
+    this.add.text(500, 500, this.vH)
+    this.add.text(500, 400, this.vG)
+
   }
 
   updateWasChangedLanguage = () => {
@@ -90,5 +101,11 @@ export default class MainMenu extends Phaser.Scene
       this.creditosTxt.setText(getPhrase('Créditos'));
       this.jugarTxt.setText(getPhrase('Jugar'));
 	  }
+  }
+  dato(data){
+    this.vH = data
+  }
+  dato1(data1){
+    this.vG = data1
   }
 }

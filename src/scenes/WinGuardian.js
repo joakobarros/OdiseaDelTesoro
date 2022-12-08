@@ -1,5 +1,8 @@
+import { getDatabase } from 'firebase/database';
 import Phaser from 'phaser'
 import { getPhrase } from '../services/translations'
+import {getData, pushData} from '../services/dataBase'
+import { sharedInstance as events } from '../scenes/EventCenter'
 
 export default class WinGuardian extends Phaser.Scene
 {
@@ -10,6 +13,9 @@ export default class WinGuardian extends Phaser.Scene
 
   create() {
 
+    getData();
+    events.on('dato-recibido1', this.dato1, this);
+    
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winGuardian');
 
     this.tcant = this.add.text(517, 170, getPhrase('Victoria del Guardian'), 
@@ -33,5 +39,13 @@ export default class WinGuardian extends Phaser.Scene
       fill: "#330C03", 
       fontFamily: "Pixel",
     });
+
+    this.vG ++;
+    pushData(this.vG, "Guardian");
+
   }      
+
+  dato1(data1){
+    this.vG = data1
+  }
 }

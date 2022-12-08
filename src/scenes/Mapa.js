@@ -5,7 +5,7 @@ import { Personaje } from "../Controladores/Personajes";
 import { getPhrase } from '../services/translations'
 
 export default class Mapa extends Phaser.Scene {
-  hum1;
+ /* hum1;
   hum2;
   hum3;
   criaturas;
@@ -17,7 +17,7 @@ export default class Mapa extends Phaser.Scene {
   vida3;
   cantCriaturas;
   mapa;
-  salaAc;
+  salaAc;*/
   salas = [];
 
   constructor() {
@@ -132,7 +132,7 @@ export default class Mapa extends Phaser.Scene {
         
       }else{ 
         if (this.mapa.salasPasadas.includes(sala.nombre) && this.mapa.salaActual != sala.nombre) {
-          sala =this.add.image(sala.posX,sala.salaY,"salaPasada");
+          sala =this.add.image(sala.posX,sala.posY,"salaPasada");
         }
       }
     });
