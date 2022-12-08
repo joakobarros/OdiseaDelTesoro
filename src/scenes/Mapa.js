@@ -2,6 +2,7 @@ import Phaser, { Tilemaps } from "phaser";
 import { Sala } from "../Controladores/Salas";
 import { sharedInstance as events } from "../scenes/EventCenter";
 import { Personaje } from "../Controladores/Personajes";
+import { getPhrase } from '../services/translations'
 
 export default class Mapa extends Phaser.Scene {
   hum1;
@@ -279,36 +280,56 @@ export default class Mapa extends Phaser.Scene {
     }
 */
     //////////////////////////////////////////////////// estadisticas
-    this.atk1 = this.add.text(240, 150,
-      "atk: " + this.hum1.ataque, 
-      { fontSize: "37px", fontFamily: "Pixel",}
-    );
-    this.vida1 = this.add.text(240, 200,
-      "vida: " + this.hum1.vida + "/" + this.hum1.vidaMax,
-      { fontSize: "37px", fontFamily: "Pixel",}
+    const vidatxt = getPhrase('Vida: ')
+    const dañotxt = getPhrase('Daño: ')
+
+    this.atk1 = this.add.text(240, 150, dañotxt + this.hum1.ataque, 
+      { 
+        fontSize: "37px", 
+        fontFamily: "Pixel",
+      }
     );
 
-    this.atk2 = this.add.text(240, 500,
-      "atk: " + this.hum2.ataque, 
-      { fontSize: "37px", fontFamily: "Pixel",}
-    );
-    this.vida2 = this.add.text(240, 550,
-      "vida: " + this.hum2.vida + "/" + this.hum2.vidaMax,
-      { fontSize: "37px", fontFamily: "Pixel",}
+    this.vida1 = this.add.text(240, 200, vidatxt + this.hum1.vida + "/" + this.hum1.vidaMax,
+      { 
+        fontSize: "37px", 
+        fontFamily: "Pixel",
+      }
     );
 
-    this.atk3 = this.add.text(240, 840,
-      "atk: " + this.hum3.ataque, 
-      { fontSize: "37px", fontFamily: "Pixel",}
-    );
-    this.vida3 = this.add.text(240, 890,
-      "vida: " + this.hum3.vida + "/" + this.hum3.vidaMax,
-      { fontSize: "37px", fontFamily: "Pixel",}
+    this.atk2 = this.add.text(240, 500, dañotxt + this.hum2.ataque, 
+      { 
+        fontSize: "37px", 
+        fontFamily: "Pixel",
+      }
     );
 
-    this.cantCriaturas = this.add.text(1475, 775,
-      "criaturas: " + this.criaturas,
-      { fontSize: "43px", fontFamily: "Pixel",}
+    this.vida2 = this.add.text(240, 550, vidatxt + this.hum2.vida + "/" + this.hum2.vidaMax,
+      { 
+        fontSize: "37px", 
+        fontFamily: "Pixel",
+      }
+    );
+
+    this.atk3 = this.add.text(240, 840, dañotxt + this.hum3.ataque, 
+      { 
+        fontSize: "37px", 
+        fontFamily: "Pixel",
+      }
+    );
+
+    this.vida3 = this.add.text(240, 890, vidatxt + this.hum3.vida + "/" + this.hum3.vidaMax,
+      { 
+        fontSize: "37px", 
+        fontFamily: "Pixel",
+      }
+    );
+
+    this.cantCriaturas = this.add.text(1475, 775, getPhrase('Criaturas: ') + this.criaturas,
+      { 
+        fontSize: "43px", 
+        fontFamily: "Pixel",
+      }
     );
 
     let calavera = this.add.image(1630, 670, "calavera");
@@ -328,9 +349,12 @@ export default class Mapa extends Phaser.Scene {
       });
     pausa.setScale(5);
 
-    this.pausatxt = this.add.text(1490, 270,
-       "Pausa",
-      { fontSize: "80px", fill: "#330C03", fontFamily: "Pixel",}
+    this.pausatxt = this.add.text(1490, 270, getPhrase('Pausa'),
+      { 
+        fontSize: "80px", 
+        fill: "#330C03", 
+        fontFamily: "Pixel",
+      }
     );
 
     this.hum1 = new Personaje(

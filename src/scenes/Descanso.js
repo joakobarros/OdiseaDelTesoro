@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
-
 import { Personaje } from "../Controladores/Personajes";
+import { getPhrase } from '../services/translations'
 
 export default class Descanso extends Phaser.Scene
 {
@@ -30,19 +30,23 @@ create() {
   this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoDescanso');
   
   /////////////////////////////////////////////////////////// carteles
-  var texto1 = this.add.text(320,580, "cura +1", {
+  var texto1 = this.add.text(320,580, getPhrase('Cura +1'), 
+  {
     fontSize: "50px",
     fontFamily: "Pixel"
   })
-  var texto2 = this.add.text(797,580, "vida máxima +1", {
+  var texto2 = this.add.text(797,580, getPhrase('Vida máxima +1'), 
+  {
     fontSize: "45px",
     fontFamily: "Pixel"
   })
-  var texto3 = this.add.text(1400,580, "ataque +1", {
+  var texto3 = this.add.text(1400,580, getPhrase('Ataque +1'), 
+  {
     fontSize: "50px",
     fontFamily: "Pixel"
   })
-  this.tcant = this.add.text(510, 100, "Selecciona una de las mejoras", {
+  this.tcant = this.add.text(510, 100, getPhrase('Selecciona una de las mejoras'), 
+  {
     fontSize: "53px",
     fontFamily: "Pixel"
   })

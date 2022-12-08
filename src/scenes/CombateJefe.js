@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { sharedInstance as events } from "../scenes/EventCenter";
 import { Personaje } from "../Controladores/Personajes";
+import { getPhrase } from '../services/translations'
 
 export default class CombateJefe extends Phaser.Scene{
 
@@ -18,6 +19,7 @@ export default class CombateJefe extends Phaser.Scene{
   daño;
   muerte;
   golpe;
+  turnoTxt = getPhrase('Turno: ')
   // INDICE DEL ULTIMO PERSONAJE QUE ATACO
   ultimoTurnoHumano;
   ultimoTurnoCriatura;
@@ -65,7 +67,8 @@ export default class CombateJefe extends Phaser.Scene{
       "CRIATURA"
     );
     this.jefe.setScale(4);
-    this.vidaJefe = this.add.text(1430, 753, this.jefe.vida + "/" + this.jefe.vidaMax), {
+    this.vidaJefe = this.add.text(1430, 753, this.jefe.vida + "/" + this.jefe.vidaMax), 
+    {
       fontSize: "50px",
       fontFamily: "Pixel",
     };
@@ -122,9 +125,7 @@ export default class CombateJefe extends Phaser.Scene{
         humano.setScale(4);
         humano.play(humano.keyIdle, true)
   
-        humano.vidaText = this.add.text(
-          humano.x - 30,
-          753,
+        humano.vidaText = this.add.text(humano.x - 30, 753,
           humano.vida + "/" + humano.vidaMax,
           {
             fontSize: "50px",
@@ -154,7 +155,8 @@ export default class CombateJefe extends Phaser.Scene{
     this.turno = "HUMANO";
     this.PersonajeAtacante.setScale(5);
 
-    this.Tturno = this.add.text(650, 130, "turno: " + this.turno, {
+    this.Tturno = this.add.text(650, 130, this.turnoTxt + this.turno, 
+    {
       fontSize: "80px", 
       fontFamily: "Pixel",
     })
@@ -173,7 +175,8 @@ export default class CombateJefe extends Phaser.Scene{
     })
     atacar.setScale(5) 
 
-    this.atacartxt = this.add.text(790, 860, "atacar", {
+    this.atacartxt = this.add.text(790, 860, "atacar", 
+    {
       fontSize: "80px",
       fill: "#330C03",
       fontFamily: "Pixel",
@@ -238,7 +241,7 @@ handleCambioTurno() {
       this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyAtk, true)
     }
   }
-  this.Tturno.setText("turno: " + this.turno);
+  this.Tturno.setText(this.turnoTxt + this.turno);
 }
   handleAtaque(personajeAtacante, personajeAtacado) {
 

@@ -45,26 +45,30 @@ export default class MainMenu extends Phaser.Scene
 
     this.jugarTxt = this.add
      .text(817, 645, getPhrase('Jugar'),
-     { fontSize: "85px", 
+     { 
+       fontSize: "85px", 
        fill: "#330C03", 
        fontFamily:'Pixel'
     })
 
     this.creditosTxt = this.add
      .text(790, 860, getPhrase('Créditos'),
-     { fontSize: "70px", 
+     { 
+       fontSize: "70px", 
        fill: "#330C03", 
        fontFamily:'Pixel'
     })
   
-    const BotonEspañol = this.add.image(1830, 950, "menos")
+    const BotonEspañol = this.add
+    .image(1830, 950, "menos")
     .setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-    this.getTranslations(ES_AR)
+      this.getTranslations(ES_AR)
     })
     .setScale(4);
 		
-		const BotonEEUU = this.add.image(1650, 950, "mas")
-		  .setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
+		const BotonEEUU = this.add
+    .image(1650, 950, "mas")
+		.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
 			this.getTranslations(EN_US)
 		})
 		.setScale(4);
@@ -82,10 +86,9 @@ export default class MainMenu extends Phaser.Scene
 	update(){
 		
 		if(this.#wasChangedLanguage === FETCHED){
-		this.#wasChangedLanguage = READY;
-    this.creditosTxt.setText(getPhrase('Créditos'));
-    this.jugarTxt.setText(getPhrase('Jugar'));
-    
-	}
- }
+		  this.#wasChangedLanguage = READY;
+      this.creditosTxt.setText(getPhrase('Créditos'));
+      this.jugarTxt.setText(getPhrase('Jugar'));
+	  }
+  }
 }

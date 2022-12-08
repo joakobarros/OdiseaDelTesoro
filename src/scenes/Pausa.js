@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { getPhrase } from '../services/translations'
 
 export default class Pausa extends Phaser.Scene
 {
@@ -26,17 +27,21 @@ export default class Pausa extends Phaser.Scene
         Salir.setScale(9);
 
         this.pausatxt = this.add
-        .text(
-            675, 310,
-            "volver",
-           { fontSize: "150px", fill: "#330C03", fontFamily: "Pixel",}
+        .text(675, 310, getPhrase('Volver'),
+            { 
+             fontSize: "150px", 
+             fill: "#330C03", 
+             fontFamily: "Pixel",
+            }
         );
 
         this.pausatxt = this.add
-        .text(
-            730, 605,
-            "salir",
-           { fontSize: "150px", fill: "#330C03", fontFamily: "Pixel",}
+        .text(730, 605, getPhrase('Salir'),
+           { 
+             fontSize: "150px",
+             fill: "#330C03",
+             fontFamily: "Pixel",
+           }
         );
     }
 }
