@@ -5,20 +5,16 @@ import { sharedInstance as events } from "../scenes/EventCenter";
 export default class Combate extends Phaser.Scene {
   mapa;
   criaturasT;
-
   //datos para gestion de turno
   turno; // contiene HUMANO o CRIATURA
   Tturno;
-
   // INDICE DEL ULTIMO PERSONAJE QUE ATACO
   ultimoTurnoHumano;
   ultimoTurnoCriatura;
-
   // Personaje al que le corresponde el turno
   PersonajeAtacante;
   // Personaje clickado para atacarlo
   personajeAtacar;
-
   // lista de humanos y criaturas
   criaturas;
   humanos;
@@ -30,11 +26,8 @@ export default class Combate extends Phaser.Scene {
   }
 
   init(data) {
-    //console.log(data);
-
     this.mapa = data.mapa;
     this.criaturasT = data.criaturas;
-
     this.hum1 = data.hum1;
     this.hum2 = data.hum2;
     this.hum3 = data.hum3;
@@ -44,8 +37,6 @@ export default class Combate extends Phaser.Scene {
   }
 
   create() {
-
-    console.log(this.data);
 
     this.add.image(
       this.cameras.main.centerX,
@@ -68,9 +59,9 @@ export default class Combate extends Phaser.Scene {
       this,
       200,
       535,
-      this.hum1.key_asset,
-      this.hum1.key_idle,
-      this.hum1.key_atk,
+      this.hum1.keyAsset,
+      this.hum1.keyIdle,
+      this.hum1.keyAtk,
       this.hum1.tipo
     );
     this.humanos.push(humano);
@@ -82,9 +73,9 @@ export default class Combate extends Phaser.Scene {
       this,
       450,
       535,
-      this.hum2.key_asset,
-      this.hum2.key_idle,
-      this.hum2.key_atk,
+      this.hum2.keyAsset,
+      this.hum2.keyIdle,
+      this.hum2.keyAtk,
       this.hum2.tipo
     );
     this.humanos.push(humano);
@@ -96,28 +87,29 @@ export default class Combate extends Phaser.Scene {
       this,
       700,
       535,
-      this.hum3.key_asset,
-      this.hum3.key_idle,
-      this.hum3.key_atk,
+      this.hum3.keyAsset,
+      this.hum3.keyIdle,
+      this.hum3.keyAtk,
       this.hum3.tipo
     );
     this.humanos.push(humano);
 
     //Se escalan los humanos
     this.humanos.forEach((humano) => {
-      humano.setScale(4);
-      // funcion de animaciones idle
-
-      humano.vidaText = this.add.text(
-        humano.x - 30,
-        753,
-        humano.vida + "/" + humano.vidaMax,
-        {
-          fontSize: "50px",
-          //fill: "#FFFFFF",
-          fontFamily: "Pixel",
-        }
-      );
+      if (humano.vida != 0) {
+        humano.setScale(4);
+        humano.play(humano.keyIdle, true)
+  
+        humano.vidaText = this.add.text(
+          humano.x - 30,
+          753,
+          humano.vida + "/" + humano.vidaMax,
+          {
+            fontSize: "50px",
+            fontFamily: "Pixel",
+          }
+        );
+      }
     });
 
     ////////////////////////////////////////////// criaturas
@@ -130,9 +122,9 @@ export default class Combate extends Phaser.Scene {
       this,
       1200,
       535,
-      this.criat1.key_asset,
-      this.criat1.key_idle,
-      this.criat1.key_atk,
+      this.criat1.keyAsset,
+      this.criat1.keyIdle,
+      this.criat1.keyAtk,
       this.criat1.tipo
     );
     this.criaturas.push(criatura);
@@ -144,9 +136,9 @@ export default class Combate extends Phaser.Scene {
       this,
       1450,
       535,
-      this.criat2.key_asset,
-      this.criat2.key_idle,
-      this.criat2.key_atk,
+      this.criat2.keyAsset,
+      this.criat2.keyIdle,
+      this.criat2.keyAtk,
       this.criat2.tipo
     );
     this.criaturas.push(criatura);
@@ -158,9 +150,9 @@ export default class Combate extends Phaser.Scene {
       this,
       1700,
       535,
-      this.criat3.key_asset,
-      this.criat3.key_idle,
-      this.criat3.key_atk,
+      this.criat3.keyAsset,
+      this.criat3.keyIdle,
+      this.criat3.keyAtk,
       this.criat3.tipo
     );
     this.criaturas.push(criatura);
@@ -168,7 +160,7 @@ export default class Combate extends Phaser.Scene {
     //Se escalan las criaturas
     this.criaturas.forEach((criatura) => {
       criatura.setScale(4);
-      // funcion de animaciones idle
+      criatura.play(criatura.keyIdle, true)
 
       criatura.vidaText = this.add.text(
         criatura.x - 30,
@@ -176,58 +168,38 @@ export default class Combate extends Phaser.Scene {
         criatura.vida + "/" + criatura.vidaMax,
         {
           fontSize: "50px",
-          //fill: "#FFFFFF",
           fontFamily: "Pixel",
         }
       );
     });
 
-     ///// invisibiliza las unidades muertas
-     this.humanos.forEach(humano => {
-      if (humano.vida == 0) {
-        humano.visible = false;
-        humano.vidaText.visible = false;
-      }
-    });
-
-    //////// animaciones idle
-    this.humanos[0].anims.play(this.humanos[0].key_idle, true);
-    this.humanos[1].anims.play(this.humanos[1].key_idle, true);
-    this.humanos[2].anims.play(this.humanos[2].key_idle, true);
-    this.criaturas[0].anims.play(this.criaturas[0].key_idle, true);
-    this.criaturas[1].play(this.criaturas[1].key_idle, true);
-    this.criaturas[2].play(this.criaturas[2].key_idle, true);
-
     // Al iniciar, se asigna el primer humano como el que tiene el turno
     if (this.humanos[0].vida <= 0) {
       if (this.humanos[1].vida <= 0) {
         this.PersonajeAtacante = this.humanos[2];
-        this.humanos[2].anims.play(this.humanos[2].key_atk, true);
+        this.humanos[2].anims.play(this.humanos[2].keyAtk, true);
         this.ultimoTurnoHumano = 2;
       }else{ 
       this.PersonajeAtacante = this.humanos[1];
-      this.humanos[1].anims.play(this.humanos[1].key_atk, true);
+      this.humanos[1].anims.play(this.humanos[1].keyAtk, true);
       this.ultimoTurnoHumano = 1;
       }
     } else {
       this.PersonajeAtacante = this.humanos[0];
-      this.humanos[0].anims.play(this.humanos[0].key_atk, true);
+      this.humanos[0].anims.play(this.humanos[0].keyAtk, true);
       this.ultimoTurnoHumano = 0;
     }
     
     this.turno = "HUMANO";
     this.PersonajeAtacante.setScale(5);
-
-    // Los arrays son base 0, o sea que el primer elemento es el 0
     this.ultimoTurnoCriatura = -1;
 
     this.Tturno = this.add.text(650, 150, "turno: " + this.turno, {
       fontSize: "80px",
-      //fill: "#FFFFFF",
       fontFamily: "Pixel",
     });
 
-    ////////////////////////////////////////////// boton atacar
+    ////////// boton atacar
     var atacar = this.add
       .image(950, 910, "boton")
       .setInteractive()
@@ -247,7 +219,6 @@ export default class Combate extends Phaser.Scene {
       fill: "#330C03",
       fontFamily: "Pixel",
     });
-
     /////////// EVENTOS
     events.on("click_en_personaje", this.handleClickEnPersonaje, this);
     events.on("ataque_uno_a_otro", this.handleAtaque, this);
@@ -255,14 +226,12 @@ export default class Combate extends Phaser.Scene {
 
   handleClickEnPersonaje(personaje) {
     if (this.turno !== personaje.tipo) {
-      //Se hizo click en un personaje del equipo contrario
       this.personajeAtacar = personaje;
-      //console.log(this.PersonajeAtacante, " atacar a ", personaje);
     }
   }
 
   handleCambioTurno() {
-    //// win condition
+    /////////// win condition
     this.criatMuertas = 0;
     this.humMuertos = 0;
     this.criaturas.forEach((criatura) => {
@@ -296,50 +265,41 @@ export default class Combate extends Phaser.Scene {
       this.PersonajeAtacante.setScale(4);
       this.turno = "CRIATURA";
       this.ultimoTurnoCriatura += 1;
-      //controlar
-      // que pasa cuando llega al ultimo elemento y suma una
+
       if (this.ultimoTurnoCriatura == 3) {
         this.ultimoTurnoCriatura = 0;
       }
-      // que pasa cuando cae en un elemento que esta muerto
-      // luego de controles, asignar el proximo personaje
+
       if (this.criaturas[this.ultimoTurnoCriatura].vida <= 0) {
         this.handleCambioTurno();
       }else{
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_idle, true)
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyIdle, true)
         this.PersonajeAtacante = this.criaturas[this.ultimoTurnoCriatura];
         this.PersonajeAtacante.setScale(5);
-        // funcion con animaciones de ataque
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_atk, true)
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyAtk, true)
       }
-    } else {
+    }else{
       this.PersonajeAtacante.setScale(4);
       this.turno = "HUMANO";
       this.ultimoTurnoHumano += 1;
-      //controlar
-      // que pasa cuando llega al ultimo elemento y suma una
+
       if (this.ultimoTurnoHumano == 3) {
         this.ultimoTurnoHumano = 0;
       }
-      // que pasa cuando cae en un elemento que esta muerto
-      // luego de controles, asignar el proximo personaje
-      if (this.humanos[this.ultimoTurnoHumano].vida <= 0) {
 
+      if (this.humanos[this.ultimoTurnoHumano].vida <= 0) {
         this.handleCambioTurno();
       }else{
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_idle, true)
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyIdle, true)
         this.PersonajeAtacante = this.humanos[this.ultimoTurnoHumano];
         this.PersonajeAtacante.setScale(5);
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.key_atk, true)
-        // funcion con animaciones de ataque
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyAtk, true)
       }
     }
     this.Tturno.setText("turno: " + this.turno);
   }
 
   handleAtaque(personajeAtacante, personajeAtacado) {
-    //personajeAtacante.anims.play(personajeAtacante.animAtaque, true);
-    //personajeAtacante.anims.play(personajeAtacante.animIDLE, true);
     if (personajeAtacado.vida > 0) {
       if (
         personajeAtacante.nombre == "Arquero" && personajeAtacado.nombre == "Polilla" ||
