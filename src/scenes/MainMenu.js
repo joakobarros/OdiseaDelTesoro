@@ -102,9 +102,11 @@ export default class MainMenu extends Phaser.Scene
       this.jugarTxt.setText(getPhrase('Jugar'));
 	  }
   }
+
   dato(data){
     this.vH = data
   }
+  
   dato1(data1){
     this.vG = data1
   }
