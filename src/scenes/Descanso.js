@@ -4,14 +4,6 @@ import { getPhrase } from '../services/translations'
 
 export default class Descanso extends Phaser.Scene
 {
-
-hum1;
-hum2;
-hum3;
-criaturas;
-mapa;
-tcant;
-
 	constructor()
 	{
 		super('Descanso')

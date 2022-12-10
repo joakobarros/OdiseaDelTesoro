@@ -4,24 +4,8 @@ import { sharedInstance as events } from "../scenes/EventCenter";
 import { getPhrase } from '../services/translations'
 
 export default class Combate extends Phaser.Scene {
-  mapa;
-  criaturasT;
-  //datos para gestion de turno
-  turno; // contiene HUMANO o CRIATURA
-  Tturno;
+
   turnoTxt = getPhrase('Turno: ')
-  // INDICE DEL ULTIMO PERSONAJE QUE ATACO
-  ultimoTurnoHumano;
-  ultimoTurnoCriatura;
-  // Personaje al que le corresponde el turno
-  PersonajeAtacante;
-  // Personaje clickado para atacarlo
-  personajeAtacar;
-  // lista de humanos y criaturas
-  criaturas;
-  humanos;
-  criatMuertas;
-  humMuertos;
 
   constructor() {
     super("Combate");

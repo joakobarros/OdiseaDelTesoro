@@ -4,17 +4,7 @@ import { Personaje } from "../Controladores/Personajes";
 import { getPhrase } from '../services/translations'
 
 export class SelectorHumanos extends Phaser.Scene {
-  mapa;
-  criaturas;
-  text1;
-  text2;
-  text3;
-  text9;
-  tcant;
-  hum1;
-  hum2;
-  hum3;
-
+ 
   constructor() {
     super("SelectorHumanos");
   }

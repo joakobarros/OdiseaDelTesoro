@@ -4,23 +4,6 @@ import { getPhrase } from '../services/translations'
 
 export default class SelectorCriaturas extends Phaser.Scene{
 
-  criaturas;
-  hum1;
-  hum2;
-  hum3;
-  text1;
-  text2;
-  text3;
-  criat1;
-  criat2;
-  criat3;
-  imag1;
-  imag2;
-  imag3;
-  tcant;
-  tmax;
-  mapa;
-
 	constructor()
 	{
 		super('SelectorCriaturas')

@@ -5,31 +5,8 @@ import { getPhrase } from '../services/translations'
 
 export default class CombateJefe extends Phaser.Scene{
 
-  hum1;
-  hum2;
-  hum3;
-  vidaH1;
-  vidaH2;
-  vidaH3;
-  vidaJefe;
-  ataque;
-  jefe;
-  turno;
-  Tturno;
-  daño;
-  muerte;
-  golpe;
   turnoTxt = getPhrase('Turno: ')
-  // INDICE DEL ULTIMO PERSONAJE QUE ATACO
-  ultimoTurnoHumano;
-  ultimoTurnoCriatura;
-  // Personaje al que le corresponde el turno
-  PersonajeAtacante;
-  // Personaje clickado para atacarlo
-  personajeAtacar;
-  // lista de humanos
-  humanos;
-
+ 
 	constructor()
 	{
 		super('CombateJefe')

@@ -16,7 +16,6 @@ export default class MainMenu extends Phaser.Scene
 	#updatedString = 'Siguiente'
   #wasChangedLanguage = TODO
   
-
 	constructor()
 	{
 		super('MainMenu')
