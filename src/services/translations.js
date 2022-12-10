@@ -3,58 +3,47 @@ import { EN_US, ES_AR } from '../enums/lenguages';
 const PROJECT_ID = '39';
 let translations = null;
 let language = ES_AR;
+                                                                          /////
+export async function getTranslations(lang, callback) {                      //
+    localStorage.clear();                                                    //  función getTranslation:
+    translations = null;                                                     //    
+    language = lang;                                                         //     se llama en el MainMenu al momento de
+    if (language === ES_AR) {                                                //     tocar cualquiera de los botones de los idiomas
+        return callback ? callback() : false;                                //
+    }                                                                        //     trae como parametro el idioma al que se cambia
+                                                                             //     y trae de la api de traducciones todos los textos
+    return await fetch(                                                      //     en ese idioma y los comprime en un archivo json
+        `https://traduci-la-strapi.herokuapp.com/api/translations/           
+        ${PROJECT_ID}/${language}`)                                          //     json = archivo de texto codificado que solo lo
+    .then(response => response.json())                                       //            lee el programa
+    .then(data => {                                                          //
+        localStorage.setItem('translations', JSON.stringify(data));          //
+        translations = data;                                                 //
+        if(callback) callback()                                              //
+    });                                                                      //
+}                                                                         /////
 
-export async function getTranslations(lang, callback) {
-    localStorage.clear();
-    translations = null;
-    language = lang;
-    if (language === ES_AR) {
-        return callback ? callback() : false;
-    }
+export function getPhrase(key) {                                          /////
+    if (!translations) {                                                     //   funcion getPhrase:
+        const locals = localStorage.getItem('translations');                 //
+        translations = locals ? JSON.parse(locals) : null;                   //     se llama cada vez que en el codigo haya algun
+    }                                                                        //     texto que cambia segun el idioma
+                                                                             //     
+    let phrase = key;                                                        //     se le pasa como parametro una "key", que es el
+    if (translations && translations[key]) {                                 //     nombre clave con el cual se guarda la traducción
+        phrase = translations[key];                                          //     en el arcvhivo json, y una vez que lo encuentra
+    }                                                                        //     lo muestra por pantalla
+                                                                             //
+    return phrase;                                                           //
+}                                                                         /////
 
-    return await fetch(`https://traduci-la-strapi.herokuapp.com/api/translations/${PROJECT_ID}/${language}`)
-    .then(response => response.json())
-    .then(data => {
-        localStorage.setItem('translations', JSON.stringify(data));
-        translations = data;
-        if(callback) callback()
-    });
-}
-
-export function getPhrase(key) {
-    if (!translations) {
-        const locals = localStorage.getItem('translations');
-        translations = locals ? JSON.parse(locals) : null;
-    }
-
-    let phrase = key;
-    if (translations && translations[key]) {
-        phrase = translations[key];
-    }
-
-    return phrase;
-}
-
-function isAllowedLanguge(language) {
-    const allowedLanguages = [ES_AR, EN_US];
-    return allowedLanguages.includes(language);
-}
-
+function isAllowedLanguge(language) {                                     /////  funcion isAllowedLanguage:
+    const allowedLanguages = [ES_AR, EN_US];                                 //    verifica que el idioma ingresado este
+    return allowedLanguages.includes(language);                              //    dentro del los idiomas disponibles  
+}                                                                         /////    (carpeta enums/lenguajes)
+                                                                         
 export function getLanguageConfig() {
     let languageConfig;
-
-    // Obtener desde la URL el idioma
-    console.log(window.location.href)
-
-    /* 
-      depende como lo manejemos: 
-      1) puede venir como www.dominio.com/es-AR
-      2) puede venir como www.dominio.com?lang=es-AR
-      En el primer caso se obtiene con: window.location.pathname
-      En el segundo caso se obtiene leyendo el query param lang 
-      
-      vamos a implementar una logica que cubra ambos casos
-    */
 
     const path = window.location.pathname !== '/' ? window.location.pathname : null;
     const params = new URL(window.location.href).searchParams;

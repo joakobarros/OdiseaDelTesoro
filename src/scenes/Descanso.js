@@ -4,14 +4,14 @@ import { getPhrase } from '../services/translations'
 
 export default class Descanso extends Phaser.Scene
 {
-
+/*
 hum1;
 hum2;
 hum3;
 criaturas;
 mapa;
 tcant;
-
+*/
 	constructor()
 	{
 		super('Descanso')
@@ -79,7 +79,7 @@ create() {
     this.hum2.tipo
   );
   this.hum3 = new Personaje(
-    this.hum3.nombre,
+    this.hum3.nombre,                              
     this.hum3.ataque,
     this.hum3.vida,
     this.hum3.vidaMax,
@@ -100,15 +100,15 @@ create() {
   
   ////////////////////////////////////////////////// botones power up
   var ataque = this.add
-    .image(1530,450,'masAtaque').setInteractive()
+    .image(1530,450,'masAtaque').setInteractive()          // en esta parte se establecen los botones para los power ups
     .on('pointerdown',()=> {
       this.hum1.ataque += 1;
       this.hum2.ataque += 1;
       this.hum3.ataque += 1;
       this.scene.start("Mapa", { 
-        hum1: this.hum1, 
-        hum2: this.hum2, 
-        hum3: this.hum3, 
+        hum1: this.hum1,                                   // cada uno toma los datos de los personajes 
+        hum2: this.hum2,                                   // y los modifica (le suma 1 de ataque/vida/vida max)
+        hum3: this.hum3,                                   // y despues pasan automaticamente al mapa otra vez
         mapa: this.mapa, 
         criaturas: this.criaturas 
       });
@@ -126,7 +126,7 @@ create() {
     .on('pointerdown',()=> {
       this.hum1.vidaMax += 1; 
       this.hum1.vida += 1;
-      this.hum2.vidaMax += 1;
+      this.hum2.vidaMax += 1;                               // vida maxima suma 1 a la vida max y a la vida actual
       this.hum2.vida += 1;
       this.hum3.vidaMax += 1;
       this.hum3.vida += 1;
@@ -152,8 +152,8 @@ create() {
       if (this.hum1.vida < this.hum1.vidaMax){
         this.hum1.vida += 1;
       }
-      if (this.hum2.vida < this.hum2.vidaMax){
-        this.hum2.vida = 1;
+      if (this.hum2.vida < this.hum2.vidaMax){              // curar solo suma 1 de vida siempre y cuando
+        this.hum2.vida = 1;                                 // la vida actual sea menor a la vida max
       }
       if (this.hum3.vida < this.hum3.vidaMax){
         this.hum3.vida += 1;

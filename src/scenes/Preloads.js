@@ -1,5 +1,9 @@
 import Phaser from 'phaser'
 
+/*
+   En el preload se cargan todos los assets (imagenes, spritesheets, sonidos) 
+   y se definen las animacionmes de los personajes 
+*/
 export default class Preloads extends Phaser.Scene
 {
 	constructor()

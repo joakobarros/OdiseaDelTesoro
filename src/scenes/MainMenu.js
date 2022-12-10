@@ -28,7 +28,6 @@ export default class MainMenu extends Phaser.Scene
 
 	create() {
     
-
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondomenu');
 
     let audio = this.sound.add('musica', {loop: true});
@@ -63,29 +62,29 @@ export default class MainMenu extends Phaser.Scene
        fontFamily:'Pixel'
     })
   
-    const BotonEspañol = this.add
-    .image(1830, 950, "menos")
-    .setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-      this.getTranslations(ES_AR)
-    })
-    .setScale(4);
-		
-		const BotonEEUU = this.add
-    .image(1650, 950, "mas")
-		.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
-			this.getTranslations(EN_US)
-		})
-		.setScale(4);
+    const BotonEspañol = this.add                                           /////
+    .image(1830, 950, "menos")                                                 //
+    .setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {    //   botones de idiomas:
+      this.getTranslations(ES_AR)                                              //
+    })                                                                         //      los botones cuando los clickean
+    .setScale(4);                                                              //      disparan un evento que ejecuta
+		                                                                           //      la funcion getTranslation con el 
+		const BotonEEUU = this.add                                                 //      idioma correspondiente
+    .image(1650, 950, "mas")                                                   //
+		.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {    //
+			this.getTranslations(EN_US)                                              //
+		})                                                                         //
+		.setScale(4);                                                           /////
 
-    getData();
-    events.on('dato-recibido', this.dato, this);
-    events.on('dato-recibido1', this.dato1, this);
-    this.add.text(500, 500, this.vH)
-    this.add.text(500, 400, this.vG)
+    getData();                                                           /////   getData: ejecuta la función de tomar los datos
+    events.on('dato-recibido', this.dato, this);                            //   almacenados en la firebase y activa los eventos 
+    events.on('dato-recibido1', this.dato1, this);                          //   de "dato-recibido" que pasan el dato a esta escena
+    this.add.text(500, 500, this.vH)                                        //   para mostrarlos por pantalla
+    this.add.text(500, 400, this.vG)                                     /////
 
   }
 
-  updateWasChangedLanguage = () => {
+  updateWasChangedLanguage = () => {            // funcion de cambio de idioma
 		this.#wasChangedLanguage = FETCHED;
 	}
 	async getTranslations(lang){
@@ -96,7 +95,7 @@ export default class MainMenu extends Phaser.Scene
 
 	update(){
 		
-		if(this.#wasChangedLanguage === FETCHED){
+		if(this.#wasChangedLanguage === FETCHED){    // cuando se cambia el idioma tambien se cambian los carteles de jugar y creditos
 		  this.#wasChangedLanguage = READY;
       this.creditosTxt.setText(getPhrase('Créditos'));
       this.jugarTxt.setText(getPhrase('Jugar'));
@@ -106,7 +105,7 @@ export default class MainMenu extends Phaser.Scene
   dato(data){
     this.vH = data
   }
-  
+
   dato1(data1){
     this.vG = data1
   }

@@ -4,17 +4,10 @@ import { Personaje } from "../Controladores/Personajes";
 import { getPhrase } from '../services/translations'
 
 export class SelectorHumanos extends Phaser.Scene {
-  mapa;
-  criaturas;
   text1;
   text2;
   text3;
-  text9;
-  tcant;
-  hum1;
-  hum2;
-  hum3;
-
+ 
   constructor() {
     super("SelectorHumanos");
   }
@@ -100,8 +93,8 @@ export class SelectorHumanos extends Phaser.Scene {
     ///////////////////////////////////////////////////// sprite
     let imag1 = new Personaje(
       "Arquero",
-      3,
-      2,
+      3,                                 // en esta parte se establecen los datos de cada personaje...
+      2,                                  
       2,
       this,
       350,
@@ -138,10 +131,10 @@ export class SelectorHumanos extends Phaser.Scene {
       "HUMANO"
     );
     imag1.setScale(4);
-    imag2.setScale(4);
+    imag2.setScale(4);             // su escala...
     imag3.setScale(4);
     imag1.anims.play(imag1.keyIdle, true);
-    imag2.anims.play(imag2.keyIdle, true);
+    imag2.anims.play(imag2.keyIdle, true);      // y las animaciones que hacen en pantalla
     imag3.anims.play(imag3.keyIdle, true);
 
     /////////////////////////////////////////////////////// botones
@@ -254,30 +247,30 @@ export class SelectorHumanos extends Phaser.Scene {
     menos1.setScale(4.3);
 
     ///////////////////////////////////////////// matriz de personajes
-    var hums = [];
-
-    var continuar = this.add
-      .image(1300, 190, "boton")
-      .setInteractive()
-      .on("pointerdown", () => {
-        if (cant == 3) {
-          for (let i = 0; i < num1; i++) {
-            hums.push(imag1);
-          }
-          for (let i = 0; i < num2; i++) {
-            hums.push(imag2);
-          }
-          for (let i = 0; i < num3; i++) {
-            hums.push(imag3);
-          }
-          this.scene.start("Mapa", {
-            hum1: hums[0],
-            hum2: hums[1],
-            hum3: hums[2],
-            mapa: this.mapa,
-            criaturas: this.criaturas,
-          });
-        }
+    var hums = [];   // array que va a almacenar todos los personajes
+                                      
+    var continuar = this.add                      /////
+      .image(1300, 190, "boton")                     //
+      .setInteractive()                              //   dentro del boton de continuar 
+      .on("pointerdown", () => {                     //   (solos si la cantidad de personajes elegido en total es 3)
+        if (cant == 3) {                             //
+          for (let i = 0; i < num1; i++) {           //   se ejecuntan 3 for para agregar los personajes elegidos de acuerdo
+            hums.push(imag1);                        //   a la cantidad que tiene cada contador
+          }                                          //
+          for (let i = 0; i < num2; i++) {           //   por ejemplo:
+            hums.push(imag2);                        //   si uno elige 2 arqueros y un mago
+          }                                          //   el primero for se ejecuta 2 veces
+          for (let i = 0; i < num3; i++) {           //   el segundo se ejecuta 0 veces 
+            hums.push(imag3);                        //   y el tercer for se ejecuta 1 vez
+          }                                          //
+          this.scene.start("Mapa", {                 //   para despues pasar a la escena del mapa 
+            hum1: hums[0],                           //   con los datos de los personajes elegidos,
+            hum2: hums[1],                           //   los datos del mapa y la cantidad de criaturas
+            hum3: hums[2],                           //
+            mapa: this.mapa,                         //   la escena del selector de criaturas es igual
+            criaturas: this.criaturas,               //   solo cambian los datos que tienen los pesonajes y
+          });                                        //   los datos que pasa de una escena a la otra
+        }                                         /////
       })
       .on("pointerover", () => {
         continuar.setScale(5.1);

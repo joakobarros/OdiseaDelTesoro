@@ -4,12 +4,12 @@ import { sharedInstance as events } from "../scenes/EventCenter";
 import { getPhrase } from '../services/translations'
 
 export default class Combate extends Phaser.Scene {
-  mapa;
+ /* mapa;
   criaturasT;
   //datos para gestion de turno
   turno; // contiene HUMANO o CRIATURA
-  Tturno;
-  turnoTxt = getPhrase('Turno: ')
+  Tturno;*/
+  turnoTxt = getPhrase('Turno: ')/*
   // INDICE DEL ULTIMO PERSONAJE QUE ATACO
   ultimoTurnoHumano;
   ultimoTurnoCriatura;
@@ -22,7 +22,7 @@ export default class Combate extends Phaser.Scene {
   humanos;
   criatMuertas;
   humMuertos;
-
+*/
   constructor() {
     super("Combate");
   }
@@ -56,8 +56,8 @@ export default class Combate extends Phaser.Scene {
     humano = new Personaje(
       this.hum1.nombre,
       this.hum1.ataque,
-      this.hum1.vida,
-      this.hum1.vidaMax,
+      this.hum1.vida,                    // en esta parte se pasan todos los datos de los personajes 
+      this.hum1.vidaMax,                 // y se los agrega a un array de humanos
       this,
       200,
       535,
@@ -97,10 +97,10 @@ export default class Combate extends Phaser.Scene {
     this.humanos.push(humano);
 
     //Se escalan los humanos
-    this.humanos.forEach((humano) => {
-      if (humano.vida != 0) {
-        humano.setScale(4);
-        humano.play(humano.keyIdle, true)
+    this.humanos.forEach((humano) => {                         // con un forEach
+      if (humano.vida != 0) {                                  // se establece la posición, la escala,
+        humano.setScale(4);                                    // la animación que ejecutan los personajes
+        humano.play(humano.keyIdle, true)                      // y el cartel de vida de cada uno
   
         humano.vidaText = this.add.text(humano.x - 30, 753, 
           humano.vida + "/" + humano.vidaMax,
@@ -115,8 +115,8 @@ export default class Combate extends Phaser.Scene {
     ////////////////////////////////////////////// criaturas
     let criatura;
     criatura = new Personaje(
-      this.criat1.nombre,
-      this.criat1.ataque,
+      this.criat1.nombre,                                      // y se hace exactamente lo mismo 
+      this.criat1.ataque,                                      // para las criaturas
       this.criat1.vida,
       this.criat1.vidaMax,
       this,
@@ -176,22 +176,22 @@ export default class Combate extends Phaser.Scene {
       if (this.humanos[1].vida <= 0) {
         this.PersonajeAtacante = this.humanos[2];
         this.humanos[2].anims.play(this.humanos[2].keyAtk, true);
-        this.ultimoTurnoHumano = 2;
-      }else{ 
-      this.PersonajeAtacante = this.humanos[1];
+        this.ultimoTurnoHumano = 2;                                       // este algoritmo esta pensado para que, 
+      }else{                                                              // cuando empiece el combate, siempre
+      this.PersonajeAtacante = this.humanos[1];                           // sea el humano más a la izquierda el que comience
       this.humanos[1].anims.play(this.humanos[1].keyAtk, true);
-      this.ultimoTurnoHumano = 1;
-      }
-    } else {
+      this.ultimoTurnoHumano = 1;                                         // en caso de que el primero en la fila este muerto
+      }                                                                   // lo sigue el de la derecha y si ese tambien esta
+    } else {                                                              // muerto empieza el ultimo de la fila
       this.PersonajeAtacante = this.humanos[0];
-      this.humanos[0].anims.play(this.humanos[0].keyAtk, true);
+      this.humanos[0].anims.play(this.humanos[0].keyAtk, true);           // (es para hacerlo más infalible pero no era tan necesario)
       this.ultimoTurnoHumano = 0;
     }
     
-    this.turno = "HUMANO";
-    this.PersonajeAtacante.setScale(5);
-    this.ultimoTurnoCriatura = -1;
-
+    this.turno = "HUMANO";   // despues se establece el turno de atacante
+    this.PersonajeAtacante.setScale(5);  // y se cambia la escala del que ataca 
+    this.ultimoTurnoCriatura = -1;  // el ultimoTurnoCriatura se establece en -1 para que despues al sumarsele 1 
+                                    // sea el turno el personaje en la posición 0 del array de criaturas
     this.Tturno = this.add.text(650, 150, this.turnoTxt + this.turno, 
     {
       fontSize: "80px",
@@ -202,11 +202,11 @@ export default class Combate extends Phaser.Scene {
     var atacar = this.add
       .image(950, 910, "boton")
       .setInteractive()
-      .on("pointerdown", () => {
-        this.handleAtaque(this.PersonajeAtacante, this.personajeAtacar);
-      })
-      .on("pointerover", () => {
-        atacar.setScale(5.1);
+      .on("pointerdown", () => {                                         // cuando se clickea el boton de atacar
+        this.handleAtaque(this.PersonajeAtacante, this.personajeAtacar); // se ejecuta la funcion de handleAtaque con
+      })                                                                 // personaje atacante (el personaje que le toca atacar)
+      .on("pointerover", () => {                                         // y personaje atacado (el personaje que se clickea para atacar)
+        atacar.setScale(5.1);                                            // como parametros
       })
       .on("pointerout", () => {
         atacar.setScale(5);
@@ -219,41 +219,41 @@ export default class Combate extends Phaser.Scene {
       fill: "#330C03",
       fontFamily: "Pixel",
     });
-    /////////// EVENTOS
-    events.on("click_en_personaje", this.handleClickEnPersonaje, this);
-    events.on("ataque_uno_a_otro", this.handleAtaque, this);
+    /////////// EVENTOS                                             // estos eventos se activan en diferentes momentos:
+    events.on("click_en_personaje", this.handleClickEnPersonaje, this);    // <== cuando un personaje es clickeado se ejecuta la funcion de abajo
+    events.on("ataque_uno_a_otro", this.handleAtaque, this);   // <== cuando se toca el boton de atacar
   }
 
   handleClickEnPersonaje(personaje) {
-    if (this.turno !== personaje.tipo) {
+    if (this.turno !== personaje.tipo) {  // esta funcion hace que el personaje clickeado sea el personaje atacado
       this.personajeAtacar = personaje;
     }
   }
 
   handleCambioTurno() {
-    /////////// win condition
-    this.criatMuertas = 0;
+    /////////// win condition                             // el cambio de turno tiene 2 partes
+    this.criatMuertas = 0;                                
     this.humMuertos = 0;
     this.criaturas.forEach((criatura) => {
         if (criatura.vida <= 0){
-          this.criatMuertas += 1;
-        }
-        if (this.criatMuertas == 3) {
-          setTimeout(()=>{ 
-            this.scene.start("Mapa", { 
-              hum1: this.humanos[0], 
-              hum2: this.humanos[1], 
-              hum3: this.humanos[2], 
+          this.criatMuertas += 1;                         // la primera es donde se establecen lo que pasa 
+        }                                                 // si todos los personajes de un equipo mueren
+        if (this.criatMuertas == 3) {                     
+          setTimeout(()=>{                                // con 2 contadores para la cantidad de muertes de cada bando
+            this.scene.start("Mapa", {                    // cada vez que se ejecute esta función, primero se hace
+              hum1: this.humanos[0],                      // un forEach al array de criaturas para ver cuantas unidades muertas tiene.
+              hum2: this.humanos[1],                      // En de que todas las criaturas esten muertas (el contador de muertes es
+              hum3: this.humanos[2],                      // igual a 3) se vuelve al mapa, sino es asi se sigue con el codigo
               mapa: this.mapa, 
               criaturas: this.criaturasT 
             })},1000)
         }
       });
     this.humanos.forEach((humano) =>{
-      if (humano.vida <= 0) {
-        this.humMuertos += 1;
-      }
-      if (this.humMuertos == 3) {
+      if (humano.vida <= 0) {                             // y lo mismo para los humanos
+        this.humMuertos += 1;                             // si el contador de muertes es igual a 3 
+      }                                                   // se va directamente a la escena de winGuardian,
+      if (this.humMuertos == 3) {                         // sino el codigo sigue
         setTimeout(()=>{
           this.scene.start("WinGuardian"
         )},1000)
