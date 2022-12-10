@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import { Mapa } from "../Controladores/mapa";
 import { Personaje } from "../Controladores/Personajes";
-import { getTranslations, getPhrase } from '../services/translations'
+import { getPhrase } from '../services/translations'
 
 export class SelectorHumanos extends Phaser.Scene {
   mapa;
@@ -56,43 +56,43 @@ export class SelectorHumanos extends Phaser.Scene {
 
     //////////////////////////////////////////////// estadisticas
 
-    const vidatxt = getPhrase('Vida')
-    const dañotxt = getPhrase('Daño')
+    const vidatxt = getPhrase('Vida: ')
+    const dañotxt = getPhrase('Daño: ')
 
-    const text4 = this.add.text(280, 665, vidatxt + ": 2", {
+    const text4 = this.add.text(280, 665, vidatxt + "2", {
       fontSize: "37px",
       fontFamily: "Pixel",
     });
-    const text5 = this.add.text(280, 625, dañotxt +": 3", {
+    const text5 = this.add.text(280, 625, dañotxt + "3", {
       fontSize: "37px",
       fontFamily: "Pixel",
     });
-    const text12 = this.add.text(140, 700, "ventaja vs: polilla", {
+    const text12 = this.add.text(140, 700, getPhrase('Ventaja vs: Polilla'), {
       fontSize: "37px",
       fontFamily: "Pixel",
     });
-    const text6 = this.add.text(895, 665, vidatxt +": 4", {
+    const text6 = this.add.text(895, 665, vidatxt + "4", {
       fontSize: "37px",
       fontFamily: "Pixel",
     });
-    const text7 = this.add.text(895, 625, dañotxt +": 1", {
+    const text7 = this.add.text(895, 625, dañotxt + "1", {
       fontSize: "37px",
       fontFamily: "Pixel",
     });
-    const text11 = this.add.text(753, 707, "ventaja vs: esqueletos", {
+    const text11 = this.add.text(753, 707, getPhrase('Ventaja vs: Esqueletos'), {
       fontSize: "31px",
       fontFamily: "Pixel",
       wordWrap: { width: 1000 }
     });
-    const text8 = this.add.text(1500, 665, vidatxt +": 3", {
+    const text8 = this.add.text(1500, 665, vidatxt + "3", {
       fontSize: "37px",
       fontFamily: "Pixel",
     });
-    const text9 = this.add.text(1500, 625, dañotxt +": 2", {
+    const text9 = this.add.text(1500, 625, dañotxt + "2", {
       fontSize: "37px",
       fontFamily: "Pixel",
     });
-    const text10 = this.add.text(1390, 700, "ventaja vs: mago", {
+    const text10 = this.add.text(1390, 700, getPhrase('Ventaja vs: Mago'), {
       fontSize: "37px",
       fontFamily: "Pixel",
     });
@@ -287,7 +287,8 @@ export class SelectorHumanos extends Phaser.Scene {
       });
     continuar.setScale(5);
 
-    this.continuartxt = this.add.text(1130, 150, "Continuar", {
+    this.continuartxt = this.add.text(1130, 150, getPhrase('Continuar'), 
+    {
       fontSize: "60px",
       fill: "#330C03",
       fontFamily: "Pixel",

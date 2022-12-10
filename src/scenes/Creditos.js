@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { getPhrase } from '../services/translations'
 
 export default class Creditos extends Phaser.Scene
 {
@@ -33,9 +34,11 @@ export default class Creditos extends Phaser.Scene
     });
     volver.setScale(5);
 
-    this.volvertxt = this.add.text(807, 870,
-      "volver",
-     { fontSize: "80px", fill: "#330C03", fontFamily: "Pixel",}
-   );
+    this.volvertxt = this.add.text(807, 870, getPhrase('Volver'),
+     {
+      fontSize: "80px", 
+      fill: "#330C03", 
+      fontFamily: "Pixel",
+    });
   }
 }

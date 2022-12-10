@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { Personaje } from "../Controladores/Personajes";
 import { sharedInstance as events } from "../scenes/EventCenter";
+import { getPhrase } from '../services/translations'
 
 export default class Combate extends Phaser.Scene {
   mapa;
@@ -8,6 +9,7 @@ export default class Combate extends Phaser.Scene {
   //datos para gestion de turno
   turno; // contiene HUMANO o CRIATURA
   Tturno;
+  turnoTxt = getPhrase('Turno: ')
   // INDICE DEL ULTIMO PERSONAJE QUE ATACO
   ultimoTurnoHumano;
   ultimoTurnoCriatura;
@@ -100,9 +102,7 @@ export default class Combate extends Phaser.Scene {
         humano.setScale(4);
         humano.play(humano.keyIdle, true)
   
-        humano.vidaText = this.add.text(
-          humano.x - 30,
-          753,
+        humano.vidaText = this.add.text(humano.x - 30, 753, 
           humano.vida + "/" + humano.vidaMax,
           {
             fontSize: "50px",
@@ -162,9 +162,7 @@ export default class Combate extends Phaser.Scene {
       criatura.setScale(4);
       criatura.play(criatura.keyIdle, true)
 
-      criatura.vidaText = this.add.text(
-        criatura.x - 30,
-        753,
+      criatura.vidaText = this.add.text(criatura.x - 30, 753, 
         criatura.vida + "/" + criatura.vidaMax,
         {
           fontSize: "50px",
@@ -194,7 +192,8 @@ export default class Combate extends Phaser.Scene {
     this.PersonajeAtacante.setScale(5);
     this.ultimoTurnoCriatura = -1;
 
-    this.Tturno = this.add.text(650, 150, "turno: " + this.turno, {
+    this.Tturno = this.add.text(650, 150, this.turnoTxt + this.turno, 
+    {
       fontSize: "80px",
       fontFamily: "Pixel",
     });
@@ -214,7 +213,8 @@ export default class Combate extends Phaser.Scene {
       });
     atacar.setScale(5);
 
-    this.atacartxt = this.add.text(790, 860, "atacar", {
+    this.atacartxt = this.add.text(790, 860, getPhrase('Atacar'), 
+    {
       fontSize: "80px",
       fill: "#330C03",
       fontFamily: "Pixel",
@@ -296,7 +296,7 @@ export default class Combate extends Phaser.Scene {
         this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyAtk, true)
       }
     }
-    this.Tturno.setText("turno: " + this.turno);
+    this.Tturno.setText(this.turnoTxt + this.turno);
   }
 
   handleAtaque(personajeAtacante, personajeAtacado) {

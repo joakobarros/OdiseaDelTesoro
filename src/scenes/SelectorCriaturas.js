@@ -62,30 +62,36 @@ export default class SelectorCriaturas extends Phaser.Scene{
     });
 
     //////////////////////////////////////////////// estadisticas
-    const vidatxt = getPhrase('Vida')
-    const dañotxt = getPhrase('Daño')
+    const vidatxt = getPhrase('Vida: ')
+    const dañotxt = getPhrase('Daño: ')
 
-    let text4 = this.add.text(280, 700, vidatxt + ": 4", {
+    let text4 = this.add.text(280, 700, vidatxt + "4", 
+    {
       fontSize: "40px",
       fontFamily: "Pixel"
     })
-    let text5 = this.add.text(280, 660, dañotxt + ": 1", {
+    let text5 = this.add.text(280, 660, dañotxt + "1", 
+    {
       fontSize: "40px",
       fontFamily: "Pixel"
     })
-    let text6 = this.add.text(895, 700, vidatxt + ": 3", {
+    let text6 = this.add.text(895, 700, vidatxt + "3", 
+    {
       fontSize: "40px",
       fontFamily: "Pixel"
     })
-    let text7 = this.add.text(895, 660, dañotxt + ": 2", {
+    let text7 = this.add.text(895, 660, dañotxt + "2", 
+    {
       fontSize: "40px",
       fontFamily: "Pixel"
     })
-    let text8 = this.add.text(1500, 700, vidatxt + ": 5", {
+    let text8 = this.add.text(1500, 700, vidatxt + "5", 
+    {
       fontSize: "40px",
       fontFamily: "Pixel"
     })
-    let text9 = this.add.text(1500, 660, dañotxt + ": 3", {
+    let text9 = this.add.text(1500, 660, dañotxt + "3", 
+    {
       fontSize: "40px",
       fontFamily: "Pixel"
     })
@@ -279,7 +285,8 @@ export default class SelectorCriaturas extends Phaser.Scene{
     });
     continuar.setScale(5);
 
-    this.continuartxt = this.add.text(1130, 150, "Continuar", {
+    this.continuartxt = this.add.text(1130, 150, getPhrase('Continuar'), 
+    {
       fontSize: "60px",
       fill: "#330C03",
       fontFamily: "Pixel",
