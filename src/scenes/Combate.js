@@ -4,25 +4,9 @@ import { sharedInstance as events } from "../scenes/EventCenter";
 import { getPhrase } from '../services/translations'
 
 export default class Combate extends Phaser.Scene {
- /* mapa;
-  criaturasT;
-  //datos para gestion de turno
-  turno; // contiene HUMANO o CRIATURA
-  Tturno;*/
-  turnoTxt = getPhrase('Turno: ')/*
-  // INDICE DEL ULTIMO PERSONAJE QUE ATACO
-  ultimoTurnoHumano;
-  ultimoTurnoCriatura;
-  // Personaje al que le corresponde el turno
-  PersonajeAtacante;
-  // Personaje clickado para atacarlo
-  personajeAtacar;
-  // lista de humanos y criaturas
-  criaturas;
-  humanos;
-  criatMuertas;
-  humMuertos;
-*/
+
+  turnoTxt = getPhrase('Turno: ')
+
   constructor() {
     super("Combate");
   }
@@ -260,31 +244,31 @@ export default class Combate extends Phaser.Scene {
       }   
     })
     
-    ///// cambio de turno
-    if (this.turno === "HUMANO") {
-      this.PersonajeAtacante.setScale(4);
-      this.turno = "CRIATURA";
-      this.ultimoTurnoCriatura += 1;
-
-      if (this.ultimoTurnoCriatura == 3) {
-        this.ultimoTurnoCriatura = 0;
-      }
-
-      if (this.criaturas[this.ultimoTurnoCriatura].vida <= 0) {
-        this.handleCambioTurno();
-      }else{
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyIdle, true)
-        this.PersonajeAtacante = this.criaturas[this.ultimoTurnoCriatura];
-        this.PersonajeAtacante.setScale(5);
-        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyAtk, true)
-      }
+    ///////////////////////////// cambio de turno
+    if (this.turno === "HUMANO") {                                           /////
+      this.PersonajeAtacante.setScale(4);                                       // En caso de el turno cambie de humano a criatura:
+      this.turno = "CRIATURA";                                                  //    - el texto del turno cambia a "criatura"
+      this.ultimoTurnoCriatura += 1;                                            //    - y se le suma 1 a ultimoTurnoCriatura para
+                                                                                //      que siga el proximo monstruo
+      if (this.ultimoTurnoCriatura == 3) {                                      //
+        this.ultimoTurnoCriatura = 0;                                           // si turno criatura es 3 vuelve a 0 el contador
+      }                                                                         // para que vuelva a comenzar el ciclo de los turnos
+                                                                                //
+      if (this.criaturas[this.ultimoTurnoCriatura].vida <= 0) {                 // despues si la criatura actual tiene 0 o menos de vida
+        this.handleCambioTurno();                                               // se ejecuta de nuevo el cambio de turno y pasaria a ser
+      }else{                                                                    // turno humano otra vez
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyIdle, true) // pero si tiene vida:
+        this.PersonajeAtacante = this.criaturas[this.ultimoTurnoCriatura];      //  - el personaje atacante anterior hace su idle
+        this.PersonajeAtacante.setScale(5);                                     //  - el personaje atacante pasa a ser la criatura actual
+        this.PersonajeAtacante.anims.play(this.PersonajeAtacante.keyAtk, true)  //  - se aumenta su escala
+      }                                                                      /////  - y el personaje atacante hace su animacion de ataque
     }else{
-      this.PersonajeAtacante.setScale(4);
-      this.turno = "HUMANO";
-      this.ultimoTurnoHumano += 1;
+      this.PersonajeAtacante.setScale(4);                       // En caso de que pase el turno de criaturas a humanos 
+      this.turno = "HUMANO";                                    // el procedimiento es igual al anterior
+      this.ultimoTurnoHumano += 1;                              // pero con el array de los humanos
 
       if (this.ultimoTurnoHumano == 3) {
-        this.ultimoTurnoHumano = 0;
+        this.ultimoTurnoHumano = 0;                                          
       }
 
       if (this.humanos[this.ultimoTurnoHumano].vida <= 0) {
@@ -299,31 +283,31 @@ export default class Combate extends Phaser.Scene {
     this.Tturno.setText(this.turnoTxt + this.turno);
   }
 
-  handleAtaque(personajeAtacante, personajeAtacado) {
+  handleAtaque(personajeAtacante, personajeAtacado) { // la funcion del ataque se ejecuta si se clickea el boton de ataque
     if (personajeAtacado.vida > 0) {
-      if (
-        personajeAtacante.nombre == "Arquero" && personajeAtacado.nombre == "Polilla" ||
-        personajeAtacante.nombre == "Caballero" && personajeAtacado.nombre == "Esqueletos" ||
-        personajeAtacante.nombre == "Piromano" && personajeAtacado.nombre == "Mago"      
+      if (  // esta condición es la que hace posible la mecanica de instakill
+        personajeAtacante.nombre == "Arquero" && personajeAtacado.nombre == "Polilla" ||      // si los nombre coinciden 
+        personajeAtacante.nombre == "Caballero" && personajeAtacado.nombre == "Esqueletos" || // la vida del personaje atacado
+        personajeAtacante.nombre == "Piromano" && personajeAtacado.nombre == "Mago"           // se reduce a 0
         ){
         personajeAtacado.vida = 0;
       } else {
-        personajeAtacado.vida -= personajeAtacante.ataque;
-        personajeAtacado.vidaText.setText(
-        personajeAtacado.vida + "/" + personajeAtacado.vidaMax
+        personajeAtacado.vida -= personajeAtacante.ataque;                          // pero si los nombre no coinciden con 
+        personajeAtacado.vidaText.setText(                                          // los anteriores solo se reduce la vida
+        personajeAtacado.vida + "/" + personajeAtacado.vidaMax                      // y se actualiza el texto de la vida
       );
       }
 
-      if (personajeAtacado.vida <= 0) {
-        personajeAtacado.vidaText.setText("0/" + personajeAtacado.vidaMax);
-        personajeAtacado.visible = false;
-        personajeAtacado.vidaText.visible = false;
-        this.muerte.play();
-      }else{
-        this.daño.play();
-      }
-
-      this.handleCambioTurno();
-    }
+      if (personajeAtacado.vida <= 0) {                                        // despues en caso de que la vida del atacado se
+        personajeAtacado.vidaText.setText("0/" + personajeAtacado.vidaMax);    // reduzca a 0
+        personajeAtacado.visible = false;                                      // - se actualiza el texto de la vida actual a 0
+        personajeAtacado.vidaText.visible = false;                             //   (esa parte esta bastante al pedo ahora que lo pienso)
+        this.muerte.play();                                                    // - se hacen invisibles tanto el personaje como
+      }else{                                                                   //   el texto de vida (por eso)
+        this.daño.play();                                                      // - y se reproduce el sonido de muerte
+      }                                                                        //
+           // cuando todo se termian de ejecutar pasa el cambio de turno       // despues si el personaje atacado no muere  
+      this.handleCambioTurno();                                                // solo suena el sonido de golpe
+    }                                                         
   }
 }

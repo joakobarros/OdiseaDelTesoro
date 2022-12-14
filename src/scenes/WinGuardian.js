@@ -13,8 +13,8 @@ export default class WinGuardian extends Phaser.Scene
 
   create() {
 
-    getData();
-    events.on('dato-recibido1', this.dato1, this);
+    getData();                                                 // para cargar el nuevo dato al Firebase, primero se hace un getData
+    events.on('dato-recibido1', this.dato1, this);             // para traer el dato almacenado en el servidor y usarlo en esta escena
     
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winGuardian');
 
@@ -40,12 +40,12 @@ export default class WinGuardian extends Phaser.Scene
       fontFamily: "Pixel",
     });
 
-    this.vG ++;
-    pushData(this.vG, "Guardian");
-
-  }      
-
-  dato1(data1){
+    this.vG ++;                         // despues al dato recivido se le suma uno
+    pushData(this.vG, "Guardian");      // y con el pushData se pasan como parametros el puntaje y el ganador
+                                        // para que sean usador en script del data base y subirlo al servidor
+  }                                     
+                                        // el proceso para el dato de los humanos es el mismo pero en la pantalla de WinHumanos
+  dato1(data1){                     
     this.vG = data1
   }
 }
