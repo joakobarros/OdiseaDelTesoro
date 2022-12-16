@@ -79,9 +79,8 @@ export default class MainMenu extends Phaser.Scene
     getData();
     events.on('dato-recibido', this.dato, this);
     events.on('dato-recibido1', this.dato1, this);
-    this.add.text(500, 500, this.vH)
-    this.add.text(500, 400, this.vG)
-
+    console.log(this.vH)
+    //this.add.text(150, 400, 'HOLA')
   }
 
   updateWasChangedLanguage = () => {
@@ -104,9 +103,15 @@ export default class MainMenu extends Phaser.Scene
 
   dato(data){
     this.vH = data
+    this.add.text(100, 500, this.vH)
+    
+    console.log("🚀 ~ file: MainMenu.js:85 ~ create ~ this.vG)", this.vH)
+
   }
   
   dato1(data1){
     this.vG = data1
+    //this.add.text(150, 400, this.vG)
+    console.log("🚀 ~ file: MainMenu.js:115 ~ dato1 ~ this.vG", this.vG)
   }
 }
