@@ -11,10 +11,14 @@ export default class WinGuardian extends Phaser.Scene
 		super('WinGuardian')
 	}
 
+  init(data){
+    this.mapa = data.mapa
+  }
+
   create() {
 
-    getData();
-    events.on('dato-recibido1', this.dato1, this);
+    this.mapa.vG ++;
+    pushData(this.mapa.vG, "Guardian");
     
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winGuardian');
 
@@ -40,12 +44,5 @@ export default class WinGuardian extends Phaser.Scene
       fontFamily: "Pixel",
     });
 
-    this.vG ++;
-    pushData(this.vG, "Guardian");
-
   }      
-
-  dato1(data1){
-    this.vG = data1
-  }
 }

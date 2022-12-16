@@ -104,6 +104,7 @@ export default class Mapa extends Phaser.Scene {
               hum1: this.hum1,
               hum2: this.hum2,
               hum3: this.hum3,
+              mapa: this.mapa,
             });
           }
         });

@@ -1,4 +1,6 @@
 import Phaser from 'phaser'
+import { getData } from '../services/dataBase'
+import { sharedInstance as events } from '../scenes/EventCenter'
 
 export default class Preloads extends Phaser.Scene
 {
@@ -50,6 +52,10 @@ export default class Preloads extends Phaser.Scene
   }
   
   create() {
+
+    getData();
+    events.on('dato-recibido', this.dato, this);
+    events.on('dato-recibido1', this.dato1, this);
 
     //////////////////////////////// animaciones
     this.anims.create({
@@ -143,7 +149,17 @@ export default class Preloads extends Phaser.Scene
       repeat: -1,
     })
 
-    this.scene.start("MainMenu");
+    this.scene.start("MainMenu",{
+      vH : this.vH, 
+      vG : this.vG
+    });
   }
     
+  dato(data){
+    this.vH = data
+  }
+  
+  dato1(data1){
+    this.vG = data1
+  }
 }

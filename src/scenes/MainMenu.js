@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 import { EN_US, ES_AR } from '../enums/lenguages'
 import { FETCHED, FETCHING, READY, TODO } from '../enums/status'
 import { getTranslations, getPhrase } from '../services/translations'
-import { getData } from '../services/dataBase'
+
 
 import { sharedInstance as events } from '../scenes/EventCenter'
 
@@ -23,6 +23,8 @@ export default class MainMenu extends Phaser.Scene
 
   init(data){
     this.#language = data.language;
+    this.vH = data.vH
+    this.vG = data.vG
   }
 
 	create() {
@@ -34,7 +36,11 @@ export default class MainMenu extends Phaser.Scene
     audio.play();
 
     var jugar = this.add.image(this.cameras.main.centerX,700,'boton').setInteractive()
-    .on('pointerdown',()=> { this.scene.start("SelectorHumanos"); })
+    .on('pointerdown',()=> { this.scene.start("SelectorHumanos", {
+       vH: this.vH,
+       vG: this.vG
+      })
+    })
     .on('pointerover', ()=> {jugar.setScale(5.1)})
     .on('pointerout', ()=> {jugar.setScale(5)});
     jugar.setScale(5);
@@ -76,11 +82,15 @@ export default class MainMenu extends Phaser.Scene
 		})
 		.setScale(4);
 
-    getData();
-    events.on('dato-recibido', this.dato, this);
-    events.on('dato-recibido1', this.dato1, this);
-    console.log(this.vH)
-    //this.add.text(150, 400, 'HOLA')
+    this.add.text(150, 150, this.vH, { 
+      fontSize: "50px",  
+      fontFamily:'Pixel'
+   })
+
+    this.add.text(100, 150, this.vG, { 
+      fontSize: "50px", 
+      fontFamily:'Pixel'
+   }) 
   }
 
   updateWasChangedLanguage = () => {
@@ -99,19 +109,5 @@ export default class MainMenu extends Phaser.Scene
       this.creditosTxt.setText(getPhrase('Créditos'));
       this.jugarTxt.setText(getPhrase('Jugar'));
 	  }
-  }
-
-  dato(data){
-    this.vH = data
-    this.add.text(100, 500, this.vH)
-    
-    console.log("🚀 ~ file: MainMenu.js:85 ~ create ~ this.vG)", this.vH)
-
-  }
-  
-  dato1(data1){
-    this.vG = data1
-    //this.add.text(150, 400, this.vG)
-    console.log("🚀 ~ file: MainMenu.js:115 ~ dato1 ~ this.vG", this.vG)
   }
 }

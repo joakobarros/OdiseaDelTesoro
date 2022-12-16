@@ -9,6 +9,11 @@ export class SelectorHumanos extends Phaser.Scene {
     super("SelectorHumanos");
   }
 
+  init(data){
+    this.vH = data.vH
+    this.vG = data.vG
+  }
+
   create() {
     this.add.image(
       this.cameras.main.centerX,
@@ -16,7 +21,7 @@ export class SelectorHumanos extends Phaser.Scene {
       "selector"
     );
 
-    this.mapa = new Mapa("s1", [], []);
+    this.mapa = new Mapa("s1", [], [], this.vH, this.vG);
     this.criaturas = 15;
 
     //////////////////////////////////////////// indicadores de cantidad

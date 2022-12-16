@@ -239,7 +239,9 @@ export default class Combate extends Phaser.Scene {
       }
       if (this.humMuertos == 3) {
         setTimeout(()=>{
-          this.scene.start("WinGuardian"
+          this.scene.start("WinGuardian", {
+            mapa: this.mapa
+          }
         )},1000)
       }   
     })

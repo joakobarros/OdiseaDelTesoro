@@ -16,6 +16,7 @@ export default class CombateJefe extends Phaser.Scene{
     this.hum1 = data.hum1;
     this.hum2 = data.hum2;
     this.hum3 = data.hum3;
+    this.mapa = data.mapa;
   }
   
   create() {    
@@ -179,7 +180,9 @@ handleCambioTurno() {
     }
     if (humMuertos == 3) {
       setTimeout(()=>{
-        this.scene.start("WinGuardian"
+        this.scene.start("WinGuardian", {
+          mapa: this.mapa
+        }
       )},1000)
     }   
   })
@@ -231,7 +234,9 @@ handleCambioTurno() {
           if (this.jefe.vida <= 0){
             this.muerte.play();
             setTimeout(()=>{
-              this.scene.start("WinHumanos"
+              this.scene.start("WinHumanos", {
+                mapa: this.mapa
+              }
             )},1000)
           }
       } else {

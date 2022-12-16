@@ -10,10 +10,14 @@ export default class WinHumanos extends Phaser.Scene
 		super('WinHumanos')
 	}
 
+  init(data){
+    this.mapa = data.mapa
+  }
+
   create() {
 
-    getData();
-    events.on('dato-recibido', this.dato, this);
+    this.mapa.vH ++;
+    pushData(this.mapa.vH, "Humanos");
 
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winHumanos');
 
@@ -40,12 +44,5 @@ export default class WinHumanos extends Phaser.Scene
         fontFamily: "Pixel",
       }
     );
-
-    this.vH ++;
-    pushData(this.vH, "Humanos");
-  }
-
-  dato(data){
-    this.vH = data
   }
 }
