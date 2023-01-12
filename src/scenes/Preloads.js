@@ -29,6 +29,10 @@ export default class Preloads extends Phaser.Scene
     this.load.image("fondoPiedras", "assets/images/fondoPiedras.png")
     this.load.image("boton", "assets/images/button1.png")
     this.load.image("calavera", "assets/images/calavera.png")
+    this.load.image("jefeIcono", "assets/images/jefeIcono.png")
+    this.load.image("humanoIcono", "assets/images/humanoIcono.png")
+    this.load.image("inglesIcono", "assets/images/inglesIcono.png")
+    this.load.image("españolIcono", "assets/images/españolIcono.png")
     //// sonido
     this.load.audio("musica", "assets/sounds/theSoundOfTheDungeon.wav")
     this.load.audio("daño", "assets/sounds/danio.wav")
@@ -149,10 +153,11 @@ export default class Preloads extends Phaser.Scene
       repeat: -1,
     })
 
+    setTimeout(()=>{ 
     this.scene.start("MainMenu",{
       vH : this.vH, 
       vG : this.vG
-    });
+    })},1000);
   }
     
   dato(data){

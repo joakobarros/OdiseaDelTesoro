@@ -3,9 +3,6 @@ import { EN_US, ES_AR } from '../enums/lenguages'
 import { FETCHED, FETCHING, READY, TODO } from '../enums/status'
 import { getTranslations, getPhrase } from '../services/translations'
 
-
-import { sharedInstance as events } from '../scenes/EventCenter'
-
 export default class MainMenu extends Phaser.Scene
 {
 
@@ -69,28 +66,31 @@ export default class MainMenu extends Phaser.Scene
     })
   
     const BotonEspañol = this.add
-    .image(1830, 950, "menos")
+    .image(1830, 950, "españolIcono")
     .setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
       this.getTranslations(ES_AR)
     })
-    .setScale(4);
+    .setScale(2);
 		
 		const BotonEEUU = this.add
-    .image(1650, 950, "mas")
+    .image(1650, 950, "inglesIcono")
 		.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_UP, () => {
 			this.getTranslations(EN_US)
 		})
-		.setScale(4);
+		.setScale(2);
 
-    this.add.text(150, 150, this.vH, { 
+    this.add.image(340, 120, "humanoIcono").setScale(2)
+    this.add.image(140, 120, "jefeIcono").setScale(2)
+
+    this.add.text(400, 110, this.vH, { 
       fontSize: "50px",  
       fontFamily:'Pixel'
    })
 
-    this.add.text(100, 150, this.vG, { 
+    this.add.text(200, 110, this.vG, { 
       fontSize: "50px", 
       fontFamily:'Pixel'
-   }) 
+   })
   }
 
   updateWasChangedLanguage = () => {
@@ -102,7 +102,7 @@ export default class MainMenu extends Phaser.Scene
 		await getTranslations(lang, this.updateWasChangedLanguage)
 	}
 
-	update(){
+	update(){ 
 		
 		if(this.#wasChangedLanguage === FETCHED){
 		  this.#wasChangedLanguage = READY;

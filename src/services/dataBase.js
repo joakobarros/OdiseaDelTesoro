@@ -21,14 +21,12 @@ export async function getData(){
     const dbRef = ref(db);
     get(child(dbRef, 'users/vicHum')).then((snapshot)=> {
         if (snapshot.exists()) {
-            console.log(snapshot.val());
             const data = snapshot.val();
             events.emit('dato-recibido', data)
         }
     })
     get(child(dbRef, 'users/vicGuard')).then((snapshot1)=> {
         if (snapshot1.exists()) {
-            console.log(snapshot1.val());
             const data1 = snapshot1.val();
             events.emit('dato-recibido1', data1)
         }
@@ -37,10 +35,12 @@ export async function getData(){
 
 export async function pushData(contador, ganador){
     if(ganador == "Humanos"){
+        contador ++;
         update(ref(db, 'users/'),{
             vicHum : contador
         })
     }else {
+        contador ++;
         update(ref(db, 'users/'),{
             vicGuard : contador
         })

@@ -1,8 +1,7 @@
-import { getDatabase } from 'firebase/database';
 import Phaser from 'phaser'
 import { getPhrase } from '../services/translations'
-import {getData, pushData} from '../services/dataBase'
-import { sharedInstance as events } from '../scenes/EventCenter'
+import { pushData} from '../services/dataBase'
+
 
 export default class WinGuardian extends Phaser.Scene
 {
@@ -17,7 +16,6 @@ export default class WinGuardian extends Phaser.Scene
 
   create() {
 
-    this.mapa.vG ++;
     pushData(this.mapa.vG, "Guardian");
     
     this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winGuardian');
@@ -32,7 +30,7 @@ export default class WinGuardian extends Phaser.Scene
     var Salir = this.add.image(950,945,'boton').setInteractive()
     .on('pointerdown',()=> {
       this.sound.stopAll(); 
-      this.scene.start("MainMenu")})
+      this.scene.start("Preloads")})
     .on('pointerover',()=> {Salir.setScale(5.1)})
     .on('pointerout',()=> {Salir.setScale(5)})
     Salir.setScale(5);
